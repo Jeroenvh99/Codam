@@ -26,7 +26,7 @@ void freelist(node_t *head){
 }
 
 void insert(node_t *newnode, node_t *head){
-    while (head->number <= newnode->number && head->next){
+    /*while (head->number <= newnode->number && head->next){
         head = head->next;
     }
     if (head->next){
@@ -36,7 +36,9 @@ void insert(node_t *newnode, node_t *head){
     else{
         newnode->next = NULL;
         head->next = newnode;
-    }
+    }*/
+    newnode->next = NULL;
+    head->next = newnode;
 }
 
 void readdict(node_t *head){
@@ -56,6 +58,9 @@ void readdict(node_t *head){
         }
         if (c == ':'){
             newnode->number = atof(stringtoparse);
+            for (pos = 0; pos < 50; pos++){
+                stringtoparse[pos] = '\0';
+            }
             pos = 0;
         }
         if (c == '\n'){
