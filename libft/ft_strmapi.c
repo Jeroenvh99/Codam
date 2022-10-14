@@ -1,0 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   ft_strmapi.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/12 14:46:05 by jvan-hal      #+#    #+#                 */
+/*   Updated: 2022/10/13 12:40:14 by jvan-hal      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include"libft.h"
+
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	int		i;
+	char	*c;
+
+	c = malloc(ft_strlen(s) + 1);
+	if (c)
+	{
+		i = 0;
+		while (s[i])
+		{
+			c[i] = (*f)(i, s[i]);
+			++i;
+		}
+		c[i] = '\0';
+		return (c);
+	}
+	return (NULL);
+}
+
+// char changec(unsigned int index, char c)
+// {
+// 	return (c + index);
+// }
+
+// int main(){
+// 	printf("%s", ft_strmapi("Hello", changec));
+// 	return 0;
+// }
