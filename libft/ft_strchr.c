@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 18:53:59 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/14 12:11:44 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/14 17:31:38 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strchr(const char *s, int c)
 		{
 			if (s[i] == (char)c)
 			{
-				return ((char *)&s[i]);
+				return ((char *)s + i);
 			}
 			++i;
 		}
@@ -31,9 +31,9 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-// int main(){
-// 	char s[15] = "adHd fdklHds";
-// 	printf("%s\n", ft_strchr(s, 'H'));
-// 	printf("%s\n", ft_strchr(s, 'g'));
-// 	return 0;
-// }
+int main(){
+	char s[15] = "teste";
+	printf("%s\n", ft_strchr(s, 'e'));
+	// printf("%s\n", ft_strchr(s, 'g'));
+	return 0;
+}
