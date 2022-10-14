@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 18:53:59 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/10 14:42:08 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/14 12:11:44 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,17 @@ char	*ft_strchr(const char *s, int c)
 {
 	int	i;
 
-	i = 0;
-	while (i == 0 || s[i - 1])
+	if (ft_isascii(c))
 	{
-		if (s[i] == (char)c)
+		i = 0;
+		while (i == 0 || s[i - 1])
 		{
-			return ((char *)&s[i]);
+			if (s[i] == (char)c)
+			{
+				return ((char *)&s[i]);
+			}
+			++i;
 		}
-		++i;
 	}
 	return (NULL);
 }
