@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:44:31 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/19 14:35:27 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/19 18:21:18 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,26 +51,6 @@ static int	getend(const char *s, char dlm)
 	return (0);
 }
 
-static char	*getsubstr(char const *s, size_t len)
-{
-	size_t	i;
-	char	*c;
-
-	i = 0;
-	c = malloc(len + 1);
-	if (c)
-	{
-		while (*s && i < len)
-		{
-			c[i] = s[i];
-			++i;
-		}
-		c[i] = '\0';
-		return (c);
-	}
-	return (NULL);
-}
-
 static int	fillarr(char **arr, const char *s, char dlm)
 {
 	int	i;
@@ -86,7 +66,7 @@ static int	fillarr(char **arr, const char *s, char dlm)
 		else
 		{
 			sublength = getend(s, dlm);
-			arr[i] = getsubstr(s, sublength);
+			arr[i] = ft_substr(s, 0, sublength);
 			if (!arr[i])
 				return (0);
 			s += sublength;
