@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 18:50:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/13 11:51:41 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/18 15:25:53 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,30 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t	i;
-	int		srclen;
-	int		shift;
+	int	dstlen;
 
-	i = 0;
-	srclen = ft_strlen(src);
-	if (!(dst - src > srclen || src - dst > srclen))
+	if (dst == src)
 	{
-		shift = srclen - (dst - src);
-		dst -= shift;
+		return (dst);
 	}
-	while (i < len)
+	if (src < dst)
 	{
-		((char *)dst)[i] = ((char *)src)[i];
+		while (len--)
+		{
+			*(char *)(dst + len) = *(char *)(src + len);
+		}
+		return (dst);
 	}
+	ft_memcpy(dst, src, len);
 	return (dst);
 }
 
-int main()
-{
-	char a[] = "hello";
-	char b[] = "hiagain";
-	ft_memmove(&a, &b, 2);
-	printf("The contents of string a are:%s\n", a);
-	printf("The contents of string b are:%s", b);
-	return 0;
-}
+// int main()
+// {
+// 	char a[] = "hello";
+// 	char b[] = "hiagain";
+// 	ft_memmove(&a, &b, 2);
+// 	printf("The contents of string a are:%s\n", a);
+// 	printf("The contents of string b are:%s", b);
+// 	return 0;
+// }

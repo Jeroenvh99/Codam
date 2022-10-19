@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 09:28:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/11 13:44:04 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/18 10:55:12 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,17 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	ft_lstlast(*lst)->next = new;
+	if (new)
+	{
+		if (!*lst)
+		{
+			*lst = new;
+		}
+		else
+		{
+			ft_lstlast(*lst)->next = new;
+		}
+	}
 }
 
 // void printlist(t_list *head){

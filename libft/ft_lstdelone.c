@@ -6,22 +6,31 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 09:41:37 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/11 10:23:02 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/19 16:04:04 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 
-static void	del(void *node)
-{
-	free(node);
-	node = NULL;
-}
-
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	(*del)(lst);
+	if (!del || !lst)
+	{
+		return ;
+	}
+	if (lst)
+	{
+		(*del)(lst->content);
+		free(lst);
+		lst = NULL;
+	}
 }
+
+// void	del(void *node)
+// {
+// 	free(node);
+// 	node = NULL;
+// }
 
 // int main(){
 // 	t_list *head = ft_lstnew("hello world!");

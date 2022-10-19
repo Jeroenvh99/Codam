@@ -55,13 +55,13 @@ endif
 all: $(NAME)
 
 .o:
-	gcc $(COMPILEFLAGS) -c $< -o ${<:.c=.o}
+	cc $(COMPILEFLAGS) -c $< -o ${%.c=%.o}
 
 $(NAME): $(ALL_OBJS)
 	ar -rcs $(NAME) $(ALL_OBJS)
 
 bonus:
-	$(MAKE) ADD_BONUS=1 all
+	$(MAKE) ADD_BONUS=1
 
 clean:
 	rm -f $(OBJS) $(BONUS_OBJS)

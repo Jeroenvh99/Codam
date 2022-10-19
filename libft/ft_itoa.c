@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/07 14:00:49 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/14 13:53:17 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/18 11:07:51 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ char	*ft_itoa(int n)
 		c = malloc(2);
 		if (c)
 		{
-			c = "0\0";
+			c[0] = '0';
+			c[1] = '\0';
 			return (c);
 		}
 		return (NULL);

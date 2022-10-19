@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:43:27 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/13 12:40:39 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/17 11:27:58 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	i = getstartindex(s1, set);
 	end = getlastindex(s1, set);
-	c = malloc(end - i + 2);
+	if (end == -1)
+		i = 0;
+	c = malloc((end - i) + 2);
 	if (c)
 	{
 		j = 0;
@@ -94,6 +96,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 }
 
 // int main(){
-// 	printf("%s", ft_strtrim("aabbcbcddee", "abe"));
+// 	char *s1 = "  \t \t \n   \n\n\n\t";
+// 	char *s2 = "";
+// 	char *ret = ft_strtrim(s1, " \n\t");
+// 	printf("%s", ret);
 // 	return 0;
 // }

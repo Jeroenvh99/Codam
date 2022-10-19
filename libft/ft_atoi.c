@@ -6,18 +6,19 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/04 09:38:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/13 10:41:26 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/17 10:59:48 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include<stdio.h>
+// #include<stdlib.h>
 
 int	ft_atoi(const char *str)
 {
 	int	out;
 	int	i;
 
-	while (*str == '\t' || *str == '\n' || *str == 'v' || *str == '\f'
+	while (*str == '\t' || *str == '\n' || *str == '\v' || *str == '\f'
 		|| *str == '\r' || *str == ' ')
 		++str;
 	if ((*str == '+' || *str == '-') && *(str + 1) >= '0' && *(str + 1) <= '9')
@@ -38,6 +39,10 @@ int	ft_atoi(const char *str)
 }
 
 // int main(){
-// 	printf("%i",ft_atoi("     -658jgh3"));
+// 	char *n = "\t\v\f\r\n \f-06050";
+// 	int i1 = atoi(n);
+// 	int i2 = ft_atoi(n);
+// 	printf("%i\n", i1);
+// 	printf("%i\n", i2);
 // 	return 0;
 // }
