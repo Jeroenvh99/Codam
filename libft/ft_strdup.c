@@ -6,11 +6,14 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/04 09:40:21 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 11:11:17 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 14:05:10 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
+#include<stdlib.h>
+#include<errno.h>
+// #include<stdio.h>
 
 char	*ft_strdup(const char *s1)
 {

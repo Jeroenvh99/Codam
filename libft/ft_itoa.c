@@ -6,11 +6,12 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/07 14:00:49 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 10:59:14 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 13:21:00 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include"stdlib.h"
+// #include<stdio.h>
 
 static int	getlength(int n)
 {
@@ -22,14 +23,10 @@ static int	getlength(int n)
 		++count;
 		n *= -1;
 	}
-	while ((n / 10) > 0)
+	while ((n / 10) >= 0 && n > 0)
 	{
 		++count;
 		n /= 10;
-	}
-	if (n < 10)
-	{
-		++count;
 	}
 	return (count);
 }

@@ -6,11 +6,13 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:42:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 11:10:21 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 13:52:09 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
+#include<stdlib.h>
+// #include<stdio.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

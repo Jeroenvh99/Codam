@@ -6,11 +6,12 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 18:09:44 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/18 09:02:45 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 13:59:57 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
+// #include<stdio.h>
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {

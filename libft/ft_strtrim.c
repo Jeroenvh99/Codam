@@ -6,11 +6,13 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:43:27 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 11:15:38 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 13:50:38 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
+#include<stdlib.h>
+// #include<stdio.h>
 
 static int	getstart(const char *s, const char *set)
 {

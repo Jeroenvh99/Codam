@@ -6,11 +6,12 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 09:28:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 11:21:41 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 13:21:55 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
+// #include<stdio.h>
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {

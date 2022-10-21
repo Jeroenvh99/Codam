@@ -6,12 +6,13 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 18:55:27 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 11:13:10 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 13:47:50 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 // #include<string.h>
+// #include<stdio.h>
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

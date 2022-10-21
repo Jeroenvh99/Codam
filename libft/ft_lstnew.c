@@ -6,11 +6,13 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 17:48:22 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 11:20:10 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 13:58:16 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
+#include<stdlib.h>
+// #include<stdio.h>
 
 t_list	*ft_lstnew(void *content)
 {

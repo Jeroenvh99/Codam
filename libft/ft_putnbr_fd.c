@@ -6,12 +6,13 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/06 11:40:46 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 11:07:50 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 14:02:51 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
-#include<limits.h>
+#include<unistd.h>
+// #include<stdio.h>
+// #include<limits.h>
 
 static void	recursive_putnbr(int n, int fd)
 {
@@ -25,8 +26,8 @@ static void	recursive_putnbr(int n, int fd)
 	}
 	if (n >= 10)
 	{
-		ft_putnbr_fd(n / 10, fd);
-		ft_putnbr_fd(n % 10, fd);
+		recursive_putnbr(n / 10, fd);
+		recursive_putnbr(n % 10, fd);
 	}
 	else
 	{

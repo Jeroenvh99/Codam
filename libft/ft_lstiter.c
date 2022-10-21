@@ -6,11 +6,12 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 10:27:09 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/18 09:09:55 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 13:59:09 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
+// #include<stdio.h>
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {

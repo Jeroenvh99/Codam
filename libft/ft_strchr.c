@@ -6,11 +6,12 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 18:53:59 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 11:13:33 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 14:04:03 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
+// #include<stdio.h>
 
 char	*ft_strchr(const char *s, int c)
 {

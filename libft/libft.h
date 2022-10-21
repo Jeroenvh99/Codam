@@ -6,17 +6,14 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 14:32:38 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/10 17:45:10 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 13:09:35 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include<unistd.h>
-# include<stdlib.h>
-# include<stdio.h>
-# include<errno.h>
+# include<stddef.h>
 
 typedef struct s_list
 {

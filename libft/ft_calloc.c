@@ -6,11 +6,12 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/04 09:39:33 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 11:22:28 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 13:15:50 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
+#include<stdlib.h>
 
 void	*ft_calloc(size_t count, size_t size)
 {
