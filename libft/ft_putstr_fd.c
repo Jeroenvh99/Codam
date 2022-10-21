@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/06 09:50:11 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/07 14:26:21 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 11:03:15 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	while (*s)
-	{
-		write(fd, s, 1);
-		++s;
-	}
+	write(fd, s, ft_strlen(s));
 }
 
 // int main(){

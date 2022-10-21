@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:46:05 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/13 12:40:14 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 11:12:48 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,16 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	char	*c;
 
 	c = malloc(ft_strlen(s) + 1);
-	if (c)
+	if (!c)
+		return (NULL);
+	i = 0;
+	while (s[i])
 	{
-		i = 0;
-		while (s[i])
-		{
-			c[i] = (*f)(i, s[i]);
-			++i;
-		}
-		c[i] = '\0';
-		return (c);
+		c[i] = (*f)(i, s[i]);
+		++i;
 	}
-	return (NULL);
+	c[i] = '\0';
+	return (c);
 }
 
 // char changec(unsigned int index, char c)

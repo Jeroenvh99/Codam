@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/07 14:00:49 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/18 11:07:51 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 10:59:14 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,24 @@
 
 static int	getlength(int n)
 {
-	int	i;
+	int	count;
 
-	i = 0;
+	count = 0;
 	if (n < 0)
 	{
-		++i;
-		if (n < -10)
-			++n;
+		++count;
 		n *= -1;
 	}
 	while ((n / 10) > 0)
 	{
-		++i;
+		++count;
 		n /= 10;
 	}
 	if (n < 10)
 	{
-		++i;
+		++count;
 	}
-	return (i);
+	return (count);
 }
 
 static void	getstr(long int n, int len, char *c)
@@ -60,13 +58,12 @@ char	*ft_itoa(int n)
 	char	*c;
 	int		i;
 
-	if (n == 0)
+	if (n == -2147483648)
 	{
-		c = malloc(2);
+		c = malloc(12);
 		if (c)
 		{
-			c[0] = '0';
-			c[1] = '\0';
+			c = "-2147483648";
 			return (c);
 		}
 		return (NULL);
@@ -83,6 +80,7 @@ char	*ft_itoa(int n)
 
 // int main(){
 // 	printf("%s\n", ft_itoa(-67577));
+// 	printf("%s\n", ft_itoa(-100));
 // 	printf("%s\n", ft_itoa(-2147483648));
 // 	printf("%s\n", ft_itoa(2147483647));
 // 	printf("%s", ft_itoa(0));

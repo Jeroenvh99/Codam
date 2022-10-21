@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 18:46:20 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/07 16:35:12 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 11:12:13 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 
 size_t	ft_strlen(const char *s)
 {
-	int	i;
+	int	count;
 
-	i = 0;
+	count = 0;
 	while (*s)
 	{
-		++i;
+		++count;
 		++s;
 	}
-	return (i);
+	return (count);
 }
 
 // int main()

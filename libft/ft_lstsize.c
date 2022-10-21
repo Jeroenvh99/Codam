@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 18:04:42 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/10 18:28:55 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 11:19:38 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int	ft_lstsize(t_list *lst)
 {
-	int	i;
+	int	count;
 
-	i = 0;
+	count = 0;
 	while (lst)
 	{
-		++i;
+		++count;
 		lst = lst->next;
 	}
-	return (i);
+	return (count);
 }
 
 // int main(){

@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:41:09 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/19 16:27:54 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 11:16:57 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,17 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	else if (start + len > srclen && srclen >= start)
 		len = srclen - start;
 	c = malloc(len + 1);
-	if (c)
+	if (!c)
+		return (NULL);
+	i = 0;
+	while (i < len)
 	{
-		i = 0;
-		while (i < len)
-		{
-			c[i] = s[start];
-			++i;
-			++start;
-		}
-		c[i] = '\0';
-		return (c);
+		c[i] = s[start];
+		++i;
+		++start;
 	}
-	return (NULL);
+	c[i] = '\0';
+	return (c);
 }
 
 // int main(){

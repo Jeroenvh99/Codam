@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 17:48:22 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/18 18:26:12 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 11:20:10 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@ t_list	*ft_lstnew(void *content)
 	t_list	*new;
 
 	new = malloc(sizeof(t_list));
-	if (new)
-	{
-		new->content = content;
-		new->next = NULL;
-		return (new);
-	}
-	return (NULL);
+	if (!new)
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
 }
 
 // int main(){

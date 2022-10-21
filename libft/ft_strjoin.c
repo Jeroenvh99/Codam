@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:42:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/13 11:49:05 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 11:10:21 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,22 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
 	c = malloc(len1 + len2 + 1);
-	if (c)
+	if (!c)
+		return (NULL);
+	while (*s1)
 	{
-		while (*s1)
-		{
-			*c = *s1;
-			++c;
-			++s1;
-		}
-		while (*s2)
-		{
-			*c = *s2;
-			++c;
-			++s2;
-		}
-		*c = '\0';
-		return (c - (len1 + len2));
+		*c = *s1;
+		++c;
+		++s1;
 	}
-	return (NULL);
+	while (*s2)
+	{
+		*c = *s2;
+		++c;
+		++s2;
+	}
+	*c = '\0';
+	return (c - (len1 + len2));
 }
 
 // int main(){

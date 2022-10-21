@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 18:52:31 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/05 19:54:14 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 11:17:25 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,9 @@
 int	ft_toupper(int c)
 {
 	if (c >= 'a' && c <= 'z')
-	{
 		return (c - 32);
-	}
 	else
-	{
 		return (c);
-	}
 }
 
 // int main(){
