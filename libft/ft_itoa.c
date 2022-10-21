@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/07 14:00:49 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 14:37:14 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 15:37:19 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ static int	getlength(int n)
 		++count;
 		n *= -1;
 	}
-	while ((n / 10) >= 0 && n > 0)
+	while ((n / 10) > 0)
 	{
 		++count;
 		n /= 10;
 	}
+	if (n < 10)
+		++count;
 	return (count);
 }
 
@@ -52,24 +54,20 @@ static void	getstr(long int n, int len, char *c)
 char	*ft_itoa(int n)
 {
 	char	*c;
-	int		i;
+	int		outlen;
 
 	if (n == -2147483648)
 	{
 		c = malloc(12);
-		if (c)
-		{
-			c = "-2147483648";
-			return (c);
-		}
-		return (NULL);
-	}
-	i = getlength(n);
-	c = malloc(i + 1);
-	if (c)
-	{
-		getstr(n, i, c);
+		if (!c)
+			return (NULL);
+		c = "-2147483648";
 		return (c);
 	}
-	return (NULL);
+	outlen = getlength(n);
+	c = malloc(outlen + 1);
+	if (!c)
+		return (NULL);
+	getstr(n, outlen, c);
+	return (c);
 }

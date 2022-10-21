@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 18:50:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 14:38:25 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 15:40:48 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	int	dstlen;
-
 	if (dst == src)
 		return (dst);
 	if (src < dst)

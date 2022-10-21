@@ -237,6 +237,16 @@ int main(){
 	// putstr
 	ft_putstr_fd("this is a string that's printed to standard output", 1);
 
+	// split
+	int i = 0;
+	char **splitarr;
+	splitarr = ft_split("      split       this for   me  !       ", ' ');
+	//printf("%i\n", getarrlength("abcabcab", 'c'));
+	while (splitarr[i]){
+		printf("%s\n", splitarr[i]);
+		++i;
+	}
+
 	// putnbr
 	ft_putnbr_fd(INT_MAX, 1);
 	printf("\n");

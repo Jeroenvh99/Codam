@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:43:27 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 14:39:43 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 16:37:16 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,15 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (end == -1)
 		i = 0;
 	c = malloc((end - i) + 2);
-	if (c)
+	if (!c)
+		return (NULL);
+	j = 0;
+	while (i <= end)
 	{
-		j = 0;
-		while (i <= end)
-		{
-			c[j] = s1[i];
-			++j;
-			++i;
-		}
-		c[j] = '\0';
-		return (c);
+		c[j] = s1[i];
+		++j;
+		++i;
 	}
-	return (NULL);
+	c[j] = '\0';
+	return (c);
 }

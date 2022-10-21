@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:47:05 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 14:39:04 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 15:50:31 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 	i = 0;
 	while (s[i])
 	{
-		(*f)(i, &s[i]);
+		(*f)(i, s + i);
 		++i;
 	}
 }

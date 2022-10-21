@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:44:31 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 14:38:50 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 15:49:49 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,21 @@
 
 static int	getarrlength(const char *c, char dlm)
 {
-	int		i;
+	int		count;
 	int		j;
 	char	prevc;
 
-	i = 0;
+	count = 0;
 	j = 0;
 	prevc = dlm;
 	while (j == 0 || c[j - 1])
 	{
 		if ((c[j] == dlm && prevc != dlm) || (!c[j] && prevc != dlm))
-		{
-			++i;
-		}
+			++count;
 		prevc = c[j];
 		++j;
 	}
-	return (i);
+	return (count);
 }
 
 static int	getend(const char *s, char dlm)
@@ -79,24 +77,24 @@ static int	fillarr(char **arr, const char *s, char dlm)
 
 char	**ft_split(char const *s, char c)
 {
-	int		i;
+	int		arrsize;
 	char	**arr;
 
 	if (!s)
 		return (NULL);
-	i = getarrlength(s, c) + 1;
-	arr = malloc(sizeof(char *) * i);
+	arrsize = getarrlength(s, c) + 1;
+	arr = malloc(sizeof(char *) * arrsize);
 	if (arr)
 	{
-		--i;
-		arr[i] = NULL;
+		--arrsize;
+		arr[arrsize] = NULL;
 		if (!fillarr(arr, s, c))
 		{
-			i = 0;
-			while (arr[i])
+			arrsize = 0;
+			while (arr[arrsize])
 			{
-				free(arr[i]);
-				++i;
+				free(arr[arrsize]);
+				++arrsize;
 			}
 			free(arr);
 			return (NULL);
@@ -105,15 +103,3 @@ char	**ft_split(char const *s, char c)
 	}
 	return (NULL);
 }
-
-// int main(){
-// 	int i = 0;
-// 	char **splitarr;
-// 	splitarr = ft_split("      split       this for   me  !       ", ' ');
-// 	//printf("%i\n", getarrlength("abcabcab", 'c'));
-// 	while (splitarr[i]){
-// 		printf("%s\n", splitarr[i]);
-// 		++i;
-// 	}
-// 	return (0);
-// }
