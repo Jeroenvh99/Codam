@@ -6,13 +6,12 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:41:09 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 13:50:32 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 14:39:47 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 #include<stdlib.h>
-// #include<stdio.h>
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -40,13 +39,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	c[i] = '\0';
 	return (c);
 }
-
-// int main(){
-// 	char *str = "01234";
-// 	size_t size = 10;
-// 	char *ret = ft_substr("hola", 4294967295, 18446744073709551615);
-// 	printf("%s", ret);
-// 	char *ret2 = ft_substr("", 1, 1);
-// 	printf("%s", ret2);
-// 	return 0;
-// }

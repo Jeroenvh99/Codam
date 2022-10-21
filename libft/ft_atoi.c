@@ -6,11 +6,9 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/04 09:38:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 13:15:23 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 14:36:00 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-// #include<stdio.h>
 
 int	ft_atoi(const char *str)
 {
@@ -36,12 +34,3 @@ int	ft_atoi(const char *str)
 		out *= -1;
 	return (out);
 }
-
-// int main(){
-// 	char *n = "\t\v\f\r\n \f-06050";
-// 	int i1 = atoi(n);
-// 	int i2 = ft_atoi(n);
-// 	printf("%i\n", i1);
-// 	printf("%i\n", i2);
-// 	return 0;
-// }

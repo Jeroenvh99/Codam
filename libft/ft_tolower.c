@@ -6,11 +6,9 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 18:53:19 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 11:17:16 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 14:39:52 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-// #include<stdio.h>
 
 int	ft_tolower(int c)
 {
@@ -19,9 +17,3 @@ int	ft_tolower(int c)
 	else
 		return (c);
 }
-
-// int main(){
-// 	printf("'A' gives %c\n", (char)ft_tolower('a'));
-// 	printf("'8' gives %c\n", (char)ft_tolower('8'));
-// 	return 0;
-// }

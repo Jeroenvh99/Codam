@@ -6,12 +6,11 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 18:54:45 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 13:50:45 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 14:39:38 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
-// #include<stdio.h>
 
 char	*ft_strrchr(const char *s, int c)
 {
@@ -26,10 +25,3 @@ char	*ft_strrchr(const char *s, int c)
 	}
 	return (NULL);
 }
-
-// int main(){
-// 	char s[15] = "adHd fdklHds";
-// 	printf("%s\n", ft_strrchr(s, 543));
-// 	printf("%s\n", ft_strrchr(s, 'g'));
-// 	return 0;
-// }

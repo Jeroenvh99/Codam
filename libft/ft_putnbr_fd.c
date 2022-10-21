@@ -6,13 +6,11 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/06 11:40:46 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 14:02:51 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 14:38:43 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include<unistd.h>
-// #include<stdio.h>
-// #include<limits.h>
 
 static void	recursive_putnbr(int n, int fd)
 {
@@ -45,18 +43,3 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 	recursive_putnbr(n, fd);
 }
-
-// int main(){
-// 	ft_putnbr_fd(INT_MAX, 1);
-// 	printf("\n");
-// 	ft_putnbr_fd(INT_MIN, 1);
-// 	printf("\nmin is %i, max is %i\n", INT_MIN, INT_MAX);
-// 	ft_putnbr_fd(10, 1);
-// 	printf("\n");
-// 	ft_putnbr_fd(100, 1);
-// 	printf("\n");
-// 	ft_putnbr_fd(5737, 1);
-// 	printf("\n");
-// 	ft_putnbr_fd(4656780, 1);
-// 	return 0;
-// }

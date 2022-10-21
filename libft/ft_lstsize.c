@@ -6,12 +6,11 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 18:04:42 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 13:57:35 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 14:38:01 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
-// #include<stdio.h>
 
 int	ft_lstsize(t_list *lst)
 {
@@ -25,10 +24,3 @@ int	ft_lstsize(t_list *lst)
 	}
 	return (count);
 }
-
-// int main(){
-// 	t_list *head = ft_lstnew("hello world!");
-// 	ft_lstadd_front(&head, ft_lstnew("hi again!"));
-// 	printf("%i", ft_lstsize(head));
-// 	return 0;
-// }

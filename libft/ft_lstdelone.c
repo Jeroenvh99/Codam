@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 09:41:37 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 13:59:33 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 14:32:03 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,3 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *))
 		lst = NULL;
 	}
 }
-
-// void	del(void *node)
-// {
-// 	free(node);
-// 	node = NULL;
-// }
-
-// int main(){
-// 	t_list *head = ft_lstnew("hello world!");
-// 	ft_lstdelone(head, &del);
-// 	return 0;
-// }

@@ -6,13 +6,12 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:43:27 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 13:50:38 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 14:39:43 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 #include<stdlib.h>
-// #include<stdio.h>
 
 static int	getstart(const char *s, const char *set)
 {
@@ -49,7 +48,7 @@ static int	getlast(const char *s, const char *set)
 	int	inset;
 
 	i = ft_strlen(s) - 1;
-	while (s[i])
+	while (i >= 0)
 	{
 		j = 0;
 		inset = 0;
@@ -96,11 +95,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	}
 	return (NULL);
 }
-
-// int main(){
-// 	char *s1 = "  \t \t \n   \n\n\n\t";
-// 	char *s2 = "";
-// 	char *ret = ft_strtrim(s1, " \n\t");
-// 	printf("%s", ret);
-// 	return 0;
-// }

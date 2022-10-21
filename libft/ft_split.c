@@ -6,13 +6,12 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:44:31 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 13:55:20 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 14:38:50 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 #include<stdlib.h>
-// #include<stdio.h>
 
 static int	getarrlength(const char *c, char dlm)
 {

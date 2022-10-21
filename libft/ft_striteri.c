@@ -6,11 +6,9 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:47:05 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 13:43:53 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 14:39:04 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-// #include<stdio.h>
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
@@ -23,12 +21,3 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 		++i;
 	}
 }
-
-// void print(unsigned int index, char *c)
-// {
-// 	printf("%c", *c + index);
-// }
-
-// int main(){
-// 	ft_striteri("Hello", print);
-// }

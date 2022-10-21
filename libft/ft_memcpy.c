@@ -6,12 +6,11 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 18:49:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 11:18:20 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 14:38:15 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
-// #include<string.h>
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
@@ -27,8 +26,3 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	}
 	return (dst);
 }
-
-// int main(){
-// 	ft_memcpy(NULL, NULL, 5);
-// 	return (0);
-// }

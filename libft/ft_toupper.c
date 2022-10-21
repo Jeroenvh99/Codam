@@ -6,11 +6,9 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 18:52:31 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 11:17:25 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 14:39:56 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-// #include<stdio.h>
 
 int	ft_toupper(int c)
 {
@@ -19,9 +17,3 @@ int	ft_toupper(int c)
 	else
 		return (c);
 }
-
-// int main(){
-// 	printf("'a' gives %c\n", (char)ft_toupper('a'));
-// 	printf("'8' gives %c\n", (char)ft_toupper('8'));
-// 	return 0;
-// }

@@ -6,12 +6,11 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 18:56:03 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 13:39:48 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 14:38:06 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
-// #include<stdio.h>
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
@@ -24,9 +23,3 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	}
 	return (NULL);
 }
-
-// int main(){
-// 	char *mem = "9865478";
-// 	printf("%s", ft_memchr(mem, '6', 6));
-// 	return 0;
-// }

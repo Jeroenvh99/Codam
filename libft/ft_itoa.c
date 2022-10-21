@@ -6,12 +6,11 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/07 14:00:49 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 13:21:00 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/21 14:37:14 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"stdlib.h"
-// #include<stdio.h>
 
 static int	getlength(int n)
 {
@@ -74,12 +73,3 @@ char	*ft_itoa(int n)
 	}
 	return (NULL);
 }
-
-// int main(){
-// 	printf("%s\n", ft_itoa(-67577));
-// 	printf("%s\n", ft_itoa(-100));
-// 	printf("%s\n", ft_itoa(-2147483648));
-// 	printf("%s\n", ft_itoa(2147483647));
-// 	printf("%s", ft_itoa(0));
-// 	return 0;
-// }
