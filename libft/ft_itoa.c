@@ -6,11 +6,12 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/07 14:00:49 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 15:37:19 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/24 15:01:13 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"stdlib.h"
+#include"libft.h"
+#include<stdlib.h>
 
 static int	getlength(int n)
 {
@@ -58,11 +59,7 @@ char	*ft_itoa(int n)
 
 	if (n == -2147483648)
 	{
-		c = malloc(12);
-		if (!c)
-			return (NULL);
-		c = "-2147483648";
-		return (c);
+		return (ft_strdup("-2147483648"));
 	}
 	outlen = getlength(n);
 	c = malloc(outlen + 1);

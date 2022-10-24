@@ -240,8 +240,19 @@ int main(){
 	// split
 	int i = 0;
 	char **splitarr;
-	splitarr = ft_split("      split       this for   me  !       ", ' ');
-	//printf("%i\n", getarrlength("abcabcab", 'c'));
+	splitarr = ft_split("      split       this for   me  !       hfhjutyk", ' ');
+	while (splitarr[i]){
+		printf("%s\n", splitarr[i]);
+		++i;
+	}
+	i = 0;
+	splitarr = ft_split(NULL, ' ');
+	// while (splitarr[i]){
+	// 	printf("%s\n", splitarr[i]);
+	// 	++i;
+	// }
+	i = 0;
+	splitarr = ft_split("vdfbnjfgbnghvbdfkergh", 'b');
 	while (splitarr[i]){
 		printf("%s\n", splitarr[i]);
 		++i;

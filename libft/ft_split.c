@@ -6,100 +6,115 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:44:31 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 15:49:49 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/24 15:09:20 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
 #include<stdlib.h>
+#include<stdio.h>
 
-static int	getarrlength(const char *c, char dlm)
+static int	getarrlength(const char *s, char dlm)
 {
+	int		i;
 	int		count;
-	int		j;
 	char	prevc;
 
+	i = 0;
 	count = 0;
-	j = 0;
 	prevc = dlm;
-	while (j == 0 || c[j - 1])
+	while (i == 0 || s[i - 1])
 	{
-		if ((c[j] == dlm && prevc != dlm) || (!c[j] && prevc != dlm))
+		if ((s[i] == dlm && prevc != dlm) || (!s[i] && prevc != dlm))
 			++count;
-		prevc = c[j];
-		++j;
+		prevc = s[i];
+		++i;
 	}
 	return (count);
 }
 
-static int	getend(const char *s, char dlm)
+static char	*getword(char *s, int len)
+{
+	char	*split;
+	int		i;
+
+	i = 0;
+	split = malloc(len + 1);
+	if (!split)
+		return (NULL);
+	while (len)
+	{
+		split[i] = *s;
+		++s;
+		++i;
+		--len;
+	}
+	split[i] = '\0';
+	return (split);
+}
+
+static char	*getsplit(char **s, char dlm)
 {
 	int		i;
 	char	prevc;
+	char	*split;
 
 	i = 0;
-	while (i == 0 || s[i - 1])
+	prevc = dlm;
+	while (i == 0 || s[0][i - 1])
 	{
-		if ((s[i] == dlm && prevc != dlm) || (s[i] == '\0' && prevc != dlm))
+		if ((s[0][i] == dlm && prevc != dlm) || (!(s[0][i])
+			&& prevc != dlm))
 		{
-			return (i);
+			split = getword(s[0], i);
+			if (!split)
+				return (NULL);
+			s[0] += i;
+			return (split);
 		}
-		prevc = s[i];
+		prevc = s[0][i];
 		++i;
 	}
-	return (0);
+	return (NULL);
 }
 
-static int	fillarr(char **arr, const char *s, char dlm)
+static void	freearr(char **arr, int current)
 {
 	int	i;
-	int	sublength;
 
 	i = 0;
-	while (*s)
+	while (i < current)
 	{
-		if (*s == dlm)
-		{
-			++s;
-		}
-		else
-		{
-			sublength = getend(s, dlm);
-			arr[i] = ft_substr(s, 0, sublength);
-			if (!arr[i])
-				return (0);
-			s += sublength;
-			++i;
-		}
+		free(arr[i]);
+		++i;
 	}
-	return (1);
+	free(arr);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	int		arrsize;
+	int		i;
 	char	**arr;
 
 	if (!s)
 		return (NULL);
 	arrsize = getarrlength(s, c) + 1;
 	arr = malloc(sizeof(char *) * arrsize);
-	if (arr)
+	if (!arr)
+		return (NULL);
+	arr[arrsize - 1] = NULL;
+	i = 0;
+	while (i < arrsize - 1)
 	{
-		--arrsize;
-		arr[arrsize] = NULL;
-		if (!fillarr(arr, s, c))
+		while (*s == c)
+			++s;
+		arr[i] = getsplit((char **)&s, c);
+		if (!arr[i])
 		{
-			arrsize = 0;
-			while (arr[arrsize])
-			{
-				free(arr[arrsize]);
-				++arrsize;
-			}
-			free(arr);
+			freearr(arr, i);
 			return (NULL);
 		}
-		return (arr);
+		++i;
 	}
-	return (NULL);
+	return (arr);
 }
