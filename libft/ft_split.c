@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:44:31 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/24 15:09:20 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/24 16:47:46 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,17 @@ static char	*getsplit(char **s, char dlm)
 	return (NULL);
 }
 
-static void	freearr(char **arr, int current)
+static void	freearr(char **arr, int i)
 {
-	int	i;
-
-	i = 0;
-	while (i < current)
+	--i;
+	while (i >= 0)
 	{
 		free(arr[i]);
-		++i;
+		arr[i] = NULL;
+		--i;
 	}
 	free(arr);
+	arr = NULL;
 }
 
 char	**ft_split(char const *s, char c)
