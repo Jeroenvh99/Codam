@@ -6,12 +6,11 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:44:31 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/24 16:47:46 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/25 08:53:18 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include<stdlib.h>
-#include<stdio.h>
 
 static int	getarrlength(const char *s, char dlm)
 {

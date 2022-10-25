@@ -318,6 +318,7 @@ int main(){
 	ft_lstadd_front(&head, ft_lstnew("hi once again!"));
 	printlist(head);
 	t_list *newlist = ft_lstmap(head, changechr, del);
+	printf("%s\n", (char *)newlist->content);
 	printlist(newlist);
 
 	// lstlast
