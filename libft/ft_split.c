@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:44:31 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/25 08:53:18 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/25 12:52:09 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 static int	getarrlength(const char *s, char dlm)
 {
-	int		i;
 	int		count;
 	char	prevc;
 
-	i = 0;
 	count = 0;
 	prevc = dlm;
-	while (i == 0 || s[i - 1])
+	while (*s)
 	{
-		if ((s[i] == dlm && prevc != dlm) || (!s[i] && prevc != dlm))
+		if (*s == dlm && prevc != dlm)
 			++count;
-		prevc = s[i];
-		++i;
+		prevc = *s;
+		++s;
 	}
+	if (prevc != dlm)
+		++count;
 	return (count);
 }
 
-static char	*getword(char *s, int len)
+static char	*getword(const char *s, int len)
 {
 	char	*split;
 	int		i;
@@ -51,7 +51,7 @@ static char	*getword(char *s, int len)
 	return (split);
 }
 
-static char	*getsplit(char **s, char dlm)
+static char	*getsplit(const char **s, char dlm)
 {
 	int		i;
 	char	prevc;
@@ -107,7 +107,7 @@ char	**ft_split(char const *s, char c)
 	{
 		while (*s == c)
 			++s;
-		arr[i] = getsplit((char **)&s, c);
+		arr[i] = getsplit(&s, c);
 		if (!arr[i])
 		{
 			freearr(arr, i);
