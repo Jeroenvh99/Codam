@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:43:27 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 16:37:16 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/26 10:09:59 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,11 @@ static int	getstart(const char *s, const char *set)
 		while (!inset && set[j])
 		{
 			if (s[i] == set[j])
-			{
 				inset = 1;
-			}
 			++j;
 		}
 		if (!inset)
-		{
 			break ;
-		}
 		++i;
 	}
 	return (i);
@@ -55,15 +51,11 @@ static int	getlast(const char *s, const char *set)
 		while (!inset && set[j])
 		{
 			if (s[i] == set[j])
-			{
 				inset = 1;
-			}
 			++j;
 		}
 		if (!inset)
-		{
 			break ;
-		}
 		--i;
 	}
 	return (i);

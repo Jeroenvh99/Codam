@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:41:09 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 14:39:47 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/26 10:14:32 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!c)
 		return (NULL);
 	i = 0;
+	s += start;
 	while (i < len)
 	{
-		c[i] = s[start];
+		c[i] = *s;
 		++i;
-		++start;
+		++s;
 	}
 	c[i] = '\0';
 	return (c);
