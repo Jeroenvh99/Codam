@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_printf.h                                        :+:    :+:            */
+/*   ft_printf_utils.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/10/27 09:14:22 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/27 09:15:30 by jvan-hal      ########   odam.nl         */
+/*   Created: 2022/10/27 09:14:16 by jvan-hal      #+#    #+#                 */
+/*   Updated: 2022/10/27 09:18:13 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-
-# endif
+void	ft_putnbr_base(unsigned long nbr, char *base, const char format)
+{
+	
+}

@@ -75,7 +75,7 @@ t_list	*ft_split_lst(char const *s, char c)
 		while (*s == c)
 			++s;
 		newnode = ft_lstnew(getsplit(&s, c));
-		if (arr && (!newnode || !newnode->content))
+		if (arr && !newnode)
 		{
 			ft_lstclear(&arr, del);
 			return (NULL);
