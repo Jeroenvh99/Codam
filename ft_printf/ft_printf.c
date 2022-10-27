@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/27 12:03:04 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/27 14:27:08 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	parser1(const char s, va_list args)
 	}
 	else
 		return (parser2(s, args));
-	ft_putstr_fd(str, 1);
+	ft_writestr(str);
 	return (ft_strlen(str));
 }
 
