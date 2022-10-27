@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/27 11:14:21 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/27 12:03:04 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,21 @@ int	sectionlength(const char *s)
 		++s;
 	}
 	return (count);
+}
+
+int	parser2(const char s, va_list args)
+{
+	if (s == 'c')
+	{
+		ft_putchar_fd(va_arg(args, int), 1);
+		return (1);
+	}
+	else if (s == '%')
+	{
+		write(1, "%", 1);
+		return (1);
+	}
+	return (0);
 }
 
 int	parser1(const char s, va_list args)
@@ -57,21 +72,6 @@ int	parser1(const char s, va_list args)
 		return (parser2(s, args));
 	ft_putstr_fd(str, 1);
 	return (ft_strlen(str));
-}
-
-int	parser2(const char s, va_list args)
-{
-	if (s == 'c')
-	{
-		ft_putchar_fd(va_arg(args, int), 1);
-		return (1);
-	}
-	else if (s == '%')
-	{
-		write(1, "%", 1);
-		return (1);
-	}
-	return (0);
 }
 
 int	argumentscheck(const char *s)
@@ -105,7 +105,7 @@ int	ft_printf(const char *s, ...)
 		if (*s)
 		{
 			++s;
-			printlen += parser(*s, args);
+			printlen += parser1(*s, args);
 			++s;
 		}
 	}
@@ -115,6 +115,6 @@ int	ft_printf(const char *s, ...)
 }
 
 int main(){
-	ft_printf("hello, this %s is a test", "ghukrtj");
+	ft_printf("%i", ft_printf("hello, this %i is a test", 24547767));
 	return 0;
 }
