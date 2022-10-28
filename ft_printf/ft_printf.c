@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/27 14:27:08 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/28 11:22:41 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,7 @@ int	parser1(const char s, va_list args)
 	if (s == 's')
 		str = va_arg(args, char *);
 	else if (s == 'p')
-	{
-		
-	}
+		ft_ptrtoa(va_arg(args, uintptr_t));
 	else if (s == 'd')
 	{
 		
@@ -66,7 +64,7 @@ int	parser1(const char s, va_list args)
 	}
 	else if (s == 'x' || s == 'X')
 	{
-		
+		ft_itoa_hex(va_arg(args, int), s);
 	}
 	else
 		return (parser2(s, args));

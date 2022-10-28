@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 09:14:16 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/27 16:53:00 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/28 11:23:58 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	getlength(long long int n)
 	if (n < 0)
 	{
 		n *= -1;
+		n = ((2147483648 - n) * 2) + n;
 	}
 	while ((n / 16) > 0)
 	{
@@ -54,6 +55,11 @@ static char	*getstr(long long int n, int len, int ptr, char format)
 {
 	char	*c;
 
+	if (n < 0)
+	{
+		n *= -1;
+		n = ((2147483648 - n) * 2) + n;
+	}
 	if (ptr)
 		len += 2;
 	c = malloc(len + 1);
@@ -69,17 +75,10 @@ static char	*getstr(long long int n, int len, int ptr, char format)
 		--c;
 	}
 	*c = gethexchar(n, format);
-	if (ptr)
-	{
-		--c;
-		*c = 'x';
-		--c;
-		*c = '0';
-	}
 	return (c);
 }
 
-char	*ft_itoa_hex(int n, const char format )
+char	*ft_itoa_hex(int n, const char format)
 {
 	if (n == -2147483648)
 		return (ft_strdup("80000000"));
@@ -88,19 +87,16 @@ char	*ft_itoa_hex(int n, const char format )
 
 char	*ft_ptrtoa(uintptr_t ptr)
 {
-	char *c;
+	char	*c;
 
 	if (!ptr)
 		return (ft_strdup("0x0"));
-	return (getstr(ptr, getlength(ptr), 1, 'x'));
-}
-
-int main(){
-	void	*v;
-	
-	printf("%s\n", ft_ptrtoa((uintptr_t)v));
-	printf("%p\n", v);
-	printf("%s\n", ft_itoa_hex(INT_MIN + 1, 'x'));
-	printf("%x", INT_MIN + 1);
-	return 0;
+	c = getstr(ptr, getlength(ptr), 1, 'x');
+	if (!c)
+		return (NULL);
+	--c;
+	*c = 'x';
+	--c;
+	*c = '0';
+	return (c);
 }
