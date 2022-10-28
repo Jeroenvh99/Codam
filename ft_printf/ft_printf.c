@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/28 15:47:27 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/28 17:46:49 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	parser2(const char s, va_list args)
 
 int	parser1(const char s, va_list args)
 {
+	int		printlen;
 	char	*str;
 
 	if (s == 's')
@@ -62,8 +63,8 @@ int	parser1(const char s, va_list args)
 		str = getstr_hex(va_arg(args, int), 0, s);
 	else
 		return (parser2(s, args));
-	ft_writestr(str);
-	return (ft_strlen(str));
+	printlen = ft_writestr(str, s);
+	return (printlen);
 }
 
 int	argumentscheck(const char *s)

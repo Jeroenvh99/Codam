@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 16:09:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/28 13:25:11 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/28 17:46:26 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,21 @@ char	*ft_uitoa(unsigned int n)
 	return (c);
 }
 
-void	ft_writestr(char *s)
+int	ft_writestr(char *s, char format)
 {
+	int	len;
+
 	if (s)
-		write(1, s, ft_strlen(s));
+	{
+		len = ft_strlen(s);
+		write(1, s, len);
+		if (format != 's')
+			free(s);
+		return (len);
+	}
 	else
+	{
 		write(1, "(null)", 6);
+		return (6);
+	}
 }
