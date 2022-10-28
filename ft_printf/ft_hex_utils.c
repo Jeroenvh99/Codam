@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 09:14:16 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/28 11:23:58 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/28 15:13:39 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	getlength(long long int n)
 	return (count);
 }
 
-static char	gethexchar(long long int n, char format)
+static char	gethexchar(unsigned long int n, char format)
 {
 	if ((n % 16) < 10)
 	{
@@ -51,10 +51,12 @@ static char	gethexchar(long long int n, char format)
 	return ('~');
 }
 
-static char	*getstr(long long int n, int len, int ptr, char format)
+char	*getstr_hex(long long int n, int ptr, char format)
 {
+	int		len;
 	char	*c;
 
+	len = getlength(n);
 	if (n < 0)
 	{
 		n *= -1;
@@ -78,20 +80,13 @@ static char	*getstr(long long int n, int len, int ptr, char format)
 	return (c);
 }
 
-char	*ft_itoa_hex(int n, const char format)
-{
-	if (n == -2147483648)
-		return (ft_strdup("80000000"));
-	return (getstr(n, getlength(n), 0, format));
-}
-
 char	*ft_ptrtoa(uintptr_t ptr)
 {
 	char	*c;
 
 	if (!ptr)
 		return (ft_strdup("0x0"));
-	c = getstr(ptr, getlength(ptr), 1, 'x');
+	c = getstr_hex(ptr, 1, 'x');
 	if (!c)
 		return (NULL);
 	--c;

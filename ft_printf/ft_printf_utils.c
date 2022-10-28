@@ -6,14 +6,15 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 16:09:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/28 12:09:07 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/28 13:25:11 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include"./sources/libft.h"
 #include<unistd.h>
 #include<stdlib.h>
 
-static int	getlength(int n)
+static int	getlength(unsigned int n)
 {
 	int	count;
 
@@ -30,8 +31,10 @@ static int	getlength(int n)
 
 char	*ft_uitoa(unsigned int n)
 {
+	int		len;
 	char	*c;
 
+	len = getlength(n);
 	c = malloc(len + 1);
 	if (!c)
 		return (NULL);

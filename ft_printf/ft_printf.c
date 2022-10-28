@@ -6,15 +6,17 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/28 12:33:15 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/28 15:47:27 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"./sources/libft.h"
+#include"ft_printf.h"
 #include<unistd.h>
 #include<stddef.h>
 #include<stdarg.h>
 #include<stdio.h>
+#include<limits.h>
 
 int	sectionlength(const char *s)
 {
@@ -57,7 +59,7 @@ int	parser1(const char s, va_list args)
 	else if (s == 'u')
 		str = ft_uitoa(va_arg(args, unsigned int));
 	else if (s == 'x' || s == 'X')
-		str = ft_itoa_hex(va_arg(args, int), s);
+		str = getstr_hex(va_arg(args, int), 0, s);
 	else
 		return (parser2(s, args));
 	ft_writestr(str);
@@ -104,7 +106,18 @@ int	ft_printf(const char *s, ...)
 	return (printlen);
 }
 
-int main(){
-	ft_printf("%i", ft_printf("hello, this %i is a test", 24547767));
-	return 0;
-}
+// int main(){
+// 	void	*v;
+// 	ft_printf("%i\n", ft_printf("hello, this %i prints an integer\n", 24547767));
+// 	ft_printf("%i\n", printf("hello, this %i prints an integer\n", 24547767));
+// 	ft_printf("%i\n", ft_printf("hello, this %p prints a pointer\n", v));
+// 	ft_printf("%i\n", printf("hello, this %p prints a pointer\n", v));
+// 	ft_printf("%i\n", ft_printf("hello, this %x prints an integer in hex", INT_MIN));
+// 	ft_printf("%i\n", printf("hello, this %x prints an integer in hex", INT_MIN));
+// 	// ft_printf("%i\n", ft_printf("hello, this %i prints an integer", 24547767));
+// 	// ft_printf("%i\n", ft_printf("hello, this %i prints an integer", 24547767));
+// 	// ft_printf("%i\n", ft_printf("hello, this %i prints an integer", 24547767));
+// 	// ft_printf("%i\n", ft_printf("hello, this %i prints an integer", 24547767));
+// 	// ft_printf("%i\n", ft_printf("hello, this %i prints an integer", 24547767));
+// 	return 0;
+// }
