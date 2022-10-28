@@ -17,6 +17,7 @@ $(NAME): $(OBJS)
 	ar -rcs $(NAME) $(OBJS)
 
 clean:
+	$(MAKE) -C ./sources fclean
 	rm -f $(OBJS)
 
 fclean: clean
