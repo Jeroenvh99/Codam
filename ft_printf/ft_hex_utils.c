@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 09:14:16 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/28 15:13:39 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/31 12:49:51 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,23 @@ static int	getlength(long long int n)
 	return (count);
 }
 
-static char	gethexchar(unsigned long int n, char format)
+static char	gethexchar(int n, char format)
 {
-	if ((n % 16) < 10)
+	if (n < 10)
 	{
-		return ((n % 16) + '0');
+		return (n + '0');
 	}
 	else
 	{
 		if (format == 'x')
-			return ((n % 16) - 10 + 'a');
+			return (n - 10 + 'a');
 		else if (format == 'X')
-			return ((n % 16) - 10 + 'A');
+			return (n - 10 + 'A');
 	}
 	return ('~');
 }
 
-char	*getstr_hex(long long int n, int ptr, char format)
+char	*getstr_hex(long long int n, char format)
 {
 	int		len;
 	char	*c;
@@ -62,33 +62,61 @@ char	*getstr_hex(long long int n, int ptr, char format)
 		n *= -1;
 		n = ((2147483648 - n) * 2) + n;
 	}
-	if (ptr)
-		len += 2;
 	c = malloc(len + 1);
 	if (!c)
 		return (NULL);
 	c += len;
 	*c = '\0';
 	--c;
-	while (n > 16)
+	while (n >= 16)
 	{
-		*c = gethexchar(n, format);
+		*c = gethexchar((n % 16), format);
 		n /= 16;
 		--c;
 	}
-	*c = gethexchar(n, format);
+	*c = gethexchar((n % 16), format);
 	return (c);
 }
 
-char	*ft_ptrtoa(uintptr_t ptr)
+static int	getlength_ptr(unsigned long int n)
 {
+	int	count;
+
+	count = 0;
+	if (n < 0)
+	{
+		n *= -1;
+		n = ((2147483648 - n) * 2) + n;
+	}
+	while ((n / 16) > 0)
+	{
+		++count;
+		n /= 16;
+	}
+	if (n < 16)
+		++count;
+	return (count);
+}
+
+char	*getstr_ptr(uintptr_t ptr)
+{
+	int		len;
 	char	*c;
 
-	if (!ptr)
-		return (ft_strdup("0x0"));
-	c = getstr_hex(ptr, 1, 'x');
+	len = getlength_ptr(ptr) + 2;
+	c = malloc(len + 1);
 	if (!c)
 		return (NULL);
+	c += len;
+	*c = '\0';
+	--c;
+	while (ptr >= 16)
+	{
+		*c = gethexchar((ptr % 16), 'x');
+		ptr /= 16;
+		--c;
+	}
+	*c = gethexchar((ptr % 16), 'x');
 	--c;
 	*c = 'x';
 	--c;
