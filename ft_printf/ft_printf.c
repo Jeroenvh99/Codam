@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/31 15:51:20 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/10/31 17:02:07 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	parser1(const char s, va_list args)
 	else if (s == 'u')
 		str = ft_uitoa(va_arg(args, unsigned int));
 	else if (s == 'x' || s == 'X')
-		str = getstr_hex(va_arg(args, int), 0, s);
+		str = getstr_hex(va_arg(args, int), s);
 	else
 		return (parser2(s, args));
 	printlen = ft_writestr(str, s);
