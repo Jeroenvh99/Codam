@@ -6,11 +6,12 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 16:09:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/02 09:19:03 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/02 11:48:48 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"./sources/libft.h"
+#include"ft_printf.h"
 #include<unistd.h>
 #include<stdlib.h>
 
@@ -63,24 +64,23 @@ char	*chartostr(int c)
 	return (str);
 }
 
-int	ft_writestr(char *s, char format)
+int	ft_writestr(char *s, char format, t_padding *padinfo)
 {
 	int	len;
 
-	if (s)
-	{
-		if (format == 'c')
-			len = 1;
-		else
-			len = ft_strlen(s);
-		write(1, s, len);
-		if (format != 's')
-			free(s);
-		return (len);
-	}
-	else
+	if (!s)
 	{
 		write(1, "(null)", 6);
 		return (6);
 	}
+	if (format == 'c')
+		len = 1;
+	else
+		len = ft_strlen(s);
+	if (len > padinfo->precision)
+		len = padinfo->precision;
+	write(1, s, len);
+	if (format != 's')
+		free(s);
+	return (len);
 }

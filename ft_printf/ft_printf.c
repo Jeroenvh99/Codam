@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/02 11:04:11 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/02 11:47:08 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	parser(const char **s, va_list args)
 		str = chartostr(va_arg(args, int));
 	else if (*s[0] == '%')
 		str = ft_strdup("%");
-	return (ft_writestr(str, *s[0]));
+	return (ft_writestr(str, *s[0], &padinfo));
 }
 
 int	argumentscheck(const char *s)

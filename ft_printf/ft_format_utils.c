@@ -6,23 +6,19 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:26:17 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/02 08:58:40 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/02 11:57:15 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
 
-static int	reachedtype(char s)
+static int	reachedtype(char s, char *format)
 {
-	int	i;
-
-	i = 0;
-	char	formats[10] = "cspdiuxX%";
-	while (formats[i])
+	while (*format)
 	{
-		if (formats[i] == s)
+		if (*format == s)
 			return (1);
-		++i;
+		++format;
 	}
 	return (0);
 }
@@ -35,7 +31,7 @@ void	initpadinfo(t_padding *padinfo)
 	padinfo->sign = '-';
 	padinfo->padchar = ' ';
 	padinfo->blank = 'n';
-	padinfo->precision = 0;
+	padinfo->precision = -1;
 }
 
 int	getformat(char *s, t_padding *padinfo)
@@ -43,7 +39,7 @@ int	getformat(char *s, t_padding *padinfo)
 	int	i;
 
 	i = 0;
-	while (!reachedtype(s[i]) && s[i])
+	while (!reachedtype(s[i], "cspdiuxX%") && s[i])
 	{
 		if (s[i] == '#')
 		{
