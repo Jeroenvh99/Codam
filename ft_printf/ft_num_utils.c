@@ -6,19 +6,20 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:14:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/02 08:15:09 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/02 10:20:15 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"./sources/libft.h"
+#include"ft_printf.h"
 #include<stdlib.h>
 
-static int	getlength(int n, char sign)
+static int	getlength(int n, char sign, char blank)
 {
 	int	count;
 
 	count = 0;
-	if (sign == '+' && n > 0)
+	if (n > 0 && (sign == '+' || blank == 'y'))
 		++count;
 	if (n < 0)
 	{
@@ -35,15 +36,12 @@ static int	getlength(int n, char sign)
 	return (count);
 }
 
-static char	*getstr(long int n, int len, char sign)
+static char	*getstr(long int n, int len, char *c, t_padding *padinfo)
 {
-	char	*c;
-
-	c = malloc(len + 1);
-	if (!c)
-		return (NULL);
-	if (sign == '+' && n >= 0)
+	if (padinfo->sign == '+' && n >= 0)
 		*c = '+';
+	if (padinfo->blank == 'y' && n >= 0)
+		*c = ' ';
 	if (n < 0)
 	{
 		*c = '-';
@@ -59,14 +57,22 @@ static char	*getstr(long int n, int len, char sign)
 		--c;
 	}
 	*c = n + '0';
-	if (*(c - 1) == '-' || sign == '+')
+	if (*(c - 1) == '-' || padinfo->sign == '+' || padinfo->blank == 'y')
 		return (c - 1);
 	return (c);
 }
 
-char	*ft_itoa_format(int n, char sign)
+char	*ft_itoa_format(int n, t_padding *padinfo)
 {
+	int		len;
+	char	*c;
+
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
-	return (getstr(n, getlength(n, sign), sign));
+	len = getlength(n, padinfo->sign, padinfo->blank);
+	c = malloc(len + 1);
+	if (!c)
+		return (NULL);
+	getstr(n, len, c, padinfo);
+	return (c);
 }

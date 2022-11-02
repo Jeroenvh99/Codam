@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 09:14:22 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/02 09:18:37 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/02 11:04:44 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ typedef struct padding_info
 	int		precision;
 }	t_padding;
 
-char	*getstr_hex(long long int n, char format);
-char	*getstr_ptr(uintptr_t ptr);
+char	*getstr_hex(long long int n, char format, char alternate);
+char	*getstr_ptr(uintptr_t ptr, char format);
 char	*ft_uitoa(unsigned int n);
-char	*ft_itoa_format(int n, char sign);
+char	*ft_itoa_format(int n, t_padding *padinfo);
 int		ft_writestr(char *s, char format);
 void	initpadinfo(t_padding *padinfo);
 int		getformat(char *s, t_padding *padinfo);
