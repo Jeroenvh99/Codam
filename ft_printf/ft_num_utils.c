@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_printf_utils.c                                  :+:    :+:            */
+/*   ft_num_utils.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/10/27 16:09:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/02 09:19:03 by jvan-hal      ########   odam.nl         */
+/*   Created: 2022/11/01 15:14:23 by jvan-hal      #+#    #+#                 */
+/*   Updated: 2022/11/02 08:15:09 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"./sources/libft.h"
-#include<unistd.h>
 #include<stdlib.h>
 
-static int	getlength(unsigned int n)
+static int	getlength(int n, char sign)
 {
 	int	count;
 
 	count = 0;
+	if (sign == '+' && n > 0)
+		++count;
+	if (n < 0)
+	{
+		++count;
+		n *= -1;
+	}
 	while ((n / 10) > 0)
 	{
 		++count;
@@ -29,15 +35,20 @@ static int	getlength(unsigned int n)
 	return (count);
 }
 
-char	*ft_uitoa(unsigned int n)
+static char	*getstr(long int n, int len, char sign)
 {
-	int		len;
 	char	*c;
 
-	len = getlength(n);
 	c = malloc(len + 1);
 	if (!c)
 		return (NULL);
+	if (sign == '+' && n >= 0)
+		*c = '+';
+	if (n < 0)
+	{
+		*c = '-';
+		n *= -1;
+	}
 	c += len;
 	*c = '\0';
 	--c;
@@ -48,39 +59,14 @@ char	*ft_uitoa(unsigned int n)
 		--c;
 	}
 	*c = n + '0';
+	if (*(c - 1) == '-' || sign == '+')
+		return (c - 1);
 	return (c);
 }
 
-char	*chartostr(int c)
+char	*ft_itoa_format(int n, char sign)
 {
-	char	*str;
-
-	str = malloc(2);
-	if (!str)
-		return (NULL);
-	str[0] = (char)c;
-	str[1] = '\0';
-	return (str);
-}
-
-int	ft_writestr(char *s, char format)
-{
-	int	len;
-
-	if (s)
-	{
-		if (format == 'c')
-			len = 1;
-		else
-			len = ft_strlen(s);
-		write(1, s, len);
-		if (format != 's')
-			free(s);
-		return (len);
-	}
-	else
-	{
-		write(1, "(null)", 6);
-		return (6);
-	}
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	return (getstr(n, getlength(n, sign), sign));
 }

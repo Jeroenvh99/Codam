@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/31 17:02:07 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/02 09:17:49 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,40 +31,28 @@ int	sectionlength(const char *s)
 	return (count);
 }
 
-int	parser2(const char s, va_list args)
+int	parser(const char **s, va_list args)
 {
-	if (s == 'c')
-	{
-		ft_putchar_fd(va_arg(args, int), 1);
-		return (1);
-	}
-	else if (s == '%')
-	{
-		write(1, "%", 1);
-		return (1);
-	}
-	return (0);
-}
+	char		*str;
+	t_padding	padinfo;
 
-int	parser1(const char s, va_list args)
-{
-	int		printlen;
-	char	*str;
-
-	if (s == 's')
+	initpadinfo(&padinfo);
+	s[0] += getformat((char *)s[0], &padinfo);
+	if (*s[0] == 's')
 		str = va_arg(args, char *);
-	else if (s == 'p')
+	else if (*s[0] == 'p')
 		str = getstr_ptr(va_arg(args, uintptr_t));
-	else if (s == 'd' || s == 'i')
-		str = ft_itoa(va_arg(args, int));
-	else if (s == 'u')
+	else if (*s[0] == 'd' || *s[0] == 'i')
+		str = ft_itoa_format(va_arg(args, int), padinfo.sign);
+	else if (*s[0] == 'u')
 		str = ft_uitoa(va_arg(args, unsigned int));
-	else if (s == 'x' || s == 'X')
-		str = getstr_hex(va_arg(args, int), s);
-	else
-		return (parser2(s, args));
-	printlen = ft_writestr(str, s);
-	return (printlen);
+	else if (*s[0] == 'x' || *s[0] == 'X')
+		str = getstr_hex(va_arg(args, int), *s[0]);
+	else if (*s[0] == 'c')
+		str = chartostr(va_arg(args, int));
+	else if (*s[0] == '%')
+		str = ft_strdup("%");
+	return (ft_writestr(str, *s[0]));
 }
 
 int	argumentscheck(const char *s)
@@ -98,7 +86,7 @@ int	ft_printf(const char *s, ...)
 		if (*s)
 		{
 			++s;
-			printlen += parser1(*s, args);
+			printlen += parser(&s, args);
 			++s;
 		}
 	}
@@ -115,10 +103,12 @@ int main(){
 	// ft_printf("%i\n", printf("hello, this %p prints a pointer\n", v));
 	// ft_printf("%i\n", ft_printf("hello, this %x prints an integer in hex", INT_MIN));
 	// ft_printf("%i\n", printf("hello, this %x prints an integer in hex", INT_MIN));
-	ft_printf("%i\n", ft_printf("hello, this %p prints a pointer", LONG_MIN));
-	printf("hello, this %x prints a pointer", 24547767);
+	// ft_printf("%i\n", ft_printf("hello, this %p prints a pointer", LONG_MIN));
+	// printf("hello, this %x prints a pointer", 24547767);
 	// ft_printf("%i\n", ft_printf("hello, this %i prints an integer", 24547767));
 	// ft_printf("%i\n", ft_printf("hello, this %i prints an integer", 24547767));
 	// ft_printf("%i\n", ft_printf("hello, this %i prints an integer", 24547767));
+	// ft_printf("%i\n", ft_printf("\001\002\007\v\010\f\r\n"));
+	ft_printf("%i\n", printf("%%"));
 	return 0;
 }

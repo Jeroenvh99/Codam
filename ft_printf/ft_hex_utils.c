@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 09:14:16 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/31 12:49:51 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/02 08:17:45 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,11 @@
 #include<stdio.h>
 #include<limits.h>
 
-static int	getlength(long long int n)
+static int	getlength(unsigned long int n)
 {
 	int	count;
 
 	count = 0;
-	if (n < 0)
-	{
-		n *= -1;
-		n = ((2147483648 - n) * 2) + n;
-	}
 	while ((n / 16) > 0)
 	{
 		++count;
@@ -56,12 +51,12 @@ char	*getstr_hex(long long int n, char format)
 	int		len;
 	char	*c;
 
-	len = getlength(n);
 	if (n < 0)
 	{
 		n *= -1;
 		n = ((2147483648 - n) * 2) + n;
 	}
+	len = getlength(n);
 	c = malloc(len + 1);
 	if (!c)
 		return (NULL);
@@ -78,32 +73,12 @@ char	*getstr_hex(long long int n, char format)
 	return (c);
 }
 
-static int	getlength_ptr(unsigned long int n)
-{
-	int	count;
-
-	count = 0;
-	if (n < 0)
-	{
-		n *= -1;
-		n = ((2147483648 - n) * 2) + n;
-	}
-	while ((n / 16) > 0)
-	{
-		++count;
-		n /= 16;
-	}
-	if (n < 16)
-		++count;
-	return (count);
-}
-
 char	*getstr_ptr(uintptr_t ptr)
 {
 	int		len;
 	char	*c;
 
-	len = getlength_ptr(ptr) + 2;
+	len = getlength(ptr) + 2;
 	c = malloc(len + 1);
 	if (!c)
 		return (NULL);
