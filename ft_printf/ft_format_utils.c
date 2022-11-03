@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:26:17 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/02 11:57:15 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/03 09:14:34 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	reachedtype(char s, char *format)
 void	initpadinfo(t_padding *padinfo)
 {
 	padinfo->alternate = 'n';
-	padinfo->width = 0;
+	padinfo->width = -1;
 	padinfo->adjustment = 'r';
 	padinfo->sign = '-';
 	padinfo->padchar = ' ';
@@ -73,6 +73,7 @@ int	getformat(char *s, t_padding *padinfo)
 		}
 		else if (s[i] == '.')
 		{
+			padinfo->precision = 0;
 			while (s[i + 1] >= '0' && s[i + 1] <= '9')
 			{
 				++i;
@@ -82,6 +83,7 @@ int	getformat(char *s, t_padding *padinfo)
 		}
 		else if (s[i] >= '1' && s[i] <= '9')
 		{
+			padinfo->width = 0;
 			padinfo->width += s[i] - '0';
 			while (s[i + 1] >= '0' && s[i + 1] <= '9')
 			{

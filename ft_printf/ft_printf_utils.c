@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 16:09:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/02 11:48:48 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/03 09:16:36 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	ft_writestr(char *s, char format, t_padding *padinfo)
 		len = 1;
 	else
 		len = ft_strlen(s);
-	if (len > padinfo->precision)
+	if (format == 's' && padinfo->precision > -1 && len > padinfo->precision)
 		len = padinfo->precision;
 	write(1, s, len);
 	if (format != 's')

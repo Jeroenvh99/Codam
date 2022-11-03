@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:14:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/02 10:20:15 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/03 11:58:36 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include"ft_printf.h"
 #include<stdlib.h>
 
-static int	getlength(int n, char sign, char blank)
+static int	getlength(int n, char sign, char blank, int precision)
 {
 	int	count;
 
@@ -33,33 +33,36 @@ static int	getlength(int n, char sign, char blank)
 	}
 	if (n < 10)
 		++count;
+	if (precision > -1 && count < precision)
+		count = precision;
 	return (count);
 }
 
-static char	*getstr(long int n, int len, char *c, t_padding *padinfo)
+static void	getstr(long int n, int i, char *c, t_padding *padinfo)
 {
 	if (padinfo->sign == '+' && n >= 0)
-		*c = '+';
+		c[0] = '+';
 	if (padinfo->blank == 'y' && n >= 0)
-		*c = ' ';
+		c[0] = ' ';
 	if (n < 0)
 	{
-		*c = '-';
+		c[0] = '-';
 		n *= -1;
 	}
-	c += len;
-	*c = '\0';
-	--c;
+	--i;
 	while (n > 9)
 	{
-		*c = (n % 10) + '0';
+		c[i] = (n % 10) + '0';
 		n /= 10;
-		--c;
+		--i;
 	}
-	*c = n + '0';
-	if (*(c - 1) == '-' || padinfo->sign == '+' || padinfo->blank == 'y')
-		return (c - 1);
-	return (c);
+	c[i] = n + '0';
+	--i;
+	while (i >= 0 && c[i] != '+' && c[i] != '-' && c[i] != ' ')
+	{
+		c[i] = '0';
+		--i;
+	}
 }
 
 char	*ft_itoa_format(int n, t_padding *padinfo)
@@ -69,8 +72,8 @@ char	*ft_itoa_format(int n, t_padding *padinfo)
 
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
-	len = getlength(n, padinfo->sign, padinfo->blank);
-	c = malloc(len + 1);
+	len = getlength(n, padinfo->sign, padinfo->blank, padinfo->precision);
+	c = ft_calloc(len + 1, 1);
 	if (!c)
 		return (NULL);
 	getstr(n, len, c, padinfo);
