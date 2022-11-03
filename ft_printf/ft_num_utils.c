@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:14:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/03 11:58:36 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/03 15:16:23 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,14 @@ static int	getlength(int n, char sign, char blank, int precision)
 
 	count = 0;
 	if (n > 0 && (sign == '+' || blank == 'y'))
+	{
 		++count;
+		++precision;
+	}
 	if (n < 0)
 	{
 		++count;
+		++precision;
 		n *= -1;
 	}
 	while ((n / 10) > 0)

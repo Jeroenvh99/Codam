@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:26:17 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/03 09:14:34 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/03 15:13:56 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	reachedtype(char s, char *format)
 	return (0);
 }
 
-void	initpadinfo(t_padding *padinfo)
+static void	initpadinfo(t_padding *padinfo)
 {
 	padinfo->alternate = 'n';
 	padinfo->width = -1;
@@ -39,6 +39,7 @@ int	getformat(char *s, t_padding *padinfo)
 	int	i;
 
 	i = 0;
+	initpadinfo(padinfo);
 	while (!reachedtype(s[i], "cspdiuxX%") && s[i])
 	{
 		if (s[i] == '#')

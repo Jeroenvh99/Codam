@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 16:09:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/03 09:16:36 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/03 15:17:38 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include<unistd.h>
 #include<stdlib.h>
 
-static int	getlength(unsigned int n)
+static int	getlength(unsigned int n, int precision)
 {
 	int	count;
 
@@ -27,28 +27,33 @@ static int	getlength(unsigned int n)
 	}
 	if (n < 10)
 		++count;
+	if (precision > -1 && count < precision)
+		count = precision;
 	return (count);
 }
 
-char	*ft_uitoa(unsigned int n)
+char	*ft_uitoa(unsigned int n, int precision)
 {
-	int		len;
+	int		i;
 	char	*c;
 
-	len = getlength(n);
-	c = malloc(len + 1);
+	i = getlength(n, precision);
+	c = ft_calloc(i + 1, 1);
 	if (!c)
 		return (NULL);
-	c += len;
-	*c = '\0';
-	--c;
+	--i;
 	while (n > 9)
 	{
-		*c = (n % 10) + '0';
+		c[i] = (n % 10) + '0';
 		n /= 10;
-		--c;
+		--i;
 	}
-	*c = n + '0';
+	c[i] = n + '0';
+	while (i > 0)
+	{
+		--i;
+		c[i] = '0';
+	}
 	return (c);
 }
 
