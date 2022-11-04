@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:26:17 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/04 16:18:49 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/04 17:37:22 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	initpadinfo(t_padding *padinfo)
 	padinfo->sign = '-';
 	padinfo->padc = ' ';
 	padinfo->blank = 'n';
-	padinfo->precision = -1;
+	padinfo->prec = -1;
 }
 
 static void	getflags(char s, t_padding *padinfo)
@@ -66,12 +66,12 @@ static int	getwidthandprecision(int i, const char *s, t_padding *padinfo)
 {
 	if (s[i] == '.')
 	{
-		padinfo->precision = 0;
+		padinfo->prec = 0;
 		while (s[i + 1] >= '0' && s[i + 1] <= '9')
 		{
 			++i;
-			padinfo->precision *= 10;
-			padinfo->precision += s[i] - '0';
+			padinfo->prec *= 10;
+			padinfo->prec += s[i] - '0';
 		}
 	}
 	else if (s[i] >= '1' && s[i] <= '9')

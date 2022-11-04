@@ -6,13 +6,30 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:14:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/04 16:17:46 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/04 17:36:15 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"./sources/libft.h"
 #include"ft_printf.h"
 #include<stdlib.h>
+
+static int	getformatlength(int count, t_padding *padinfo)
+{
+	if (padinfo->padc == '0' && padinfo->prec < 1 && padinfo->width > count)
+	{
+		padinfo->prec += (padinfo->width - count);
+		count = padinfo->width;
+	}
+	if (count < padinfo->prec)
+	{
+		count = padinfo->prec;
+		padinfo->padc = ' ';
+	}
+	if (count > padinfo->prec)
+		padinfo->padc = ' ';
+	return (count);
+}
 
 static int	getlength(int n, t_padding *padinfo)
 {
@@ -22,7 +39,7 @@ static int	getlength(int n, t_padding *padinfo)
 	if (n < 0 || (n >= 0 && (padinfo->sign == '+' || padinfo->blank == 'y')))
 	{
 		++count;
-		++padinfo->precision;
+		++padinfo->prec;
 	}
 	if (n < 0)
 		n *= -1;
@@ -33,13 +50,7 @@ static int	getlength(int n, t_padding *padinfo)
 	}
 	if (n < 10)
 		++count;
-	if (padinfo->adj == 'r' && padinfo->padc == '0' && padinfo->width > count)
-	{
-		padinfo->precision += (padinfo->width - count);
-		count = padinfo->width;
-	}
-	if (count < padinfo->precision)
-		count = padinfo->precision;
+	count = getformatlength(count, padinfo);
 	return (count);
 }
 
@@ -63,7 +74,7 @@ static void	getstr(long int n, int i, char *c, t_padding *padinfo)
 	}
 	c[i] = n + '0';
 	--i;
-	while (i >= 0 && c[i] != '+' && c[i] != '-' && c[i] != ' ')
+	while (i >= 0 && !c[i])
 	{
 		c[i] = '0';
 		--i;

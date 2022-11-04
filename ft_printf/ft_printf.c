@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/04 16:12:10 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/04 17:38:07 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ int	parser(const char **s, va_list args)
 	if (*s[0] == 's')
 		str = va_arg(args, char *);
 	else if (*s[0] == 'p')
-		str = getstr_ptr(va_arg(args, uintptr_t), 'x', padinfo.precision);
+		str = getstr_ptr(va_arg(args, uintptr_t), 'x', padinfo.prec);
 	else if (*s[0] == 'd' || *s[0] == 'i')
 		str = ft_itoa_format(va_arg(args, int), &padinfo);
 	else if (*s[0] == 'u')
-		str = ft_uitoa(va_arg(args, unsigned int), padinfo.precision);
+		str = ft_uitoa(va_arg(args, unsigned int), padinfo.prec);
 	else if (*s[0] == 'x' || *s[0] == 'X')
 		str = getstr_hex(va_arg(args, int), *s[0], padinfo.alternate,
-				padinfo.precision);
+				padinfo.prec);
 	else if (*s[0] == 'c')
 		str = chartostr(va_arg(args, int));
 	else if (*s[0] == '%')
@@ -108,6 +108,6 @@ int main(){
 	// ft_printf("%i\n", ft_printf("hello, this %i prints an integer", 24547767));
 	// ft_printf("%i\n", ft_printf("hello, this %i prints an integer", 24547767));
 	// ft_printf("%i\n", ft_printf("\001\002\007\v\010\f\r\n"));
-	printf("%i\n", ft_printf("%7i", -14));
+	printf("%i\n", ft_printf("%08.3i", 8375));
 	return 0;
 }
