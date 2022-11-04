@@ -5,7 +5,8 @@ SRCS = ft_printf.c\
 	ft_hex_utils.c\
 	ft_printf_utils.c\
 	ft_num_utils.c\
-	ft_format_utils.c
+	ft_format_utils.c\
+	ft_format_utils_2.c
 
 all: $(NAME)
 

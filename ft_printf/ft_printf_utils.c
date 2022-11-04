@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 16:09:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/03 15:17:38 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/04 12:36:38 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	getlength(unsigned int n, int precision)
 	}
 	if (n < 10)
 		++count;
-	if (precision > -1 && count < precision)
+	if (count < precision)
 		count = precision;
 	return (count);
 }
@@ -72,6 +72,8 @@ char	*chartostr(int c)
 int	ft_writestr(char *s, char format, t_padding *padinfo)
 {
 	int	len;
+	int	preformlen;
+	int	postformlen;
 
 	if (!s)
 	{
@@ -84,8 +86,14 @@ int	ft_writestr(char *s, char format, t_padding *padinfo)
 		len = ft_strlen(s);
 	if (format == 's' && padinfo->precision > -1 && len > padinfo->precision)
 		len = padinfo->precision;
+	preformlen = printpreformatting(len, padinfo);
+	if (preformlen == -1)
+		return (-1);
 	write(1, s, len);
 	if (format != 's')
 		free(s);
-	return (len);
+	postformlen = printpostformatting(len, padinfo);
+	if (postformlen == -1)
+		return (-1);
+	return (len + preformlen + postformlen);
 }

@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:26:17 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/03 15:13:56 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/04 12:40:05 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,61 @@ static void	initpadinfo(t_padding *padinfo)
 	padinfo->precision = -1;
 }
 
-int	getformat(char *s, t_padding *padinfo)
+static void	getflags(char s, t_padding *padinfo)
+{
+	if (s == '#')
+	{
+		padinfo->alternate = 'y';
+	}
+	else if (s == '-')
+	{
+		padinfo->adjustment = 'l';
+		padinfo->padchar = ' ';
+	}
+	else if (s == '+')
+	{
+		padinfo->sign = '+';
+		padinfo->blank = 'n';
+	}
+	else if (s == ' ')
+	{
+		if (padinfo->sign != '+')
+			padinfo->blank = 'y';
+	}
+	else if (s == '0')
+	{
+		if (padinfo->adjustment != 'l')
+			padinfo->padchar = '0';
+	}
+}
+
+static int	getwidthandprecision(int i, const char *s, t_padding *padinfo)
+{
+	if (s[i] == '.')
+	{
+		padinfo->precision = 0;
+		while (s[i + 1] >= '0' && s[i + 1] <= '9')
+		{
+			++i;
+			padinfo->precision *= 10;
+			padinfo->precision += s[i] - '0';
+		}
+	}
+	else if (s[i] >= '1' && s[i] <= '9')
+	{
+		padinfo->width = 0;
+		padinfo->width += s[i] - '0';
+		while (s[i + 1] >= '0' && s[i + 1] <= '9')
+		{
+			++i;
+			padinfo->width *= 10;
+			padinfo->width += s[i] - '0';
+		}
+	}
+	return (i);
+}
+
+int	getformat(const char *s, t_padding *padinfo)
 {
 	int	i;
 
@@ -42,56 +96,13 @@ int	getformat(char *s, t_padding *padinfo)
 	initpadinfo(padinfo);
 	while (!reachedtype(s[i], "cspdiuxX%") && s[i])
 	{
-		if (s[i] == '#')
+		if (s[i] == '.' || (s[i] >= '1' && s[i] <= '9'))
 		{
-			padinfo->alternate = 'y';
+			i = getwidthandprecision(i, s, padinfo);
 		}
-		else if (s[i] == '-')
+		else
 		{
-			padinfo->adjustment = 'l';
-			if (padinfo->padchar == '0')
-			{
-				padinfo->padchar = ' ';
-			}
-		}
-		else if (s[i] == '+')
-		{
-			padinfo->sign = '+';
-			if (padinfo->blank == 'y')
-			{
-				padinfo->blank = 'n';
-			}
-		}
-		else if (s[i] == ' ')
-		{
-			if (padinfo->sign != '+')
-				padinfo->blank = 'y';
-		}
-		else if (s[i] == '0')
-		{
-			if (padinfo->adjustment != 'l')
-				padinfo->padchar = '0';
-		}
-		else if (s[i] == '.')
-		{
-			padinfo->precision = 0;
-			while (s[i + 1] >= '0' && s[i + 1] <= '9')
-			{
-				++i;
-				padinfo->precision *= 10;
-				padinfo->precision += s[i] - '0';
-			}
-		}
-		else if (s[i] >= '1' && s[i] <= '9')
-		{
-			padinfo->width = 0;
-			padinfo->width += s[i] - '0';
-			while (s[i + 1] >= '0' && s[i + 1] <= '9')
-			{
-				++i;
-				padinfo->width *= 10;
-				padinfo->width += s[i] - '0';
-			}
+			getflags(s[i], padinfo);
 		}
 		++i;
 	}

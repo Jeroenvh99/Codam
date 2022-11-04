@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 09:14:16 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/03 11:10:14 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/03 15:50:27 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	getlength(unsigned long int n, int precision)
 	}
 	if (n < 16)
 		++count;
-	if (precision > -1 && count < precision)
+	if (count < precision)
 		count = precision;
 	return (count);
 }

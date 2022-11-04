@@ -6,14 +6,13 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/03 15:14:29 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/04 12:33:37 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"./sources/libft.h"
 #include"ft_printf.h"
 #include<unistd.h>
-#include<stddef.h>
 #include<stdarg.h>
 #include<stdio.h>
 #include<limits.h>
@@ -36,7 +35,7 @@ int	parser(const char **s, va_list args)
 	char		*str;
 	t_padding	padinfo;
 
-	s[0] += getformat((char *)s[0], &padinfo);
+	s[0] += getformat(s[0], &padinfo);
 	if (*s[0] == 's')
 		str = va_arg(args, char *);
 	else if (*s[0] == 'p')
@@ -109,6 +108,6 @@ int main(){
 	// ft_printf("%i\n", ft_printf("hello, this %i prints an integer", 24547767));
 	// ft_printf("%i\n", ft_printf("hello, this %i prints an integer", 24547767));
 	// ft_printf("%i\n", ft_printf("\001\002\007\v\010\f\r\n"));
-	ft_printf("%i\n", printf("%%"));
+	printf("%i\n", ft_printf(" %.1s", ""));
 	return 0;
 }
