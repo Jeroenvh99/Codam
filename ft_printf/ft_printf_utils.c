@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 16:09:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/04 12:36:38 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/04 16:20:29 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,21 +76,19 @@ int	ft_writestr(char *s, char format, t_padding *padinfo)
 	int	postformlen;
 
 	if (!s)
-	{
-		write(1, "(null)", 6);
-		return (6);
-	}
+		s = ft_strdup("(null)");
+	if (!s)
+		return (-1);
+	len = ft_strlen(s);
 	if (format == 'c')
 		len = 1;
-	else
-		len = ft_strlen(s);
 	if (format == 's' && padinfo->precision > -1 && len > padinfo->precision)
 		len = padinfo->precision;
 	preformlen = printpreformatting(len, padinfo);
 	if (preformlen == -1)
 		return (-1);
 	write(1, s, len);
-	if (format != 's')
+	if (format != 's' || ft_strnstr(s, "(null)", 6))
 		free(s);
 	postformlen = printpostformatting(len, padinfo);
 	if (postformlen == -1)

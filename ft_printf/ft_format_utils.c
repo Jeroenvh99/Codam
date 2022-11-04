@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:26:17 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/04 12:40:05 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/04 16:18:49 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static void	initpadinfo(t_padding *padinfo)
 {
 	padinfo->alternate = 'n';
 	padinfo->width = -1;
-	padinfo->adjustment = 'r';
+	padinfo->adj = 'r';
 	padinfo->sign = '-';
-	padinfo->padchar = ' ';
+	padinfo->padc = ' ';
 	padinfo->blank = 'n';
 	padinfo->precision = -1;
 }
@@ -42,8 +42,8 @@ static void	getflags(char s, t_padding *padinfo)
 	}
 	else if (s == '-')
 	{
-		padinfo->adjustment = 'l';
-		padinfo->padchar = ' ';
+		padinfo->adj = 'l';
+		padinfo->padc = ' ';
 	}
 	else if (s == '+')
 	{
@@ -57,8 +57,8 @@ static void	getflags(char s, t_padding *padinfo)
 	}
 	else if (s == '0')
 	{
-		if (padinfo->adjustment != 'l')
-			padinfo->padchar = '0';
+		if (padinfo->adj != 'l')
+			padinfo->padc = '0';
 	}
 }
 

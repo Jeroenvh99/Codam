@@ -15,8 +15,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) -C ./sources
-	cp ./sources/libft.a .
-	mv libft.a $(NAME)
+	mv ./sources/libft.a $(NAME)
 	ar -rcs $(NAME) $(OBJS)
 
 clean:

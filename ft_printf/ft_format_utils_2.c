@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/04 12:05:12 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/04 12:40:27 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/04 16:19:33 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int	printpreformatting(int strlen, t_padding *padinfo)
 	char	*form;
 
 	formlen = 0;
-	if (padinfo->width > -1 && padinfo->adjustment == 'r' && strlen
-		< padinfo->width)
+	if (padinfo->width > -1 && padinfo->adj == 'r' && strlen < padinfo->width)
 	{
 		i = padinfo->width - strlen;
 		form = ft_calloc(i + 1, 1);
@@ -33,7 +32,7 @@ int	printpreformatting(int strlen, t_padding *padinfo)
 		while (i > 0)
 		{
 			--i;
-			form[i] = padinfo->padchar;
+			form[i] = padinfo->padc;
 		}
 		write(1, form, formlen);
 		free(form);
@@ -48,8 +47,7 @@ int	printpostformatting(int strlen, t_padding *padinfo)
 	char	*form;
 
 	formlen = 0;
-	if (padinfo->width > -1 && padinfo->adjustment == 'l' && strlen
-		< padinfo->width)
+	if (padinfo->width > -1 && padinfo->adj == 'l' && strlen < padinfo->width)
 	{
 		i = padinfo->width - strlen;
 		form = ft_calloc(i + 1, 1);
@@ -59,7 +57,7 @@ int	printpostformatting(int strlen, t_padding *padinfo)
 		while (i > 0)
 		{
 			--i;
-			form[i] = padinfo->padchar;
+			form[i] = padinfo->padc;
 		}
 		write(1, form, formlen);
 		free(form);

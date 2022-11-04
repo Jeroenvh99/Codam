@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/04 12:33:37 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/04 16:12:10 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,6 @@ int main(){
 	// ft_printf("%i\n", ft_printf("hello, this %i prints an integer", 24547767));
 	// ft_printf("%i\n", ft_printf("hello, this %i prints an integer", 24547767));
 	// ft_printf("%i\n", ft_printf("\001\002\007\v\010\f\r\n"));
-	printf("%i\n", ft_printf(" %.1s", ""));
+	printf("%i\n", ft_printf("%7i", -14));
 	return 0;
 }

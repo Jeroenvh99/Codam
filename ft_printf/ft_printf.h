@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 09:14:22 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/04 12:04:35 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/04 16:19:43 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ typedef struct padding_info
 {
 	char	alternate;
 	int		width;
-	char	adjustment;
+	char	adj;
 	char	sign;
-	char	padchar;
+	char	padc;
 	char	blank;
 	int		precision;
 }	t_padding;
