@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/07 09:58:38 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/07 11:43:50 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 #include"ft_printf.h"
 #include<unistd.h>
 #include<stdarg.h>
-#include<stdio.h>
-#include<limits.h>
+#include<stdlib.h>
 
-int	sectionlength(const char *s)
+static int	sectionlength(const char *s)
 {
 	int	count;
 
@@ -30,7 +29,19 @@ int	sectionlength(const char *s)
 	return (count);
 }
 
-int	parser(const char **s, va_list args)
+static char	*chartostr(int c)
+{
+	char	*str;
+
+	str = malloc(2);
+	if (!str)
+		return (NULL);
+	str[0] = (char)c;
+	str[1] = '\0';
+	return (str);
+}
+
+static int	parser(const char **s, va_list args)
 {
 	char		*str;
 	t_padding	padinfo;
@@ -53,7 +64,7 @@ int	parser(const char **s, va_list args)
 	return (ft_writestr(str, *s[0], &padinfo));
 }
 
-int	argumentscheck(const char *s)
+static int	argumentscheck(const char *s)
 {
 	while (*s)
 	{
@@ -91,22 +102,4 @@ int	ft_printf(const char *s, ...)
 	if (varargs)
 		va_end(args);
 	return (printlen);
-}
-
-int main(){
-	void	*v;
-	// ft_printf("%i\n", ft_printf("hello, this %i prints an integer\n", 24547767));
-	// ft_printf("%i\n", printf("hello, this %i prints an integer\n", 24547767));
-	// ft_printf("%i\n", ft_printf("hello, this %p prints a pointer\n", v));
-	// ft_printf("%i\n", printf("hello, this %p prints a pointer\n", v));
-	// ft_printf("%i\n", ft_printf("hello, this %x prints an integer in hex", INT_MIN));
-	// ft_printf("%i\n", printf("hello, this %x prints an integer in hex", INT_MIN));
-	// ft_printf("%i\n", ft_printf("hello, this %p prints a pointer", LONG_MIN));
-	// printf("hello, this %x prints a pointer", 24547767);
-	// ft_printf("%i\n", ft_printf("hello, this %i prints an integer", 24547767));
-	// ft_printf("%i\n", ft_printf("hello, this %i prints an integer", 24547767));
-	// ft_printf("%i\n", ft_printf("hello, this %i prints an integer", 24547767));
-	// ft_printf("%i\n", ft_printf("\001\002\007\v\010\f\r\n"));
-	printf("%i\n", ft_printf("%08.5x", 34));
-	return 0;
 }

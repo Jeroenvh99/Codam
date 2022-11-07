@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 16:09:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/07 09:15:41 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/07 11:23:00 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,54 @@ char	*ft_uitoa(unsigned int n, t_padding *padinfo)
 	return (c);
 }
 
-char	*chartostr(int c)
+static int	printpreformatting(int strlen, t_padding *padinfo)
 {
-	char	*str;
+	int		i;
+	int		formlen;
+	char	*form;
 
-	str = malloc(2);
-	if (!str)
-		return (NULL);
-	str[0] = (char)c;
-	str[1] = '\0';
-	return (str);
+	formlen = 0;
+	if (padinfo->width > -1 && padinfo->adj == 'r' && strlen < padinfo->width)
+	{
+		i = padinfo->width - strlen;
+		form = ft_calloc(i + 1, 1);
+		if (!form)
+			return (-1);
+		formlen = i;
+		while (i > 0)
+		{
+			--i;
+			form[i] = padinfo->padc;
+		}
+		write(1, form, formlen);
+		free(form);
+	}
+	return (formlen);
+}
+
+static int	printpostformatting(int strlen, t_padding *padinfo)
+{
+	int		i;
+	int		formlen;
+	char	*form;
+
+	formlen = 0;
+	if (padinfo->width > -1 && padinfo->adj == 'l' && strlen < padinfo->width)
+	{
+		i = padinfo->width - strlen;
+		form = ft_calloc(i + 1, 1);
+		if (!form)
+			return (-1);
+		formlen = i;
+		while (i > 0)
+		{
+			--i;
+			form[i] = padinfo->padc;
+		}
+		write(1, form, formlen);
+		free(form);
+	}
+	return (formlen);
 }
 
 int	ft_writestr(char *s, char format, t_padding *padinfo)
