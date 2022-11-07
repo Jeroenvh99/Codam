@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:14:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/04 17:36:15 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/07 10:04:52 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static int	getlength(int n, t_padding *padinfo)
 	int	count;
 
 	count = 0;
+	if (padinfo->prec == 0 && n == 0)
+		return (0);
 	if (n < 0 || (n >= 0 && (padinfo->sign == '+' || padinfo->blank == 'y')))
 	{
 		++count;

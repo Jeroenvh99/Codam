@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 16:09:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/04 17:36:39 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/07 09:15:41 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 #include<unistd.h>
 #include<stdlib.h>
 
-static int	getlength(unsigned int n, int precision)
+static int	getlength(unsigned int n, t_padding *padinfo)
 {
 	int	count;
 
 	count = 0;
+	if (padinfo->prec == 0 && n == 0)
+		return (0);
 	while ((n / 10) > 0)
 	{
 		++count;
@@ -27,17 +29,24 @@ static int	getlength(unsigned int n, int precision)
 	}
 	if (n < 10)
 		++count;
-	if (count < precision)
-		count = precision;
+	if (count < padinfo->prec)
+		count = padinfo->prec;
+	if (padinfo->prec > -1)
+		padinfo->padc = ' ';
+	if (padinfo->padc == '0' && padinfo->prec < 1 && padinfo->width > count)
+	{
+		padinfo->prec += (padinfo->width - count);
+		count = padinfo->width;
+	}
 	return (count);
 }
 
-char	*ft_uitoa(unsigned int n, int precision)
+char	*ft_uitoa(unsigned int n, t_padding *padinfo)
 {
 	int		i;
 	char	*c;
 
-	i = getlength(n, precision);
+	i = getlength(n, padinfo);
 	c = ft_calloc(i + 1, 1);
 	if (!c)
 		return (NULL);

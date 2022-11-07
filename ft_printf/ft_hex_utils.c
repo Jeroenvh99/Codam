@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 09:14:16 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/03 15:50:27 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/07 09:59:33 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 #include"ft_printf.h"
 #include<stdlib.h>
 
-static int	getlength(unsigned long int n, int precision)
+static int	getlength(unsigned long int n, t_padding *padinfo)
 {
 	int	count;
 
 	count = 0;
+	if (padinfo->prec == 0 && n == 0)
+		return (0);
 	while ((n / 16) > 0)
 	{
 		++count;
@@ -26,8 +28,15 @@ static int	getlength(unsigned long int n, int precision)
 	}
 	if (n < 16)
 		++count;
-	if (count < precision)
-		count = precision;
+	if (count < padinfo->prec)
+		count = padinfo->prec;
+	if (padinfo->prec > -1)
+		padinfo->padc = ' ';
+	if (padinfo->padc == '0' && padinfo->prec < 1 && padinfo->width > count)
+	{
+		padinfo->prec += (padinfo->width - count);
+		count = padinfo->width;
+	}
 	return (count);
 }
 
@@ -47,12 +56,12 @@ static char	gethexchar(int n, char format)
 	return ('~');
 }
 
-char	*getstr_ptr(uintptr_t ptr, char format, int precision)
+char	*getstr_ptr(uintptr_t ptr, char format, t_padding *padinfo)
 {
 	int		i;
 	char	*c;
 
-	i = getlength(ptr, precision) + 2;
+	i = getlength(ptr, padinfo) + 2;
 	c = ft_calloc(i + 1, 1);
 	if (!c)
 		return (NULL);
@@ -76,17 +85,16 @@ char	*getstr_ptr(uintptr_t ptr, char format, int precision)
 	return (c);
 }
 
-char	*getstr_hex(long long int n, char format, char alternate,
-		int precision)
+char	*getstr_hex(long long int n, char format, t_padding *padinfo)
 {
 	int		i;
 	char	*c;
 
 	if (n < 0)
 		n = ((2147483648 + n) * 2) - n;
-	if (alternate == 'y' && n > 0)
-		return (getstr_ptr(n, format, precision));
-	i = getlength(n, precision);
+	if (padinfo->alternate == 'y' && n > 0)
+		return (getstr_ptr(n, format, padinfo));
+	i = getlength(n, padinfo);
 	c = ft_calloc(i + 1, 1);
 	if (!c)
 		return (NULL);
