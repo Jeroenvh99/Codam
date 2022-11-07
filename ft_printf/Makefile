@@ -17,6 +17,8 @@ $(NAME): $(OBJS)
 	mv ./sources/libft.a $(NAME)
 	ar -rcs $(NAME) $(OBJS)
 
+bonus: $(NAME)
+
 clean:
 	$(MAKE) -C ./sources fclean
 	rm -f $(OBJS)
