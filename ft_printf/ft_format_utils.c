@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:26:17 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/07 11:41:25 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/08 10:08:17 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void	initpadinfo(t_padding *padinfo)
 {
-	padinfo->alternate = 'n';
+	padinfo->alt = 'n';
 	padinfo->width = -1;
 	padinfo->adj = 'r';
 	padinfo->sign = '-';
@@ -28,7 +28,7 @@ static void	getflags(char s, t_padding *padinfo)
 {
 	if (s == '#')
 	{
-		padinfo->alternate = 'y';
+		padinfo->alt = 'y';
 	}
 	else if (s == '-')
 	{
@@ -84,7 +84,7 @@ int	getformat(const char *s, t_padding *padinfo)
 
 	i = 0;
 	initpadinfo(padinfo);
-	while (!ft_strchr("cspdiuxX%", s[i]) && s[i])
+	while (!ft_strchr("cspdiuxX%%", s[i]) && s[i])
 	{
 		if (s[i] == '.' || (s[i] >= '1' && s[i] <= '9'))
 		{

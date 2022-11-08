@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 09:14:16 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/07 11:19:30 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/08 10:18:11 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ static int	getlength(unsigned long int n, t_padding *padinfo)
 	int	count;
 
 	count = 0;
+	if (padinfo->prec > -1)
+		padinfo->padc = ' ';
 	if (padinfo->prec == 0 && n == 0)
 		return (0);
+	if (padinfo->alt == 'y' && padinfo->padc == '0' && n > 0)
+		padinfo->width -= 2;
 	while ((n / 16) > 0)
 	{
 		++count;
@@ -29,9 +33,7 @@ static int	getlength(unsigned long int n, t_padding *padinfo)
 		++count;
 	if (count < padinfo->prec)
 		count = padinfo->prec;
-	if (padinfo->prec > -1)
-		padinfo->padc = ' ';
-	if (padinfo->padc == '0' && padinfo->prec < 1 && padinfo->width > count)
+	if (padinfo->padc == '0' && padinfo->prec == -1 && padinfo->width > count)
 	{
 		padinfo->prec += (padinfo->width - count);
 		count = padinfo->width;
@@ -39,7 +41,7 @@ static int	getlength(unsigned long int n, t_padding *padinfo)
 	return (count);
 }
 
-static char	gethexchar(int n, char format)
+static char	gethexchar(int n, char type)
 {
 	if (n < 10)
 	{
@@ -47,15 +49,15 @@ static char	gethexchar(int n, char format)
 	}
 	else
 	{
-		if (format == 'x')
+		if (type == 'x')
 			return (n - 10 + 'a');
-		else if (format == 'X')
+		else if (type == 'X')
 			return (n - 10 + 'A');
 	}
 	return ('~');
 }
 
-char	*getstr_ptr(uintptr_t ptr, char format, t_padding *padinfo)
+char	*getstr_ptr(uintptr_t ptr, char type, t_padding *padinfo)
 {
 	int		i;
 	char	*c;
@@ -67,32 +69,32 @@ char	*getstr_ptr(uintptr_t ptr, char format, t_padding *padinfo)
 	--i;
 	while (ptr >= 16)
 	{
-		c[i] = gethexchar((ptr % 16), format);
+		c[i] = gethexchar((ptr % 16), type);
 		ptr /= 16;
 		--i;
 	}
-	c[i] = gethexchar((ptr % 16), format);
+	c[i] = gethexchar((ptr % 16), type);
 	--i;
 	while (i > 1)
 	{
 		c[i] = '0';
 		--i;
 	}
-	c[i] = format;
+	c[i] = type;
 	--i;
 	c[i] = '0';
 	return (c);
 }
 
-char	*getstr_hex(long long int n, char format, t_padding *padinfo)
+char	*getstr_hex(long long int n, char type, t_padding *padinfo)
 {
 	int		i;
 	char	*c;
 
 	if (n < 0)
 		n = ((2147483648 + n) * 2) - n;
-	if (padinfo->alternate == 'y' && n > 0)
-		return (getstr_ptr(n, format, padinfo));
+	if (padinfo->alt == 'y' && n > 0)
+		return (getstr_ptr(n, type, padinfo));
 	i = getlength(n, padinfo);
 	c = ft_calloc(i + 1, 1);
 	if (!c)
@@ -100,11 +102,11 @@ char	*getstr_hex(long long int n, char format, t_padding *padinfo)
 	--i;
 	while (n >= 16)
 	{
-		c[i] = gethexchar((n % 16), format);
+		c[i] = gethexchar((n % 16), type);
 		n /= 16;
 		--i;
 	}
-	c[i] = gethexchar((n % 16), format);
+	c[i] = gethexchar((n % 16), type);
 	while (i > 0)
 	{
 		--i;

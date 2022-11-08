@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/07 11:43:50 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/08 10:21:05 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include<unistd.h>
 #include<stdarg.h>
 #include<stdlib.h>
+#include<stdio.h>
 
 static int	sectionlength(const char *s)
 {
@@ -44,48 +45,37 @@ static char	*chartostr(int c)
 static int	parser(const char **s, va_list args)
 {
 	char		*str;
+	char		type;
 	t_padding	padinfo;
 
 	s[0] += getformat(s[0], &padinfo);
-	if (*s[0] == 's')
+	type = *s[0];
+	if (type == 's')
 		str = va_arg(args, char *);
-	else if (*s[0] == 'p')
+	else if (type == 'p')
 		str = getstr_ptr(va_arg(args, uintptr_t), 'x', &padinfo);
-	else if (*s[0] == 'd' || *s[0] == 'i')
+	else if (type == 'd' || type == 'i')
 		str = ft_itoa_format(va_arg(args, int), &padinfo);
-	else if (*s[0] == 'u')
+	else if (type == 'u')
 		str = ft_uitoa(va_arg(args, unsigned int), &padinfo);
-	else if (*s[0] == 'x' || *s[0] == 'X')
+	else if (type == 'x' || type == 'X')
 		str = getstr_hex(va_arg(args, int), *s[0], &padinfo);
-	else if (*s[0] == 'c')
+	else if (type == 'c')
 		str = chartostr(va_arg(args, int));
-	else if (*s[0] == '%')
+	else if (type == '%')
 		str = ft_strdup("%");
-	return (ft_writestr(str, *s[0], &padinfo));
-}
-
-static int	argumentscheck(const char *s)
-{
-	while (*s)
-	{
-		if (*s == '%')
-			return (1);
-		++s;
-	}
-	return (0);
+	++s[0];
+	return (ft_writestr(str, type, &padinfo));
 }
 
 int	ft_printf(const char *s, ...)
 {
 	int		sectionlen;
 	int		printlen;
-	int		varargs;
 	va_list	args;
 
 	printlen = 0;
-	varargs = argumentscheck(s);
-	if (varargs)
-		va_start(args, s);
+	va_start(args, s);
 	while (*s)
 	{
 		sectionlen = sectionlength(s);
@@ -95,11 +85,12 @@ int	ft_printf(const char *s, ...)
 		if (*s)
 		{
 			++s;
-			printlen += parser(&s, args);
-			++s;
+			sectionlen = parser(&s, args);
+			if (sectionlen == -1)
+				return (-1);
+			printlen += sectionlen;
 		}
 	}
-	if (varargs)
-		va_end(args);
+	va_end(args);
 	return (printlen);
 }

@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:14:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/07 11:01:42 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/07 15:21:21 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,8 @@ static int	getformatlength(int count, t_padding *padinfo)
 		count = padinfo->width;
 	}
 	if (count < padinfo->prec)
-	{
 		count = padinfo->prec;
-		padinfo->padc = ' ';
-	}
-	if (count > padinfo->prec)
+	if (padinfo->prec > -1)
 		padinfo->padc = ' ';
 	return (count);
 }
