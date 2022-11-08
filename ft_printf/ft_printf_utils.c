@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 16:09:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/07 15:18:12 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/08 17:22:06 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static int	getlength(unsigned int n, t_padding *padinfo)
 	int	count;
 
 	count = 0;
+	if (padinfo->prec > -1)
+		padinfo->padc = ' ';
 	if (padinfo->prec == 0 && n == 0)
 		return (0);
 	while ((n / 10) > 0)
@@ -31,8 +33,6 @@ static int	getlength(unsigned int n, t_padding *padinfo)
 		++count;
 	if (count < padinfo->prec)
 		count = padinfo->prec;
-	if (padinfo->prec > -1)
-		padinfo->padc = ' ';
 	if (padinfo->padc == '0' && padinfo->prec < 1 && padinfo->width > count)
 	{
 		padinfo->prec += (padinfo->width - count);

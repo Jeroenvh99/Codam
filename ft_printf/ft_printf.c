@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/08 10:21:05 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/08 17:24:50 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include<stdarg.h>
 #include<stdlib.h>
 #include<stdio.h>
+#include<limits.h>
 
 static int	sectionlength(const char *s)
 {
@@ -63,7 +64,9 @@ static int	parser(const char **s, va_list args)
 	else if (type == 'c')
 		str = chartostr(va_arg(args, int));
 	else if (type == '%')
-		str = ft_strdup("%");
+		str = chartostr('%');
+	else
+		str = chartostr(type);
 	++s[0];
 	return (ft_writestr(str, type, &padinfo));
 }
@@ -85,6 +88,8 @@ int	ft_printf(const char *s, ...)
 		if (*s)
 		{
 			++s;
+			if (!*s)
+				break ;
 			sectionlen = parser(&s, args);
 			if (sectionlen == -1)
 				return (-1);

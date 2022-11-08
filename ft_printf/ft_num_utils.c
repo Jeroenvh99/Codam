@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:14:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/07 15:21:21 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/08 17:18:20 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ static int	getformatlength(int count, t_padding *padinfo)
 	}
 	if (count < padinfo->prec)
 		count = padinfo->prec;
-	if (padinfo->prec > -1)
-		padinfo->padc = ' ';
 	return (count);
 }
 
-static int	getlength(int n, t_padding *padinfo)
+static int	getlength(long int n, t_padding *padinfo)
 {
 	int	count;
 
 	count = 0;
+	if (padinfo->prec > -1)
+		padinfo->padc = ' ';
 	if (padinfo->prec == 0 && n == 0)
 		return (0);
 	if (n < 0 || (n >= 0 && (padinfo->sign == '+' || padinfo->blank == 'y')))
@@ -84,8 +84,6 @@ char	*ft_itoa_format(int n, t_padding *padinfo)
 	int		len;
 	char	*c;
 
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
 	len = getlength(n, padinfo);
 	c = ft_calloc(len + 1, 1);
 	if (!c)

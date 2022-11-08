@@ -33,5 +33,9 @@ int main(){
 	printf("%i\n", ft_printf("%08.5x", 34));
 	ft_printf("%i\n", ft_printf("42%0#29x42\n", 0));
 	printf("%i\n", printf("42%0#29x42\n", 0));
+	ft_printf("%i\n", ft_printf("%%%"));
+	printf("%i\n", printf("%%%"));
+	ft_printf("%i\n", ft_printf("%01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n", 0, 5, -1, -10, 100, -1862, 0xABCDE, INT_MIN, INT_MAX, UINT_MAX));
+	printf("%i\n", printf("%01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n", 0, 5, -1, -10, 100, -1862, 0xABCDE, INT_MIN, INT_MAX, UINT_MAX));
 	return 0;
 }
