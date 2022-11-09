@@ -20,6 +20,8 @@ int main(){
 	ft_printf("%i\n", ft_printf("mine: hello, this %p prints a pointer\n", NULL));
 	printf("%i\n", printf("system: hello, this %p prints a pointer\n", NULL));
 
+	ft_printf("%i\n", ft_printf("mine: hello, this %-i prints an integer\n", 24547767));
+	printf("%i\n", printf("system: hello, this %-i prints an integer\n", 24547767));
 	ft_printf("%i\n", ft_printf("mine: hello, this %-057.4365i prints an integer\n", 24547767));
 	printf("%i\n", printf("system: hello, this %-057.4365i prints an integer\n", 24547767));
 	ft_printf("%i\n", ft_printf("mine: hello, this %#.57p prints a pointer\n", v));
