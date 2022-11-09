@@ -44,5 +44,7 @@ int main(){
 	printf("%i\n", printf("system: hello\0my  \0name\0 is\Jeroen"));
 	ft_printf("%i\n", ft_printf("mine: %s", "hello\0my  \0name\0 is\Jeroen"));
 	printf("%i\n", printf("system: %s", "hello\0my  \0name\0 is\Jeroen"));
+	ft_printf("%i\n", ft_printf("mine: \Jeroen"));
+	printf("%i\n", printf("system: \Jeroen"));
 	return 0;
 }

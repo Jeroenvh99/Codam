@@ -54,8 +54,8 @@ endif
 
 all: $(NAME)
 
-.o:
-	cc $(COMPILEFLAGS) -c $< -o ${%.c=%.o}
+.c.o:
+	cc $(COMPILEFLAGS) -c $(SRCS) $<
 
 $(NAME): $(ALL_OBJS)
 	ar -rcs $(NAME) $(ALL_OBJS)
