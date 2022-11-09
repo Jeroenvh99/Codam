@@ -30,12 +30,17 @@ int main(){
 	printf("%i\n", printf("system: hello, this %0.8X prints an integer in hex\n", INT_MAX));
 	ft_printf("%i\n", ft_printf("mine: hello, this %-35.7p prints a pointer\n", LONG_MIN));
 	printf("%i\n", printf("system: hello, this %-35.7p prints a pointer\n", LONG_MIN));
-	printf("%i\n", ft_printf("%08.5x", 34));
-	ft_printf("%i\n", ft_printf("42%0#29x42\n", 0));
-	printf("%i\n", printf("42%0#29x42\n", 0));
-	ft_printf("%i\n", ft_printf("%%%"));
-	printf("%i\n", printf("%%%"));
-	ft_printf("%i\n", ft_printf("%01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n", 0, 5, -1, -10, 100, -1862, 0xABCDE, INT_MIN, INT_MAX, UINT_MAX));
-	printf("%i\n", printf("%01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n", 0, 5, -1, -10, 100, -1862, 0xABCDE, INT_MIN, INT_MAX, UINT_MAX));
+	ft_printf("%i\n", ft_printf("mine: %08.5x\n", 34));
+	printf("%i\n", printf("system: %08.5x\n", 34));
+	ft_printf("%i\n", ft_printf("mine: 42%0#29x42\n", 0));
+	printf("%i\n", printf("system: 42%0#29x42\n", 0));
+	ft_printf("%i\n", ft_printf("mine: %%%"));
+	printf("%i\n", printf("system: %%%"));
+	ft_printf("%i\n", ft_printf("mine: %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n", 0, 5, -1, -10, 100, -1862, 0xABCDE, INT_MIN, INT_MAX, UINT_MAX));
+	printf("%i\n", printf("system: %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n, %01.u\n", 0, 5, -1, -10, 100, -1862, 0xABCDE, INT_MIN, INT_MAX, UINT_MAX));
+	ft_printf("%i\n", ft_printf("mine: hello\0my  \0name\0 is\Jeroen"));
+	printf("%i\n", printf("system: hello\0my  \0name\0 is\Jeroen"));
+	ft_printf("%i\n", ft_printf("mine: %s", "hello\0my  \0name\0 is\Jeroen"));
+	printf("%i\n", printf("system: %s", "hello\0my  \0name\0 is\Jeroen"));
 	return 0;
 }

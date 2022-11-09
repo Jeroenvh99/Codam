@@ -6,23 +6,12 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:26:17 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/08 12:00:22 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/09 11:16:14 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"./sources/libft.h"
 #include"ft_printf.h"
-
-static void	initpadinfo(t_padding *padinfo)
-{
-	padinfo->alt = 'n';
-	padinfo->width = -1;
-	padinfo->adj = 'r';
-	padinfo->sign = '-';
-	padinfo->padc = ' ';
-	padinfo->blank = 'n';
-	padinfo->prec = -1;
-}
 
 static void	getflags(char s, t_padding *padinfo)
 {
@@ -83,17 +72,19 @@ int	getformat(const char *s, t_padding *padinfo)
 	int	i;
 
 	i = 0;
-	initpadinfo(padinfo);
+	padinfo->alt = 'n';
+	padinfo->width = -1;
+	padinfo->adj = 'r';
+	padinfo->sign = '-';
+	padinfo->padc = ' ';
+	padinfo->blank = 'n';
+	padinfo->prec = -1;
 	while (ft_strchr("0123456789.#-+ ", s[i]) && s[i])
 	{
 		if (s[i] == '.' || (s[i] >= '1' && s[i] <= '9'))
-		{
 			i = getwidthandprecision(i, s, padinfo);
-		}
 		else
-		{
 			getflags(s[i], padinfo);
-		}
 		++i;
 	}
 	return (i);
