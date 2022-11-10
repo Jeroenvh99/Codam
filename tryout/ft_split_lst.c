@@ -17,26 +17,6 @@ void printlist(t_list *head)
 	}
 }
 
-static char	*getword(const char *s, int len)
-{
-	char	*split;
-	int		i;
-
-	i = 0;
-	split = malloc(len + 1);
-	if (!split)
-		return (NULL);
-	while (len)
-	{
-		split[i] = *s;
-		++s;
-		++i;
-		--len;
-	}
-	split[i] = '\0';
-	return (split);
-}
-
 static char	*getsplit(const char **s, char dlm)
 {
 	int		i;
@@ -50,7 +30,7 @@ static char	*getsplit(const char **s, char dlm)
 		if ((s[0][i] == dlm && prevc != dlm) || (!(s[0][i])
 			&& prevc != dlm))
 		{
-			split = getword(s[0], i);
+			split = ft_substr(s[0], 0, i);
 			if (!split)
 				return (NULL);
 			s[0] += i;
