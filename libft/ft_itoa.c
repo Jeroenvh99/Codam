@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/07 14:00:49 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/10 11:31:33 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/10 12:23:53 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ static int	getlength(int n)
 		++count;
 		n *= -1;
 	}
-	while (n > 0)
+	while ((n / 10) > 0)
 	{
 		++count;
 		n /= 10;
 	}
+	if (n < 10)
+		++count;
 	return (count);
 }
 

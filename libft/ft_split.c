@@ -6,10 +6,11 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 14:44:31 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/25 15:05:02 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/10 13:51:57 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include"libft.h"
 #include<stdlib.h>
 
 static int	getarrlength(const char *s, char dlm)
@@ -31,26 +32,6 @@ static int	getarrlength(const char *s, char dlm)
 	return (count);
 }
 
-static char	*getword(const char *s, int len)
-{
-	char	*split;
-	int		i;
-
-	i = 0;
-	split = malloc(len + 1);
-	if (!split)
-		return (NULL);
-	while (len)
-	{
-		split[i] = *s;
-		++s;
-		++i;
-		--len;
-	}
-	split[i] = '\0';
-	return (split);
-}
-
 static char	*getsplit(const char **s, char dlm)
 {
 	int		i;
@@ -64,7 +45,7 @@ static char	*getsplit(const char **s, char dlm)
 		if ((s[0][i] == dlm && prevc != dlm) || (!(s[0][i])
 			&& prevc != dlm))
 		{
-			split = getword(s[0], i);
+			split = ft_substr(s[0], 0, i);
 			if (!split)
 				return (NULL);
 			s[0] += i;

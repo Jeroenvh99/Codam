@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/09 13:19:41 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/10 13:42:54 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	ft_printf(const char *s, ...)
 
 int main(){
 	// void	*v;
-	ft_printf("%i\n", ft_printf("mine: eroen"));
+	ft_printf("%i\n", ft_printf("mine: eroen%0.34", 6));
 	printf("%i\n", printf("system: eroen"));
 	return 0;
 }
