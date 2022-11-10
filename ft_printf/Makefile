@@ -10,7 +10,7 @@ SRCS = ft_printf.c\
 all: $(NAME)
 
 .c.o:
-	cc $(COMPILEFLAGS) -c $(SRCS) $<
+	cc $(COMPILEFLAGS) -c $<
 
 $(NAME): $(OBJS)
 	$(MAKE) -C ./sources

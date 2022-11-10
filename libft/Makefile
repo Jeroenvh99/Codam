@@ -55,7 +55,7 @@ endif
 all: $(NAME)
 
 .c.o:
-	cc $(COMPILEFLAGS) -c $(SRCS) $<
+	cc $(COMPILEFLAGS) -c $<
 
 $(NAME): $(ALL_OBJS)
 	ar -rcs $(NAME) $(ALL_OBJS)
@@ -73,4 +73,5 @@ re: fclean all
 
 .PHONY: clean fclean all bonus re
 
-tests:
+test:
+	cc libfttester.c libft.a && ./a.out

@@ -1,5 +1,6 @@
 #include"libft.h"
 #include<stdio.h>
+#include<stdlib.h>
 #include<ctype.h>
 
 char changec(unsigned int index, char c)
@@ -25,9 +26,9 @@ void printlist(t_list *head){
 	}
 }
 
-void print(void *node){
-	printf("%s\n", ((t_list *)node)->content);
-}
+// void print(void *node){
+// 	printf("%s\n", ((t_list *)node)->content);
+// }
 
 void	del(void *node)
 {
