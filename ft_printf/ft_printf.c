@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/11 15:44:27 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/11 15:49:07 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include<unistd.h>
 #include<stdarg.h>
 #include<stdlib.h>
-#include<stdio.h>
 
 static int	sectionlength(const char *s)
 {
