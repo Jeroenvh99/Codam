@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:26:17 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/09 11:16:14 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/11 15:39:37 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	getformat(const char *s, t_padding *padinfo)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	padinfo->alt = 'n';
 	padinfo->width = -1;
 	padinfo->adj = 'r';

@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/11 09:17:33 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/11 15:44:27 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include<unistd.h>
 #include<stdarg.h>
 #include<stdlib.h>
+#include<stdio.h>
 
 static int	sectionlength(const char *s)
 {
@@ -87,7 +88,8 @@ int	ft_printf(const char *s, ...)
 		printlen += sectionlen;
 		if (*s)
 		{
-			++s;
+			if (!*(s + 1))
+				break ;
 			sectionlen = parser(&s, args);
 			if (sectionlen == -1)
 				return (-1);
