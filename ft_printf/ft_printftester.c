@@ -46,5 +46,7 @@ int main(){
 	printf("%i\n", printf("system: %s", "hello\0my  \0name\0 is\Jeroen"));
 	ft_printf("%i\n", ft_printf("mine: \Jeroen"));
 	printf("%i\n", printf("system: \Jeroen"));
+	ft_printf("%i\n", ft_printf("mine: %.x, %.x, %.x, %.x, %.x, %.x, %.x, %.x, %.x, %.x\n", 0, 5, -1, -10, 0x1234, -1862, 0xABCDE, INT_MIN, INT_MAX, UINT_MAX));
+	printf("%i\n", printf("system: %.x, %.x, %.x, %.x, %.x, %.x, %.x, %.x, %.x, %.x", 0, 5, -1, -10, 0x1234, -1862, 0xABCDE, INT_MIN, INT_MAX, UINT_MAX));
 	return 0;
 }
