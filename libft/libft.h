@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 14:32:38 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/26 11:01:57 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/14 14:02:00 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,24 @@
 # define LIBFT_H
 
 # include<stddef.h>
+# include<stdint.h>
 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
+typedef struct padding_info
+{
+	char	alt;
+	int		width;
+	char	adj;
+	char	sign;
+	char	padc;
+	char	blank;
+	int		prec;
+}	t_padding;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -64,5 +76,13 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+char	*getstr_hex(long long int n, char type, t_padding *padinfo);
+char	*getstr_ptr(uintptr_t ptr, char type, t_padding *padinfo);
+char	*ft_uitoa(unsigned int n, t_padding *padinfo);
+char	*ft_itoa_format(int n, t_padding *padinfo);
+int		ft_writestr(char *s, char type, t_padding *padinfo);
+int		getformat(const char *s, t_padding *padinfo);
+int		ft_printf(const char *s, ...);
 
 #endif

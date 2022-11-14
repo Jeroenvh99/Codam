@@ -29,3 +29,6 @@ fclean: clean
 re: fclean all
 
 .PHONY: clean fclean all bonus re
+
+test:
+	cc ft_printftester.c libftprintf.a && ./a.out

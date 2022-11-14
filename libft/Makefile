@@ -2,6 +2,7 @@ NAME = libft.a
 COMPILEFLAGS = -Wall -Werror -Wextra
 OBJS = ${SRCS:.c=.o}
 BONUS_OBJS = ${BONUS_SRCS:.c=.o}
+PRINTF_OBJS = ${PRINTF_SRCS:.c=.o}
 SRCS = ft_strjoin.c\
 	ft_atoi.c\
 	ft_strlcat.c\
@@ -45,9 +46,14 @@ BONUS_SRCS = ft_lstadd_back.c\
 	ft_lstdelone.c\
 	ft_lstlast.c\
 	ft_lstnew.c
+PRINTF_SRCS = ft_printf.c\
+	ft_hex_utils.c\
+	ft_printf_utils.c\
+	ft_num_utils.c\
+	ft_format_utils.c
 
-ifdef ADD_BONUS
-ALL_OBJS = $(OBJS) $(BONUS_OBJS)
+ifdef ADD_BONUS_PRINTF
+ALL_OBJS = $(OBJS) $(BONUS_OBJS) $(PRINTF_OBJS)
 else
 ALL_OBJS = $(OBJS)
 endif
@@ -61,7 +67,7 @@ $(NAME): $(ALL_OBJS)
 	ar -rcs $(NAME) $(ALL_OBJS)
 
 bonus:
-	$(MAKE) ADD_BONUS=1
+	$(MAKE) ADD_BONUS_PRINTF=1
 
 clean:
 	rm -f $(OBJS) $(BONUS_OBJS)
