@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/16 11:40:19 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/16 11:51:47 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ static char	*chartostr(int c)
 {
 	char	*str;
 
-	str = ft
-	ft_calloc(2, 1);
+	str = ft_calloc(2, 1);
 	if (!str)
 		return (NULL);
 	str[0] = (char)c;

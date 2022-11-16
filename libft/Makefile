@@ -66,11 +66,11 @@ all: $(NAME)
 $(NAME): $(ALL_OBJS)
 	ar -rcs $(NAME) $(ALL_OBJS)
 
-bonus:
+bonus_and_printf:
 	$(MAKE) ADD_BONUS_PRINTF=1
 
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS)
+	rm -f $(OBJS) $(BONUS_OBJS) $(PRINTF_OBJS)
 
 fclean: clean
 	rm -f $(NAME)
