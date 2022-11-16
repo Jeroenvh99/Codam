@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 14:32:38 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/16 08:56:26 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/16 11:38:52 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 char	*getstr_hex(long long int n, char type, t_padding *padinfo);
 char	*getstr_ptr(uintptr_t ptr, char type, t_padding *padinfo);
-char	*ft_uitoa(unsigned int n, t_padding *padinfo);
 char	*ft_itoa_format(long int n, t_padding *padinfo);
 int		ft_writestr(char *s, char type, t_padding *padinfo);
 int		getformat(const char *s, t_padding *padinfo);

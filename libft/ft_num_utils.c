@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:14:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/16 09:24:04 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/16 11:38:05 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,4 @@ char	*ft_itoa_format(long int n, t_padding *padinfo)
 		return (NULL);
 	getstr(n, len, c, padinfo);
 	return (c);
-}
-
-char	*ft_uitoa(unsigned int n, t_padding *padinfo)
-{
-	padinfo->sign = '-';
-	padinfo->blank = 'n';
-	return (ft_itoa_format(n, padinfo));
 }

@@ -6,14 +6,13 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/16 09:20:43 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/16 11:40:19 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 #include<unistd.h>
 #include<stdarg.h>
-#include<stdlib.h>
 
 static int	sectionlength(const char *s)
 {
@@ -32,11 +31,11 @@ static char	*chartostr(int c)
 {
 	char	*str;
 
-	str = malloc(2);
+	str = ft
+	ft_calloc(2, 1);
 	if (!str)
 		return (NULL);
 	str[0] = (char)c;
-	str[1] = '\0';
 	return (str);
 }
 
@@ -55,7 +54,7 @@ static int	parser(const char **s, va_list args)
 	else if (type == 'd' || type == 'i')
 		str = ft_itoa_format(va_arg(args, int), &padinfo);
 	else if (type == 'u')
-		str = ft_uitoa(va_arg(args, unsigned int), &padinfo);
+		str = ft_itoa_format(va_arg(args, unsigned int), &padinfo);
 	else if (type == 'x' || type == 'X')
 		str = getstr_hex(va_arg(args, int), *s[0], &padinfo);
 	else if (type == 'c')
