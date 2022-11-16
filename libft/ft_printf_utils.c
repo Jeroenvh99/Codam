@@ -6,65 +6,13 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 16:09:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/08 17:22:06 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/16 09:22:36 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"./sources/libft.h"
-#include"ft_printf.h"
+#include"libft.h"
 #include<unistd.h>
 #include<stdlib.h>
-
-static int	getlength(unsigned int n, t_padding *padinfo)
-{
-	int	count;
-
-	count = 0;
-	if (padinfo->prec > -1)
-		padinfo->padc = ' ';
-	if (padinfo->prec == 0 && n == 0)
-		return (0);
-	while ((n / 10) > 0)
-	{
-		++count;
-		n /= 10;
-	}
-	if (n < 10)
-		++count;
-	if (count < padinfo->prec)
-		count = padinfo->prec;
-	if (padinfo->padc == '0' && padinfo->prec < 1 && padinfo->width > count)
-	{
-		padinfo->prec += (padinfo->width - count);
-		count = padinfo->width;
-	}
-	return (count);
-}
-
-char	*ft_uitoa(unsigned int n, t_padding *padinfo)
-{
-	int		i;
-	char	*c;
-
-	i = getlength(n, padinfo);
-	c = ft_calloc(i + 1, 1);
-	if (!c)
-		return (NULL);
-	--i;
-	while (n > 9)
-	{
-		c[i] = (n % 10) + '0';
-		n /= 10;
-		--i;
-	}
-	c[i] = n + '0';
-	while (i > 0)
-	{
-		--i;
-		c[i] = '0';
-	}
-	return (c);
-}
 
 static int	printpreformatting(int strlen, t_padding *padinfo)
 {

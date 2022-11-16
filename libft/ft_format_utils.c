@@ -6,12 +6,11 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:26:17 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/11 15:39:37 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/16 08:30:26 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"./sources/libft.h"
-#include"ft_printf.h"
+#include"libft.h"
 
 static void	getflags(char s, t_padding *padinfo)
 {

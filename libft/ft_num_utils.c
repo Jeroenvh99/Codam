@@ -6,12 +6,11 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:14:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/10 12:23:25 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/16 09:24:04 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"./sources/libft.h"
-#include"ft_printf.h"
+#include"libft.h"
 
 static int	getformatlength(int count, t_padding *padinfo)
 {
@@ -79,7 +78,7 @@ static void	getstr(long int n, int i, char *c, t_padding *padinfo)
 	}
 }
 
-char	*ft_itoa_format(int n, t_padding *padinfo)
+char	*ft_itoa_format(long int n, t_padding *padinfo)
 {
 	int		len;
 	char	*c;
@@ -90,4 +89,11 @@ char	*ft_itoa_format(int n, t_padding *padinfo)
 		return (NULL);
 	getstr(n, len, c, padinfo);
 	return (c);
+}
+
+char	*ft_uitoa(unsigned int n, t_padding *padinfo)
+{
+	padinfo->sign = '-';
+	padinfo->blank = 'n';
+	return (ft_itoa_format(n, padinfo));
 }

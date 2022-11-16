@@ -6,12 +6,11 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 09:14:16 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/08 10:18:11 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/16 08:30:10 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"./sources/libft.h"
-#include"ft_printf.h"
+#include"libft.h"
 
 static int	getlength(unsigned long int n, t_padding *padinfo)
 {

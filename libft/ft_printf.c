@@ -6,12 +6,11 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/11 15:49:07 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/16 09:20:43 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"./sources/libft.h"
-#include"ft_printf.h"
+#include"libft.h"
 #include<unistd.h>
 #include<stdarg.h>
 #include<stdlib.h>
