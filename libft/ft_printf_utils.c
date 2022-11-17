@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 16:09:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/16 09:22:36 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/17 11:17:12 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	printpreformatting(int strlen, t_padding *padinfo)
 			--i;
 			form[i] = padinfo->padc;
 		}
-		write(1, form, formlen);
+		formlen = write(1, form, formlen);
 		free(form);
 	}
 	return (formlen);
@@ -58,7 +58,7 @@ static int	printpostformatting(int strlen, t_padding *padinfo)
 			--i;
 			form[i] = padinfo->padc;
 		}
-		write(1, form, formlen);
+		formlen = write(1, form, formlen);
 		free(form);
 	}
 	return (formlen);

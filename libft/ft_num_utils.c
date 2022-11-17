@@ -6,23 +6,11 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/01 15:14:23 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/16 11:38:05 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/17 09:58:34 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
-
-static int	getformatlength(int count, t_padding *padinfo)
-{
-	if (padinfo->padc == '0' && padinfo->prec < 1 && padinfo->width > count)
-	{
-		padinfo->prec += (padinfo->width - count);
-		count = padinfo->width;
-	}
-	if (count < padinfo->prec)
-		count = padinfo->prec;
-	return (count);
-}
 
 static int	getlength(long int n, t_padding *padinfo)
 {
@@ -47,7 +35,6 @@ static int	getlength(long int n, t_padding *padinfo)
 	}
 	if (n < 10)
 		++count;
-	count = getformatlength(count, padinfo);
 	return (count);
 }
 
@@ -84,6 +71,13 @@ char	*ft_itoa_format(long int n, t_padding *padinfo)
 	char	*c;
 
 	len = getlength(n, padinfo);
+	if (padinfo->padc == '0' && padinfo->prec < 1 && padinfo->width > len)
+	{
+		padinfo->prec += (padinfo->width - len);
+		len = padinfo->width;
+	}
+	if (len < padinfo->prec)
+		len = padinfo->prec;
 	c = ft_calloc(len + 1, 1);
 	if (!c)
 		return (NULL);
