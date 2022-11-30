@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/16 11:51:47 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/30 10:14:28 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ int	ft_printf(const char *s, ...)
 	va_start(args, s);
 	while (*s)
 	{
-		sectionlen = write(1, s, sectionlength(s));
-		if (sectionlen == -1)
+		if (write(1, s, sectionlength(s)) == -1)
 			return (-1);
 		s += sectionlen;
 		printlen += sectionlen;

@@ -6,9 +6,11 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/04 09:38:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/10/21 14:36:00 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/11/23 13:29:38 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include<stdio.h>
 
 int	ft_atoi(const char *str)
 {
