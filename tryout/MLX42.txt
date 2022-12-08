@@ -1,3 +1,0 @@
-- non-list functions in mlx_list.c to mlx_utils.c
-- why are the input arguments in mlx_equal_image being copied and not casted, I think this is unnecessary use of resources, and since the values are only used for the comparison this doesn't matter
-- same goes for mlx_equal_inst
