@@ -63,6 +63,8 @@ for line in lines:
 			head = knotpositions[i]
 			tail = knotpositions[i + 1]
 			if not touching(head[0], head[1], tail[0], tail[1]):
+				tx = tail[0]
+				ty = tail[1]
 				movetail(head[0], head[1])
 				knotpositions[i + 1] = [tx, ty]
 		tailpositions.add((tuple(knotpositions[-1])))
