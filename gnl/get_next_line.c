@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 09:39:52 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/12/16 13:28:45 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/12/16 14:46:10 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,25 @@ char	*extendmem(char *mem, int increment)
 	{
 		prevsize = gnl_strlen(mem);
 		newmem = malloc(prevsize + increment + 1);
+		if (!newmem)
+		{
+			free(mem);
+			return (NULL);
+		}
 		i = 0;
 		while (i < prevsize)
 		{
 			newmem[i] = mem[i];
 			++i;
 		}
+		free(mem);
 		newmem[prevsize + increment] = '\0';
 	}
 	else
 	{
 		newmem = malloc(increment + 1);
+		if (!newmem)
+			return (NULL);
 		newmem[increment] = '\0';
 	}
 	return (newmem);
@@ -55,10 +63,8 @@ char	*extendmem(char *mem, int increment)
 
 int	copytomem(char *mem, char *src, int i, int len)
 {
-	int	nl;
 	int	memlen;
 
-	nl = 0
 	memlen = gnl_strlen(mem) - len;
 	while (src[i])
 	{
@@ -66,11 +72,12 @@ int	copytomem(char *mem, char *src, int i, int len)
 		if (src[i] == '\n')
 		{
 			mem[(memlen + i) - 1] = src[i];
+			mem[memlen + i] = '\0';
 			return (i);
 		}
 		++i;
 	}
-	return (0);
+	return (-1);
 }
 
 void	shiftmem(char *mem, int shiftlen)
@@ -90,11 +97,14 @@ void	shiftmem(char *mem, int shiftlen)
 char	*get_next_line(int fd)
 {
 	static char	*leftstr;
-	char		*buffer[BUFFER_SIZE + 1];
+	char		buffer[BUFFER_SIZE + 1];
 	char		*newline;
 	int			bytesread;
 	int			nlindex;
+	int			leftstrlength;
 
+	if (fd < 0 || BUFFER_SIZE == 0)
+		return (NULL);
 	newline = NULL;
 	if (leftstr)
 	{
@@ -110,7 +120,7 @@ char	*get_next_line(int fd)
 	while (1)
 	{
 		bytesread = read(fd, buffer, BUFFER_SIZE);
-		if (bytesread == 0)
+		if (bytesread < 0)
 		{
 			if (newline)
 				free(newline);
@@ -119,13 +129,25 @@ char	*get_next_line(int fd)
 			return (NULL);
 		}
 		buffer[bytesread] = '\0';
+		if (bytesread == 0)
+		{
+			newline = extendmem(newline, bytesread);
+			nlindex = copytomem(newline, buffer, 0, bytesread);
+			if (!*newline)
+			{
+				free(newline);
+				newline = NULL;
+			}
+			return (newline);
+		}
 		newline = extendmem(newline, bytesread);
 		nlindex = copytomem(newline, buffer, 0, bytesread);
-		if (nlindex)
+		if (nlindex > -1)
 		{
 			leftstr = extendmem(leftstr, (bytesread - nlindex));
 			copytomem(leftstr, buffer, nlindex + 1, (bytesread - nlindex));
 			return (newline);
 		}
 	}
+	return (NULL);
 }
