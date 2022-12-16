@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 09:39:52 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/12/16 17:25:26 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/12/16 17:53:03 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,22 +63,22 @@ char	*extendmem(char *mem, int increment)
 	return (newmem);
 }
 
-int	copytomem(char *mem, char *src, int i, int len)
+int	copytomem(char **mem, char *src, int i, int len)
 {
 	int	memlen;
 
-	memlen = gnl_strlen(mem);
-	mem = extendmem(mem, len);
+	memlen = gnl_strlen(*mem);
+	*mem = extendmem(*mem, len);
 	while (src[i])
 	{
 		if (src[i] == '\n')
 		{
-			mem[(memlen + i) - 1] = src[i];
+			*mem[memlen + i] = src[i];
 			return (i);
 		}
 		else
 		{
-			mem[(memlen + i) - 1] = src[i];
+			*mem[memlen + i] = src[i];
 		}
 		++i;
 	}
@@ -114,8 +114,8 @@ char	*get_next_line(int fd)
 	if (leftstr)
 	{
 		leftstrlength = gnl_strlen(leftstr);
-		nlindex = copytomem(newline, leftstr, 0, leftstrlength);
-		if (nlindex)
+		nlindex = copytomem(&newline, leftstr, 0, leftstrlength);
+		if (nlindex > -1)
 		{
 			shiftmem(leftstr, nlindex + 1);
 			return (newline);
@@ -124,7 +124,7 @@ char	*get_next_line(int fd)
 	while ((bytesread = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		buffer[bytesread] = '\0';
-		nlindex = copytomem(newline, buffer, 0, bytesread);
+		nlindex = copytomem(&newline, buffer, 0, bytesread);
 		if (nlindex > -1)
 		{
 			break;
