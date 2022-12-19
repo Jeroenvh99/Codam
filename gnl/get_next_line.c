@@ -6,13 +6,15 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 09:39:52 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/12/16 17:53:03 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/12/19 17:26:00 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include<unistd.h>
 #include<stdlib.h>
 #include"get_next_line.h"
+#include<fcntl.h>
+#include<stdio.h>
 
 int	gnl_strlen(const char *s)
 {
@@ -58,6 +60,12 @@ char	*extendmem(char *mem, int increment)
 		newmem = malloc(increment + 1);
 		if (!newmem)
 			return (NULL);
+		i = 0;
+		while (i < increment)
+		{
+			newmem[i] = '0';
+			++i;
+		}
 		newmem[increment] = '\0';
 	}
 	return (newmem);
@@ -69,16 +77,19 @@ int	copytomem(char **mem, char *src, int i, int len)
 
 	memlen = gnl_strlen(*mem);
 	*mem = extendmem(*mem, len);
+	if (!*mem)
+		return (-2);
 	while (src[i])
 	{
 		if (src[i] == '\n')
 		{
-			*mem[memlen + i] = src[i];
+			(*mem)[memlen + i] = src[i];
+			(*mem)[memlen + i + 1] = '\0';
 			return (i);
 		}
 		else
 		{
-			*mem[memlen + i] = src[i];
+			(*mem)[memlen + i] = src[i];
 		}
 		++i;
 	}
@@ -92,7 +103,7 @@ void	shiftmem(char *mem, int shiftlen)
 
 	i = 0;
 	memlen = gnl_strlen(mem);
-	while (i < memlen)
+	while (i < memlen + 1 - shiftlen)
 	{
 		mem[i] = mem[i + shiftlen];
 		++i;
@@ -106,29 +117,79 @@ char	*get_next_line(int fd)
 	char		*newline;
 	int			bytesread;
 	int			nlindex;
-	int			leftstrlength;
+	int			i;
 
 	if (fd < 0 || BUFFER_SIZE == 0)
 		return (NULL);
 	newline = NULL;
 	if (leftstr)
 	{
-		leftstrlength = gnl_strlen(leftstr);
-		nlindex = copytomem(&newline, leftstr, 0, leftstrlength);
+		nlindex = copytomem(&newline, leftstr, 0, gnl_strlen(leftstr));
+		if (nlindex == -2)
+		{
+			free(leftstr);
+			free(newline);
+			return (NULL);
+		}
 		if (nlindex > -1)
 		{
 			shiftmem(leftstr, nlindex + 1);
+			if (leftstr[0] == '\0')
+			{
+				free(leftstr);
+				leftstr = NULL;
+			}
 			return (newline);
+		}
+		else
+		{
+			free(leftstr);
+			leftstr = NULL;
 		}
 	}
 	while ((bytesread = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		buffer[bytesread] = '\0';
 		nlindex = copytomem(&newline, buffer, 0, bytesread);
+		if (nlindex == -2)
+		{
+			free(leftstr);
+			free(newline);
+			return (NULL);
+		}
 		if (nlindex > -1)
 		{
-			break;
+			if (nlindex < bytesread - 1)
+			{
+				leftstr = malloc(bytesread - nlindex);
+				if (!leftstr)
+				{
+					free(newline);
+					return (NULL);
+				}
+				i = 0;
+				while (i < bytesread - nlindex - 1)
+				{
+					leftstr[i] = buffer[nlindex + i + 1];
+					++i;
+				}
+				leftstr[bytesread - nlindex - 1] = '\0';
+			}
+			break ;
 		}
 	}
 	return (newline);
 }
+
+// int main(){
+// 	int fd = open("in.txt", O_RDONLY);
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	return (0);
+// }
