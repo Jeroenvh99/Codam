@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 09:39:52 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/12/19 17:26:00 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/12/20 09:55:23 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,24 @@ void	shiftmem(char *mem, int shiftlen)
 	}
 }
 
+char	*copyleftstr(char *buffer, int bytesread, int nlindex)
+{
+	int		i;
+	char	*leftstr;
+
+	leftstr = malloc(bytesread - nlindex);
+	if (!leftstr)
+		return (NULL);
+	i = 0;
+	while (i < bytesread - nlindex - 1)
+	{
+		leftstr[i] = buffer[nlindex + i + 1];
+		++i;
+	}
+	leftstr[bytesread - nlindex - 1] = '\0';
+	return (leftstr);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*leftstr;
@@ -117,7 +135,6 @@ char	*get_next_line(int fd)
 	char		*newline;
 	int			bytesread;
 	int			nlindex;
-	int			i;
 
 	if (fd < 0 || BUFFER_SIZE == 0)
 		return (NULL);
@@ -147,8 +164,20 @@ char	*get_next_line(int fd)
 			leftstr = NULL;
 		}
 	}
-	while ((bytesread = read(fd, buffer, BUFFER_SIZE)) > 0)
+	bytesread = 1;
+	while (bytesread > 0)
 	{
+		bytesread = read(fd, buffer, BUFFER_SIZE);
+		if (bytesread == -1)
+		{
+			free(leftstr);
+			leftstr = NULL;
+			free(newline);
+			newline = NULL;
+			break ;
+		}
+		if (bytesread == 0)
+			break ;
 		buffer[bytesread] = '\0';
 		nlindex = copytomem(&newline, buffer, 0, bytesread);
 		if (nlindex == -2)
@@ -161,19 +190,12 @@ char	*get_next_line(int fd)
 		{
 			if (nlindex < bytesread - 1)
 			{
-				leftstr = malloc(bytesread - nlindex);
+				leftstr = copyleftstr(buffer, bytesread, nlindex);
 				if (!leftstr)
 				{
 					free(newline);
 					return (NULL);
 				}
-				i = 0;
-				while (i < bytesread - nlindex - 1)
-				{
-					leftstr[i] = buffer[nlindex + i + 1];
-					++i;
-				}
-				leftstr[bytesread - nlindex - 1] = '\0';
 			}
 			break ;
 		}
