@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 09:39:52 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/12/20 09:55:23 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/12/20 14:00:23 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,37 @@ char	*copyleftstr(char *buffer, int bytesread, int nlindex)
 	return (leftstr);
 }
 
+int	getstart(char **newline, char **leftstr)
+{
+	int	nlindex;
+
+	nlindex = copytomem(newline, *leftstr, 0, gnl_strlen(*leftstr));
+	// printf("left: %s\n", *leftstr);
+	// printf("index: %i\n", nlindex);
+	if (nlindex == -2)
+	{
+		free(*leftstr);
+		free(*newline);
+		return (0);
+	}
+	if (nlindex > -1)
+	{
+		shiftmem(*leftstr, nlindex + 1);
+		if (*leftstr[0] == '\0')
+		{
+			free(*leftstr);
+			*leftstr = NULL;
+		}
+		return (2);
+	}
+	else
+	{
+		free(*leftstr);
+		*leftstr = NULL;
+	}
+	return (1);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*leftstr;
@@ -139,32 +170,15 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE == 0)
 		return (NULL);
 	newline = NULL;
+	bytesread = 1;
 	if (leftstr)
 	{
-		nlindex = copytomem(&newline, leftstr, 0, gnl_strlen(leftstr));
-		if (nlindex == -2)
-		{
-			free(leftstr);
-			free(newline);
+		nlindex = getstart(&newline, &leftstr);
+		if (nlindex == 0)
 			return (NULL);
-		}
-		if (nlindex > -1)
-		{
-			shiftmem(leftstr, nlindex + 1);
-			if (leftstr[0] == '\0')
-			{
-				free(leftstr);
-				leftstr = NULL;
-			}
-			return (newline);
-		}
-		else
-		{
-			free(leftstr);
-			leftstr = NULL;
-		}
+		else if (nlindex == 2)
+			bytesread = 0;
 	}
-	bytesread = 1;
 	while (bytesread > 0)
 	{
 		bytesread = read(fd, buffer, BUFFER_SIZE);
@@ -205,13 +219,11 @@ char	*get_next_line(int fd)
 
 // int main(){
 // 	int fd = open("in.txt", O_RDONLY);
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
+// 	char *str = "";
+// 	while (str){
+// 		str = get_next_line(fd);
+// 		printf("%s", str);
+// 		free(str);
+// 	}
 // 	return (0);
 // }
