@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 09:40:52 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/12/19 15:21:16 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/12/20 18:57:59 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 #  define BUFFER_SIZE 15
 # endif
 
+int		gnl_strlen(const char *s);
+int		copytomem(char **mem, char *src, int i, int len);
+void	shiftmem(char *mem, int shiftlen);
+char	*copyleftstr(char *buffer, int bytesread, int nlindex);
 char	*get_next_line(int fd);
 
 #endif
