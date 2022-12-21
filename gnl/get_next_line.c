@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 09:39:52 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/12/20 18:55:50 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/12/21 09:08:17 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,8 @@ int	getstart(char **newline, char **leftstr)
 	return (1);
 }
 
-int	processbuffer(char **newline, char *buffer, char **leftstr, int bytesread)
+int	checkreaderror(int bytesread, char **newline, char **leftstr)
 {
-	int	nlindex;
-
 	if (bytesread == -1)
 	{
 		free(*leftstr);
@@ -57,6 +55,15 @@ int	processbuffer(char **newline, char *buffer, char **leftstr, int bytesread)
 		*newline = NULL;
 		return (1);
 	}
+	return (0);
+}
+
+int	processbuffer(char **newline, char *buffer, char **leftstr, int bytesread)
+{
+	int	nlindex;
+
+	if (checkreaderror(bytesread, newline, leftstr) == 1)
+		return (1);
 	if (bytesread == 0)
 		return (1);
 	buffer[bytesread] = '\0';
@@ -67,16 +74,13 @@ int	processbuffer(char **newline, char *buffer, char **leftstr, int bytesread)
 		free(*newline);
 		return (1);
 	}
-	if (nlindex > -1)
+	else if (nlindex > -1)
 	{
 		if (nlindex < bytesread - 1)
 		{
 			*leftstr = copyleftstr(buffer, bytesread, nlindex);
 			if (!*leftstr)
-			{
 				free(*newline);
-				return (1);
-			}
 		}
 		return (1);
 	}

@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 09:40:58 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/12/20 18:58:55 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/12/21 07:26:36 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,17 @@ int	gnl_strlen(const char *s)
 	return (count);
 }
 
-char	*extendmem(char *mem, int increment)
+char	*extendmem(char *mem, int increment, int i)
 {
 	char	*newmem;
 	int		prevsize;
-	int		i;
 
 	if (mem)
 	{
 		prevsize = gnl_strlen(mem);
 		newmem = malloc(prevsize + increment + 1);
 		if (!newmem)
-		{
-			free(mem);
-			return (NULL);
-		}
-		i = 0;
+			return (free(mem), NULL);
 		while (i < prevsize)
 		{
 			newmem[i] = mem[i];
@@ -56,12 +51,6 @@ char	*extendmem(char *mem, int increment)
 		newmem = malloc(increment + 1);
 		if (!newmem)
 			return (NULL);
-		i = 0;
-		while (i < increment)
-		{
-			newmem[i] = '0';
-			++i;
-		}
 		newmem[increment] = '\0';
 	}
 	return (newmem);
@@ -72,7 +61,7 @@ int	copytomem(char **mem, char *src, int i, int len)
 	int	memlen;
 
 	memlen = gnl_strlen(*mem);
-	*mem = extendmem(*mem, len);
+	*mem = extendmem(*mem, len, 0);
 	if (!*mem)
 		return (-2);
 	while (src[i])
