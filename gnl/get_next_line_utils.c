@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 09:40:58 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/12/21 07:26:36 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/12/22 07:56:02 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	gnl_strlen(const char *s)
 	return (count);
 }
 
-char	*extendmem(char *mem, int increment, int i)
+static char	*extendmem(char *mem, int increment, int i)
 {
 	char	*newmem;
 	int		prevsize;

@@ -6,17 +6,16 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 09:39:52 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/12/21 09:08:17 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/12/22 07:55:10 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include<unistd.h>
 #include<stdlib.h>
+#include<limits.h>
 #include"get_next_line.h"
-#include<fcntl.h>
-#include<stdio.h>
 
-int	getstart(char **newline, char **leftstr)
+static int	getstart(char **newline, char **leftstr)
 {
 	int	nlindex;
 
@@ -45,7 +44,7 @@ int	getstart(char **newline, char **leftstr)
 	return (1);
 }
 
-int	checkreaderror(int bytesread, char **newline, char **leftstr)
+static int	checkreaderror(int bytesread, char **newline, char **leftstr)
 {
 	if (bytesread == -1)
 	{
@@ -58,7 +57,8 @@ int	checkreaderror(int bytesread, char **newline, char **leftstr)
 	return (0);
 }
 
-int	processbuffer(char **newline, char *buffer, char **leftstr, int bytesread)
+static int	processbuffer(char **newline, char *buffer, char **leftstr,
+	int bytesread)
 {
 	int	nlindex;
 
@@ -89,19 +89,19 @@ int	processbuffer(char **newline, char *buffer, char **leftstr, int bytesread)
 
 char	*get_next_line(int fd)
 {
-	static char	*leftstr;
+	static char	*leftstr[OPEN_MAX];
 	char		buffer[BUFFER_SIZE + 1];
 	char		*newline;
 	int			bytesread;
 	int			nlindex;
 
-	if (fd < 0 || BUFFER_SIZE == 0)
+	if (fd < 0 || fd >= OPEN_MAX || BUFFER_SIZE == 0)
 		return (NULL);
 	newline = NULL;
 	bytesread = 1;
-	if (leftstr)
+	if (leftstr[fd])
 	{
-		nlindex = getstart(&newline, &leftstr);
+		nlindex = getstart(&newline, &leftstr[fd]);
 		if (nlindex == 0)
 			return (NULL);
 		else if (nlindex == 2)
@@ -110,18 +110,18 @@ char	*get_next_line(int fd)
 	while (bytesread > 0)
 	{
 		bytesread = read(fd, buffer, BUFFER_SIZE);
-		if (processbuffer(&newline, buffer, &leftstr, bytesread) == 1)
+		if (processbuffer(&newline, buffer, &leftstr[fd], bytesread) == 1)
 			break ;
 	}
 	return (newline);
 }
 
 // int main(){
-// 	int fd = open("in.txt", O_RDONLY);
+// 	int fd = open("get_next_line.c", O_RDONLY);
 // 	char *str = "";
 // 	while (str){
 // 		str = get_next_line(fd);
-// 		printf("%s", str);
+// 		printf("nl: %s", str);
 // 		free(str);
 // 	}
 // 	return (0);
