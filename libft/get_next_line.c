@@ -6,14 +6,14 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 09:39:52 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/12/22 07:55:10 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/12/23 10:27:36 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include<unistd.h>
-#include<stdlib.h>
 #include<limits.h>
-#include"get_next_line.h"
+#include<stdlib.h>
+#include"libft.h"
 
 static int	getstart(char **newline, char **leftstr)
 {
@@ -48,13 +48,37 @@ static int	checkreaderror(int bytesread, char **newline, char **leftstr)
 {
 	if (bytesread == -1)
 	{
-		free(*leftstr);
-		*leftstr = NULL;
-		free(*newline);
-		*newline = NULL;
+		if (*leftstr)
+		{
+			free(*leftstr);
+			*leftstr = NULL;
+		}
+		if (*newline)
+		{
+			free(*newline);
+			*newline = NULL;
+		}
 		return (1);
 	}
 	return (0);
+}
+
+static char	*copyleftstr(char *buffer, int bytesread, int nlindex)
+{
+	int		i;
+	char	*leftstr;
+
+	leftstr = ft_calloc(bytesread - nlindex, sizeof(char));
+	if (!leftstr)
+		return (NULL);
+	i = 0;
+	while (i < bytesread - nlindex - 1)
+	{
+		leftstr[i] = buffer[nlindex + i + 1];
+		++i;
+	}
+	leftstr[bytesread - nlindex - 1] = '\0';
+	return (leftstr);
 }
 
 static int	processbuffer(char **newline, char *buffer, char **leftstr,
@@ -95,7 +119,7 @@ char	*get_next_line(int fd)
 	int			bytesread;
 	int			nlindex;
 
-	if (fd < 0 || fd >= OPEN_MAX || BUFFER_SIZE == 0)
+	if (fd < 0 || fd >= OPEN_MAX || BUFFER_SIZE == 0 || BUFFER_SIZE >= 8000000)
 		return (NULL);
 	newline = NULL;
 	bytesread = 1;
@@ -115,14 +139,3 @@ char	*get_next_line(int fd)
 	}
 	return (newline);
 }
-
-// int main(){
-// 	int fd = open("get_next_line.c", O_RDONLY);
-// 	char *str = "";
-// 	while (str){
-// 		str = get_next_line(fd);
-// 		printf("nl: %s", str);
-// 		free(str);
-// 	}
-// 	return (0);
-// }

@@ -3,6 +3,7 @@ COMPILEFLAGS = -Wall -Werror -Wextra
 OBJS = ${SRCS:.c=.o}
 BONUS_OBJS = ${BONUS_SRCS:.c=.o}
 PRINTF_OBJS = ${PRINTF_SRCS:.c=.o}
+GNL_OBJS = ${GNL_SRCS:.c=.o}
 SRCS = ft_strjoin.c\
 	ft_atoi.c\
 	ft_strlcat.c\
@@ -51,9 +52,11 @@ PRINTF_SRCS = ft_printf.c\
 	ft_printf_utils.c\
 	ft_num_utils.c\
 	ft_format_utils.c
+GNL_SRCS = get_next_line.c\
+	get_next_line_utils.c
 
-ifdef ADD_BONUS_PRINTF
-ALL_OBJS = $(OBJS) $(BONUS_OBJS) $(PRINTF_OBJS)
+ifdef ADD_BONUS_PRINTF_GNL
+ALL_OBJS = $(OBJS) $(BONUS_OBJS) $(PRINTF_OBJS) $(GNL_OBJS)
 else
 ALL_OBJS = $(OBJS)
 endif
@@ -66,11 +69,11 @@ all: $(NAME)
 $(NAME): $(ALL_OBJS)
 	ar -rcs $(NAME) $(ALL_OBJS)
 
-bonus_and_printf:
-	$(MAKE) ADD_BONUS_PRINTF=1
+bonus_and_printf_and_gnl:
+	$(MAKE) ADD_BONUS_PRINTF_GNL=1
 
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS) $(PRINTF_OBJS)
+	rm -f $(OBJS) $(BONUS_OBJS) $(PRINTF_OBJS) $(GNL_OBJS)
 
 fclean: clean
 	rm -f $(NAME)

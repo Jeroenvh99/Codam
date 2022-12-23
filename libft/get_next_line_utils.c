@@ -6,11 +6,11 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 09:40:58 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/12/22 07:56:02 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/12/23 10:24:03 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdlib.h>
+#include"libft.h"
 
 int	gnl_strlen(const char *s)
 {
@@ -35,7 +35,7 @@ static char	*extendmem(char *mem, int increment, int i)
 	if (mem)
 	{
 		prevsize = gnl_strlen(mem);
-		newmem = malloc(prevsize + increment + 1);
+		newmem = ft_calloc(prevsize + increment + 1, sizeof(char));
 		if (!newmem)
 			return (free(mem), NULL);
 		while (i < prevsize)
@@ -48,7 +48,7 @@ static char	*extendmem(char *mem, int increment, int i)
 	}
 	else
 	{
-		newmem = malloc(increment + 1);
+		newmem = ft_calloc(increment + 1, sizeof(char));
 		if (!newmem)
 			return (NULL);
 		newmem[increment] = '\0';
@@ -93,22 +93,4 @@ void	shiftmem(char *mem, int shiftlen)
 		mem[i] = mem[i + shiftlen];
 		++i;
 	}
-}
-
-char	*copyleftstr(char *buffer, int bytesread, int nlindex)
-{
-	int		i;
-	char	*leftstr;
-
-	leftstr = malloc(bytesread - nlindex);
-	if (!leftstr)
-		return (NULL);
-	i = 0;
-	while (i < bytesread - nlindex - 1)
-	{
-		leftstr[i] = buffer[nlindex + i + 1];
-		++i;
-	}
-	leftstr[bytesread - nlindex - 1] = '\0';
-	return (leftstr);
 }
