@@ -28,7 +28,7 @@ static int	getstart(char **newline, char **leftstr)
 	}
 	if (nlindex > -1)
 	{
-		shiftmem(*leftstr, nlindex + 1);
+		shiftmem(*leftstr, nlindex);
 		if (*leftstr[0] == '\0')
 		{
 			free(*leftstr);
@@ -68,16 +68,16 @@ static char	*copyleftstr(char *buffer, int bytesread, int nlindex)
 	int		i;
 	char	*leftstr;
 
-	leftstr = ft_calloc(bytesread - nlindex, sizeof(char));
+	leftstr = ft_calloc((bytesread - nlindex) + 1, sizeof(char));
 	if (!leftstr)
 		return (NULL);
 	i = 0;
-	while (i < bytesread - nlindex - 1)
+	while (i < bytesread - nlindex)
 	{
-		leftstr[i] = buffer[nlindex + i + 1];
+		leftstr[i] = buffer[nlindex + i];
 		++i;
 	}
-	leftstr[bytesread - nlindex - 1] = '\0';
+	leftstr[bytesread - nlindex] = '\0';
 	return (leftstr);
 }
 

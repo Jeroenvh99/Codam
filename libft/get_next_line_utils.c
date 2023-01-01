@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include<stdlib.h>
 #include"libft.h"
 
 int	gnl_strlen(const char *s)
@@ -27,32 +28,25 @@ int	gnl_strlen(const char *s)
 	return (count);
 }
 
-static char	*extendmem(char *mem, int increment, int i)
+static char	*extendmem(char *mem, int increment, int i, int prevsize)
 {
 	char	*newmem;
-	int		prevsize;
 
+	newmem = ft_calloc(prevsize + increment + 1, sizeof(char));
+	if (!newmem)
+	{
+		if (mem)
+			free(mem);
+		return (NULL);
+	}
+	while (i < prevsize)
+	{
+		newmem[i] = mem[i];
+		++i;
+	}
+	newmem[prevsize + increment] = '\0';
 	if (mem)
-	{
-		prevsize = gnl_strlen(mem);
-		newmem = ft_calloc(prevsize + increment + 1, sizeof(char));
-		if (!newmem)
-			return (free(mem), NULL);
-		while (i < prevsize)
-		{
-			newmem[i] = mem[i];
-			++i;
-		}
-		newmem[prevsize + increment] = '\0';
 		free(mem);
-	}
-	else
-	{
-		newmem = ft_calloc(increment + 1, sizeof(char));
-		if (!newmem)
-			return (NULL);
-		newmem[increment] = '\0';
-	}
 	return (newmem);
 }
 
@@ -61,7 +55,7 @@ int	copytomem(char **mem, char *src, int i, int len)
 	int	memlen;
 
 	memlen = gnl_strlen(*mem);
-	*mem = extendmem(*mem, len, 0);
+	*mem = extendmem(*mem, len, 0, memlen);
 	if (!*mem)
 		return (-2);
 	while (src[i])
@@ -69,7 +63,8 @@ int	copytomem(char **mem, char *src, int i, int len)
 		if (src[i] == '\n')
 		{
 			(*mem)[memlen + i] = src[i];
-			(*mem)[memlen + i + 1] = '\0';
+			++i;
+			(*mem)[memlen + i] = '\0';
 			return (i);
 		}
 		else
@@ -88,7 +83,7 @@ void	shiftmem(char *mem, int shiftlen)
 
 	i = 0;
 	memlen = gnl_strlen(mem);
-	while (i < memlen + 1 - shiftlen)
+	while (i < memlen - shiftlen)
 	{
 		mem[i] = mem[i + shiftlen];
 		++i;
