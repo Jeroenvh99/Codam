@@ -1,53 +1,96 @@
 #include<unistd.h>
-#include<stdio.h>
+#include<limits.h>
+#include<stdlib.h>
+#include"push_swap.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+gcc push_swap.c ../libft/ft_lstadd_back.c ../libft/ft_lstnew.c ../libft/ft_lstclear.c ../libft/ft_lstdelone.c ../libft/ft_lstlast.c input_utils.c list_utils.c ../libft/ft_printf.c ../libft/ft_printf_utils.c ../libft/ft_num_utils.c ../libft/ft_format_utils.c ../libft/ft_hex_utils.c ../libft/ft_calloc.c ../libft/ft_strdup.c ../libft/ft_strchr.c ../libft/ft_memset.c ../libft/ft_strlen.c ../libft/ft_strnstr.c ../libft/ft_strncmp.c 
+
+void    switchindex(t_list **lst, int first, int second)
 {
-	size_t	i;
+    int     temp;
+    t_list  *current;
+    t_list  *current2;
 
-	i = 0;
-	while (i == 0 || (s1[i - 1] && s2[i - 1]))
-	{
-		if ((unsigned char)s1[i] != (unsigned char)s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		else
-			++i;
-	}
-	return (0);
+    current = *lst;
+    while (second > 0)
+    {
+        current = current->next;
+        --first;
+        --second;
+    }
+    current2 = current;
+    while (first > 0)
+    {
+        current = current->next;
+        --first;
+    }
+    temp = *(int *)current2->content;
+    *(int *)current2->content = *(int *)current->content;
+    *(int *)current->content = temp;
 }
 
-int checkduplicates(int argc, char **argv)
+void    reorderlist(t_list *oldlst, t_list **newlst, int i)
 {
-    char    *arg;
-    int     i;
-    int     j;
+    int a;
+    int b;
+    int j;
 
-    i = 1;
-    j = 1;
-    while (i < argc)
+    j = i;
+    a = *(int *)oldlst->content;
+    b = a - 1;
+    while (a > b)
     {
-        arg = argv[i];
-        while (j < argc)
+        oldlst = oldlst->prev;
+        b = *(int *)oldlst->content;
+        --j;
+    }
+    switchindex(newlst, i, j);
+}
+
+t_list    *unsignlist(t_list *lst)
+{
+    unsigned int    i;
+    unsigned int    *num;
+    t_list          *newlist;
+
+    newlist = NULL;
+    i = 0;
+    while(lst)
+    {
+        num = malloc(sizeof(unsigned int));
+        if (!num)
         {
-            if (j != i && ft_strcmp(arg, argv[j]) == 0)
-                return (0);
-            ++j;
+            ft_lstclear(&newlist, del);
+            return (NULL);
         }
+        *num = i;
+        ft_lstadd_back(&newlist, ft_lstnew(num));
+        if (lst->prev)
+            reorderlist(lst, &newlist, i);
+        lst = lst->next;
         ++i;
     }
-    return (1);
+    return (newlist);
 }
 
 int main(int argc, char **argv)
 {
     t_list  *a;
     t_list  *b;
-    if (argc > 1)
+
+    a = NULL;
+    b = NULL;
+    if (argc > 1 && argc - 1 <= UINT_MAX)
     {
-        if (checkduplicates(argc, argv) == 0)
+        if (loadlist(argc, argv, &a) == 0)
         {
             write(2, "error\n", 6);
+            return (1);
         }
+        if (issorted(a))
+            return (0);
+        a = unsignlist(a);
+        printlist(a);
     }
     return (0);
 }

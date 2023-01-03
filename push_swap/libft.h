@@ -6,12 +6,15 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/03 14:32:38 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/16 11:38:52 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2022/12/23 10:23:05 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 15
+# endif
 
 # include<stddef.h>
 # include<stdint.h>
@@ -19,6 +22,7 @@
 typedef struct s_list
 {
 	void			*content;
+	struct s_list	*prev;
 	struct s_list	*next;
 }	t_list;
 
@@ -83,5 +87,10 @@ char	*ft_itoa_format(long int n, t_padding *padinfo);
 int		ft_writestr(char *s, char type, t_padding *padinfo);
 int		getformat(const char *s, t_padding *padinfo);
 int		ft_printf(const char *s, ...);
+
+int		gnl_strlen(const char *s);
+int		copytomem(char **mem, char *src, int i, int len);
+void	shiftmem(char *mem, int shiftlen);
+char	*get_next_line(int fd);
 
 #endif
