@@ -38,14 +38,14 @@ int atoi_overflow(char *str, int *num)
     return (0);
 }
 
-int loadlisterror(t_list **lst, int *num)
+int loadlisterror(t_ps_list **lst, int *num)
 {
-    ft_lstclear(lst, del);
+    ps_lstclear(lst, del);
     free(num);
     return (0);
 }
 
-int loadlist(int argc, char **argv, t_list **a)
+int loadlist(int argc, char **argv, t_ps_list **a)
 {
     int i;
     int *num;
@@ -56,13 +56,13 @@ int loadlist(int argc, char **argv, t_list **a)
         num = (int *)malloc(sizeof(int));
         if (!num)
         {
-            ft_lstclear(a, del);
+            ps_lstclear(a, del);
             return (0);
         }
         if (atoi_overflow(argv[i], num))
         {
             if (lstsearch(*a, num) == 0)
-                ft_lstadd_back(a, ft_lstnew(num));
+                ps_lstadd_back(a, ps_lstnew(num, i - 1));
             else
                 return (loadlisterror(a, num));
         }

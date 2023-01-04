@@ -2,7 +2,7 @@
 #include<stdio.h>
 #include"libft.h"
 
-void printlist(t_list *head)
+void printlist(t_ps_list *head)
 {
 	while (head)
     {
@@ -11,7 +11,7 @@ void printlist(t_list *head)
 	}
 }
 
-int lstsearch(t_list *lst, int *content)
+int lstsearch(t_ps_list *lst, int *content)
 {
     while (lst)
     {
@@ -28,7 +28,7 @@ void	del(void *node)
 	node = NULL;
 }
 
-int     issorted(t_list *lst)
+int     issorted(t_ps_list *lst)
 {
     int prevnum;
 
