@@ -45,6 +45,36 @@ int loadlisterror(t_ps_list **lst, int *num)
     return (0);
 }
 
+void    reorderindex(t_ps_list *lst, int index)
+{
+    t_ps_list   *current;
+    int         i;
+    int         j;
+    int         temp;
+
+    while (index > 0)
+    {
+        lst = lst->next;
+        --index;
+    }
+    while (lst->prev)
+    {
+        i = *(lst->num);
+        j = i - 1;
+        current = lst;
+        while (current->prev && j > i)
+            current = current->prev;
+        j = *(current->num);
+        if (j > i)
+        {
+            temp = lst->index;
+            lst->index = current->index;
+            current->index = temp;
+        }
+        lst = lst->prev;
+    }
+}
+
 int loadlist(int argc, char **argv, t_ps_list **a)
 {
     int i;
@@ -65,6 +95,7 @@ int loadlist(int argc, char **argv, t_ps_list **a)
                 ps_lstadd_back(a, ps_lstnew(num, i - 1));
             else
                 return (loadlisterror(a, num));
+            reorderindex(*a, i - 1);
         }
         else
             return (loadlisterror(a, num));
