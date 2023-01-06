@@ -61,7 +61,7 @@ int sortlist(t_list *a, t_list *b, int fd)
 
     instr = get_next_line(fd);
     instructions = {swap_a, swap_b, NULL, push_a, push_b, rotate_a, rotate_b,
-        NULL, rreverse_a, rreverse_b, NULL}
+        NULL, rrotate_a, rrotate_b, NULL}
     while (instr)
     {
         instr = get_next_line(fd);

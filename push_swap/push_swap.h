@@ -26,6 +26,6 @@ void    swap_a(t_ps_list *a, t_ps_list *b);
 void    swap_b(t_ps_list *a, t_ps_list *b);
 void    rotate_a(t_ps_list *a, t_ps_list *b);
 void    rotate_b(t_ps_list *a, t_ps_list *b);
-void    rreverse_a(t_ps_list *a, t_ps_list *b);
-void    rreverse_b(t_ps_list *a, t_ps_list *b);
+void    rrotate_a(t_ps_list *a, t_ps_list *b);
+void    rrotate_b(t_ps_list *a, t_ps_list *b);
 #endif
