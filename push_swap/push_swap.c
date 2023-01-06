@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 
     a = NULL;
     b = NULL;
-    if (argc > 1 && argc - 1 <= UINT_MAX)
+    if (argc > 2 && argc - 1 <= UINT_MAX)
     {
         if (loadlist(argc, argv, &a) == 0)
         {

@@ -26,7 +26,7 @@ int atoi_overflow(char *str, int *num)
     while (*str && *str >= '0' && *str <= '9')
 	{
 		res = res * 10 + (*str - '0');
-        if (res - 1 >= INT_MAX)
+        if (res > 0 && res - 1 >= INT_MAX)
             return (0);
 		++str;
 	}
@@ -45,31 +45,27 @@ int loadlisterror(t_ps_list **lst, int *num)
     return (0);
 }
 
-void    reorderindex(t_ps_list *lst, int index)
+void    reorderindex(t_ps_list *lst)
 {
     t_ps_list   *current;
     int         i;
-    int         j;
     int         temp;
 
-    while (index > 0)
-    {
+    while (lst->next)
         lst = lst->next;
-        --index;
-    }
     while (lst->prev)
     {
         i = *(lst->num);
-        j = i - 1;
         current = lst;
-        while (current->prev && j > i)
-            current = current->prev;
-        j = *(current->num);
-        if (j > i)
+        while (current->prev)
         {
-            temp = lst->index;
-            lst->index = current->index;
-            current->index = temp;
+            current = current->prev;
+            if (*(current->num) > i)
+            {
+                temp = lst->index;
+                lst->index = current->index;
+                current->index = temp;
+            }
         }
         lst = lst->prev;
     }
@@ -95,11 +91,11 @@ int loadlist(int argc, char **argv, t_ps_list **a)
                 ps_lstadd_back(a, ps_lstnew(num, i - 1));
             else
                 return (loadlisterror(a, num));
-            reorderindex(*a, i - 1);
         }
         else
             return (loadlisterror(a, num));
         ++i;
     }
+    reorderindex(*a);
     return (1);
 }
