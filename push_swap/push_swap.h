@@ -20,12 +20,12 @@ void		del(void *node);
 int     	issorted(t_ps_list *lst);
 int 		loadlist(int argc, char **argv, t_ps_list **a);
 
-void    push_a(t_ps_list *a, t_ps_list *b);
-void    push_a(t_ps_list *a, t_ps_list *b);
-void    swap_a(t_ps_list *a, t_ps_list *b);
-void    swap_b(t_ps_list *a, t_ps_list *b);
-void    rotate_a(t_ps_list *a, t_ps_list *b);
-void    rotate_b(t_ps_list *a, t_ps_list *b);
-void    rrotate_a(t_ps_list *a, t_ps_list *b);
-void    rrotate_b(t_ps_list *a, t_ps_list *b);
+void    	push_a(t_ps_list **a, t_ps_list *b);
+void    	push_b(t_ps_list *a, t_ps_list **b);
+t_ps_list   *swap_a(t_ps_list *a);
+t_ps_list   *swap_b(t_ps_list *b);
+t_ps_list   *rotate_a(t_ps_list *a);
+t_ps_list   *rotate_b(t_ps_list *b);
+t_ps_list   *rrotate_a(t_ps_list *a);
+t_ps_list   *rrotate_b(t_ps_list *b);
 #endif

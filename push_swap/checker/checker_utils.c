@@ -53,16 +53,39 @@ t_ps_list   *swap_a(t_ps_list *a)
     t_ps_list   *temp;
     t_ps_list   *newhead;
 
-    if (!(a || a->next))
+    if (!(b || b->next))
         return (NULL);
-    newhead = a;
-    while (a->next)
-        a = a->next;
-    
+    newhead = b;
+    while (b->next->next)
+        b = b->next;
+    temp = b;
+    temp->next = NULL;
+    b->prev->next = b->next;
+    temp->prev = b->next;
+    b->next->next = temp;
+    if (!b->prev)
+        newhead = b;
+    return (newhead);
 }
 
 t_ps_list   *swap_b(t_ps_list *b)
 {
+    t_ps_list   *temp;
+    t_ps_list   *newhead;
+
+    if (!(a || a->next))
+        return (NULL);
+    newhead = a;
+    while (a->next->next)
+        a = a->next;
+    temp = a;
+    temp->next = NULL;
+    a->prev->next = a->next;
+    temp->prev = a->next;
+    a->next->next = temp;
+    if (!a->prev)
+        newhead = a;
+    return (newhead);
 }
 
 t_ps_list   *rotate_a(t_ps_list *a)
