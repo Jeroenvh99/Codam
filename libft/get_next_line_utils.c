@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 09:40:58 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/12/23 10:24:03 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/01/09 11:08:18 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ int	copytomem(char **mem, char *src, int i, int len)
 		if (src[i] == '\n')
 		{
 			(*mem)[memlen + i] = src[i];
-			++i;
-			(*mem)[memlen + i] = '\0';
+			(*mem)[memlen + i + 1] = '\0';
 			return (i);
 		}
 		else
@@ -83,7 +82,7 @@ void	shiftmem(char *mem, int shiftlen)
 
 	i = 0;
 	memlen = gnl_strlen(mem);
-	while (i < memlen - shiftlen)
+	while (i < memlen + 1 - shiftlen)
 	{
 		mem[i] = mem[i + shiftlen];
 		++i;

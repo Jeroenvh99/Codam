@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 09:39:52 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/12/23 10:27:36 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/01/09 11:07:31 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	getstart(char **newline, char **leftstr)
 	}
 	if (nlindex > -1)
 	{
-		shiftmem(*leftstr, nlindex);
+		shiftmem(*leftstr, nlindex + 1);
 		if (*leftstr[0] == '\0')
 		{
 			free(*leftstr);
@@ -68,16 +68,16 @@ static char	*copyleftstr(char *buffer, int bytesread, int nlindex)
 	int		i;
 	char	*leftstr;
 
-	leftstr = ft_calloc((bytesread - nlindex) + 1, sizeof(char));
+	leftstr = ft_calloc(bytesread - nlindex, sizeof(char));
 	if (!leftstr)
 		return (NULL);
 	i = 0;
-	while (i < bytesread - nlindex)
+	while (i < bytesread - nlindex - 1)
 	{
-		leftstr[i] = buffer[nlindex + i];
+		leftstr[i] = buffer[nlindex + i + 1];
 		++i;
 	}
-	leftstr[bytesread - nlindex] = '\0';
+	leftstr[bytesread - nlindex - 1] = '\0';
 	return (leftstr);
 }
 
@@ -119,7 +119,7 @@ char	*get_next_line(int fd)
 	int			bytesread;
 	int			nlindex;
 
-	if (fd < 0 || fd >= OPEN_MAX || BUFFER_SIZE == 0 || BUFFER_SIZE >= 8000000)
+	if (fd < 0 || fd >= OPEN_MAX || BUFFER_SIZE == 0)
 		return (NULL);
 	newline = NULL;
 	bytesread = 1;
