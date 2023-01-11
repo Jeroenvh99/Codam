@@ -1,108 +1,110 @@
-void    push_a(t_ps_list **a, t_ps_list *b)
-{
-    t_ps_list   *current;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   checker_utils.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/01/09 12:13:15 by jvan-hal      #+#    #+#                 */
+/*   Updated: 2023/01/11 10:19:51 by jvan-hal      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
-    if (!b)
-        return;
-    current = *a;
-    if (current)
-    {
-        while (current->next)
-            current = current->next;
-    }
-    current->prev->next = NULL;
-    if (b)
-    {
-        while (b->next)
-            b = b->next;
-    }
-    current->prev = b;
-    if (*a)
-        current->next = b;
-    else
-        *a = b;
+#include"./../libft.h"
+
+t_list	*swap_a(t_list *a)
+{
+	t_list	*temp;
+	t_list	*newhead;
+
+	if (!(a && a->next))
+		return (NULL);
+	newhead = a->next;
+	a->next = a->next->next;
+	a->prev = newhead;
+	newhead->next = a;
+	newhead->prev = NULL;
+	return (newhead);
 }
 
-void    push_b(t_ps_list *a, t_ps_list **b)
+t_list	*swap_b(t_list *b)
 {
-    t_ps_list   *current;
+	t_list	*temp;
+	t_list	*newhead;
 
-    if (!a)
-        return;
-    current = *b;
-    if (current)
-    {
-        while (current->next)
-            current = current->next;
-    }
-    current->prev->next = NULL;
-    if (a)
-    {
-        while (a->next)
-            a = a->next;
-    }
-    current->prev = a;
-    if (*b)
-        current->next = a;
-    else
-        *b = a;
+	if (!(b && b->next))
+		return (NULL);
+	newhead = b->next;
+	b->next = b->next->next;
+	b->prev = newhead;
+	newhead->next = b;
+	newhead->prev = NULL;
+	return (newhead);
 }
 
-t_ps_list   *swap_a(t_ps_list *a)
+void	push_a(t_list **a, t_list **b)
 {
-    t_ps_list   *temp;
-    t_ps_list   *newhead;
+	t_list	*current;
 
-    if (!(b || b->next))
-        return (NULL);
-    newhead = b;
-    while (b->next->next)
-        b = b->next;
-    temp = b;
-    temp->next = NULL;
-    b->prev->next = b->next;
-    temp->prev = b->next;
-    b->next->next = temp;
-    if (!b->prev)
-        newhead = b;
-    return (newhead);
+	if (!*b)
+		return ;
+	current = *b;
+	if (current->next)
+	{
+		current->next->prev = NULL;
+		*b = current->next;
+	}
+	else
+		*b = NULL;
+	if (*a)
+	{
+		(*a)->prev = current;
+		current->next = *a;
+	}
+	else
+		current->next = NULL;
+	*a = current;
 }
 
-t_ps_list   *swap_b(t_ps_list *b)
+void	push_b(t_list **a, t_list **b)
 {
-    t_ps_list   *temp;
-    t_ps_list   *newhead;
+	t_list	*current;
 
-    if (!(a || a->next))
-        return (NULL);
-    newhead = a;
-    while (a->next->next)
-        a = a->next;
-    temp = a;
-    temp->next = NULL;
-    a->prev->next = a->next;
-    temp->prev = a->next;
-    a->next->next = temp;
-    if (!a->prev)
-        newhead = a;
-    return (newhead);
+	if (!*a)
+		return ;
+	current = *a;
+	if (current->next)
+	{
+		current->next->prev = NULL;
+		*a = current->next;
+	}
+	else
+		*a = NULL;
+	if (*b)
+	{
+		(*b)->prev = current;
+		current->next = *b;
+	}
+	else
+		current->next = NULL;
+	*b = current;
 }
 
-t_ps_list   *rotate_a(t_ps_list *a)
+t_list	*rotate_a(t_list *a)
 {
-    t_ps_list   *temp;
-    t_ps_list   *newhead;
+	t_list	*temp;
+	t_list	*newhead;
 
-    if (!(a || a->next))
-        return;
-    temp = a;
-    newhead = temp->next;
-    temp->next = NULL;
-    a = a->next;
-    a->prev = NULL;
-    while (a->next)
-        a = a->next;
-    temp->prev = a;
-    a->next = temp;
-    return (newhead);
+	if (!(a && a->next))
+		return (NULL);
+	temp = a;
+	newhead = a->next;
+	a = a->next;
+	temp->next = NULL;
+	a->prev = NULL;
+	while (a->next)
+		a = a->next;
+	temp->prev = a;
+	a->next = temp;
+	return (newhead);
 }

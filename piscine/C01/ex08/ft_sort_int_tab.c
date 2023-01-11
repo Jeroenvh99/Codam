@@ -12,25 +12,25 @@
 
 #include<stdio.h>
 
-void    ft_sort_int_tab(int *tab, int size)
+void	ft_sort_int_tab(int *tab, int size)
 {
-    int i;
-    int temp1;
-    int temp2;
+	int i;
+	int temp1;
+	int temp2;
 
-    i = 0;
-    while (i < size - 1)
-    {
-        temp1 = tab[i];
-        temp2 = tab[i + 1];
-        if (temp1 > temp2)
-        {
-            tab[i] = temp2;
-            tab[i + 1] = temp1;
-            i = 0;
-        }
-        i++;
-    }
+	i = 0;
+	while (i < size - 1)
+	{
+		temp1 = tab[i];
+		temp2 = tab[i + 1];
+		if (temp1 > temp2)
+		{
+			tab[i] = temp2;
+			tab[i + 1] = temp1;
+			i = 0;
+		}
+		i++;
+	}
 }
 
 int main(){

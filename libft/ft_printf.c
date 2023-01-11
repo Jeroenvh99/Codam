@@ -6,13 +6,14 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 13:25:50 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2022/11/30 10:14:28 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/01/11 10:59:27 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 #include<unistd.h>
 #include<stdarg.h>
+#include<stdlib.h>
 
 static int	sectionlength(const char *s)
 {
@@ -31,10 +32,11 @@ static char	*chartostr(int c)
 {
 	char	*str;
 
-	str = ft_calloc(2, 1);
+	str = malloc(2);
 	if (!str)
 		return (NULL);
 	str[0] = (char)c;
+	str[1] = '\0';
 	return (str);
 }
 
@@ -53,7 +55,7 @@ static int	parser(const char **s, va_list args)
 	else if (type == 'd' || type == 'i')
 		str = ft_itoa_format(va_arg(args, int), &padinfo);
 	else if (type == 'u')
-		str = ft_itoa_format(va_arg(args, unsigned int), &padinfo);
+		str = ft_uitoa(va_arg(args, unsigned int), &padinfo);
 	else if (type == 'x' || type == 'X')
 		str = getstr_hex(va_arg(args, int), *s[0], &padinfo);
 	else if (type == 'c')
@@ -77,7 +79,8 @@ int	ft_printf(const char *s, ...)
 	va_start(args, s);
 	while (*s)
 	{
-		if (write(1, s, sectionlength(s)) == -1)
+		sectionlen = write(1, s, sectionlength(s));
+		if (sectionlen == -1)
 			return (-1);
 		s += sectionlen;
 		printlen += sectionlen;
