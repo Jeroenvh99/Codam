@@ -6,35 +6,34 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/09 12:13:25 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/01/11 10:26:37 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/01/25 17:38:39 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdio.h>
 #include<fcntl.h>
-#include<stdio.h>
 #include<unistd.h>
 #include<limits.h>
-#include"checker.h"
+#include<stdlib.h>
+#include"push_swap.h"
 
 void	singlecalls(t_list **a, t_list **b, char *instr)
 {
-	if (ft_strncmp(instr, "sa", 2) == 0)
-		*a = swap_a(*a);
-	else if (ft_strncmp(instr, "sb", 2) == 0)
-		*b = swap_b(*b);
-	else if (ft_strncmp(instr, "pa", 2) == 0)
-		push_a(a, b);
-	else if (ft_strncmp(instr, "pb", 2) == 0)
-		push_b(a, b);
-	else if (ft_strncmp(instr, "ra", 2) == 0)
-		*a = rotate_a(*a);
-	else if (ft_strncmp(instr, "rb", 2) == 0)
-		*b = rotate_b(*b);
-	else if (ft_strncmp(instr, "rra", 3) == 0)
-		*a = rrotate_a(*a);
-	else if (ft_strncmp(instr, "rrb", 3) == 0)
-		*b = rrotate_b(*b);
+	if (ft_strncmp(instr, "sa\n", 3) == 0)
+		*a = swap(*a);
+	else if (ft_strncmp(instr, "sb\n", 3) == 0)
+		*b = swap(*b);
+	else if (ft_strncmp(instr, "pa\n", 3) == 0)
+		push(a, b);
+	else if (ft_strncmp(instr, "pb\n", 3) == 0)
+		push(b, a);
+	else if (ft_strncmp(instr, "ra\n", 3) == 0)
+		*a = rotate(*a);
+	else if (ft_strncmp(instr, "rb\n", 3) == 0)
+		*b = rotate(*b);
+	else if (ft_strncmp(instr, "rra\n", 4) == 0)
+		*a = rrotate(*a);
+	else if (ft_strncmp(instr, "rrb\n", 4) == 0)
+		*b = rrotate(*b);
 }
 
 void	sortlist(t_list **a, t_list **b, int fd)
@@ -44,23 +43,24 @@ void	sortlist(t_list **a, t_list **b, int fd)
 	instr = get_next_line(fd);
 	while (instr)
 	{
-		if (ft_strncmp(instr, "ss", 2) == 0)
+		if (ft_strncmp(instr, "ss\n", 3) == 0)
 		{
-			*a = swap_a(*a);
-			*b = swap_b(*b);
+			*a = swap(*a);
+			*b = swap(*b);
 		}
-		else if (ft_strncmp(instr, "rr", 2) == 0)
+		else if (ft_strncmp(instr, "rr\n", 3) == 0)
 		{
-			*a = rotate_a(*a);
-			*b = rotate_b(*b);
+			*a = rotate(*a);
+			*b = rotate(*b);
 		}
-		else if (ft_strncmp(instr, "rrr", 3) == 0)
+		else if (ft_strncmp(instr, "rrr\n", 4) == 0)
 		{
-			*a = rrotate_a(*a);
-			*b = rrotate_b(*b);
+			*a = rrotate(*a);
+			*b = rrotate(*b);
 		}
 		else
 			singlecalls(a, b, instr);
+		free(instr);
 		instr = get_next_line(fd);
 	}
 }
@@ -73,21 +73,21 @@ int	main(int argc, char **argv)
 
 	a = NULL;
 	b = NULL;
-	if (argc > 2 && argc - 1 <= UINT_MAX)
+	if (argc > 2)
 	{
 		if (loadlist(argc, argv, &a) == 0)
 		{
 			write(2, "error\n", 6);
 			return (1);
 		}
-		fd = open("test.txt", O_RDONLY);
+		fd = open("./check/test.txt", O_RDONLY);
 		sortlist(&a, &b, fd);
 		close(fd);
-		printlist(a);
+		printlist_stack(a);
 		if (issorted(a))
-			printf("the list is sorted\n");
+			ft_printf("the list is sorted\n");
 		else
-			printf("the list is not sorted\n");
+			ft_printf("the list is not sorted\n");
 		ft_lstclear(&a, del);
 	}
 	return (0);

@@ -6,13 +6,12 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/09 12:13:34 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/01/11 11:25:27 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/01/23 18:16:38 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include<limits.h>
 #include<stdlib.h>
-#include<stdio.h>
 #include"push_swap.h"
 
 int	ft_isspace(char c)
@@ -50,38 +49,12 @@ int	atoi_overflow(char *str, int *num)
 	return (0);
 }
 
-int	loadlisterror(t_list **lst, int *num)
+int	loadlisterror(t_list **lst, void *num)
 {
 	ft_lstclear(lst, del);
 	free(num);
 	return (0);
 }
-
-// void    reorderindex(t_ps_list *lst)
-// {
-//     t_ps_list   *current;
-//     int         i;
-//     int         temp;
-
-//     while (lst->next)
-//         lst = lst->next;
-//     while (lst->prev)
-//     {
-//         i = *(lst->num);
-//         current = lst;
-//         while (current->prev)
-//         {
-//             current = current->prev;
-//             if (*(current->num) > i)
-//             {
-//                 temp = lst->index;
-//                 lst->index = current->index;
-//                 current->index = temp;
-//             }
-//         }
-//         lst = lst->prev;
-//     }
-// }
 
 int	loadlist(int argc, char **argv, t_list **a)
 {

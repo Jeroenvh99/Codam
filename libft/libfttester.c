@@ -3,6 +3,8 @@
 #include<stdlib.h>
 #include<ctype.h>
 #include<limits.h>
+#include<fcntl.h>
+#include<unistd.h>
 
 char changec(unsigned int index, char c)
 {
@@ -101,6 +103,22 @@ void test_printf(){
 	printf("%i\n", printf("system: \Jeroen"));
 	ft_printf("%i\n", ft_printf("mine:   %.x, %.x, %.x, %.x, %.x, %.x, %.x, %.x, %.x, %.x\n", 0, 5, -1, -10, 0x1234, -1862, 0xABCDE, INT_MIN, INT_MAX, UINT_MAX));
 	printf("%i\n", printf("system: %.x, %.x, %.x, %.x, %.x, %.x, %.x, %.x, %.x, %.x", 0, 5, -1, -10, 0x1234, -1862, 0xABCDE, INT_MIN, INT_MAX, UINT_MAX));
+}
+
+int test_gnl(){
+	char *str;
+	int fd;
+	
+	fd = open("bible.txt", O_RDONLY);
+	str = get_next_line(fd);
+	while (str)
+	{
+		printf("%s\n", str);
+		str = get_next_line(fd);
+		free(str);
+	}
+	close(fd);
+	return 0;
 }
 
 int main(){
