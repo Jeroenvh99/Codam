@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/09 12:14:09 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/01/25 13:13:43 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/01/26 09:51:45 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	main(int argc, char **argv)
 		optimise_instr(instr);
 		printlist_instr(instr);
 		ft_lstclear(&a, del);
-		ft_lstclear(&b, del);
 		ft_lstclear(&instr, del);
 	}
 	return (0);

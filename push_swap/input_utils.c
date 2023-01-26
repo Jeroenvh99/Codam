@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/09 12:13:34 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/01/23 18:16:38 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/01/26 10:05:31 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 #include<stdlib.h>
 #include"push_swap.h"
 
-int	ft_isspace(char c)
+static int	ft_isspace(char c)
 {
 	return (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
 		|| c == ' ');
 }
 
-int	atoi_overflow(char *str, int *num)
+static int	atoi_overflow(char *str, int *num)
 {
 	unsigned int	res;
 
@@ -49,7 +49,7 @@ int	atoi_overflow(char *str, int *num)
 	return (0);
 }
 
-int	loadlisterror(t_list **lst, void *num)
+static int	loadlisterror(t_list **lst, void *num)
 {
 	ft_lstclear(lst, del);
 	free(num);

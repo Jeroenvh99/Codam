@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/09 12:14:20 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/01/25 19:38:22 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/01/26 10:19:47 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 # define PUSH_SWAP_H
 # include"./libft/libft.h"
 
-void	printlist_stack(t_list *head);
 void	printlist_instr(t_list *head);
 int		lstsearch(t_list *lst, int *num);
 void	del(void *node);
 int		issorted(t_list *lst);
 int		loadlist(int argc, char **argv, t_list **a);
-int		getlow(t_list *lst);
-int		gethigh(t_list *lst);
+int		getextreme(t_list *lst, int high_or_low);
 
 t_list	*swap(t_list *lst);
 void	push(t_list **lst1, t_list **lst2);

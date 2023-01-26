@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 12:36:39 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/01/24 18:17:34 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/01/26 10:19:02 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static void	smart_rotate_b(t_list *b, int current, int size, t_list **instr)
 	int	high;
 
 	rotations = 0;
-	high = gethigh(b);
-	if (current > high || current < getlow(b))
+	high = getextreme(b, 1);
+	if (current > high || current < getextreme(b, 0))
 	{
 		while (b && *((int *)b->content) != high)
 		{

@@ -6,13 +6,14 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/12 17:03:47 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/01/25 17:53:03 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/01/26 10:21:15 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
 
-t_list	*find_instr_pair(t_list *current, char *instr, char *pair, int size)
+static t_list	*find_instr_pair(t_list *current, char *instr, char *pair,
+	int size)
 {
 	t_list	*temp;
 

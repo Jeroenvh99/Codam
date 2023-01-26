@@ -8,12 +8,12 @@ SRCS = push_swap.c\
 	get_cheapest_ab.c\
 	get_cheapest_ba.c\
 	sort_list.c\
+	sort_list_2.c\
 	optimise_instr.c
 BONUS_SRCS = checker.c
 OVERLAPPING_SRCS = rules.c\
 	input_utils.c\
-	list_utils.c\
-	list_utils_2.c
+	list_utils.c
 
 all: $(NAME)
 

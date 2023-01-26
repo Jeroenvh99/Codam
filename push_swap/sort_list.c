@@ -6,20 +6,20 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 14:25:47 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/01/25 19:37:06 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/01/26 10:16:33 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
 
-void	rotate_b_stack(t_list **b, int to_insert, t_list **instr)
+static void	rotate_b_stack(t_list **b, int to_insert, t_list **instr)
 {
 	int	rotations;
 	int	high;
 
 	rotations = 0;
-	high = gethigh(*b);
-	if (to_insert > high || to_insert < getlow(*b))
+	high = getextreme(*b, 1);
+	if (to_insert > high || to_insert < getextreme(*b, 0))
 	{
 		while (*b && *((int *)(*b)->content) != high)
 		{
@@ -39,14 +39,14 @@ void	rotate_b_stack(t_list **b, int to_insert, t_list **instr)
 	smart_rotate_stack_b(rotations, ft_lstsize(*b), instr);
 }
 
-void	rotate_a_stack_final(t_list **a, int to_push, t_list **instr)
+static void	rotate_a_stack_final(t_list **a, int to_push, t_list **instr)
 {
 	int	rotations;
 	int	low;
 
 	rotations = 0;
-	low = getlow(*a);
-	if (to_push > gethigh(*a) || to_push < low)
+	low = getextreme(*a, 0);
+	if (to_push > getextreme(*a, 1) || to_push < low)
 	{
 		while (*a && *((int *)(*a)->content) != low)
 		{
@@ -66,7 +66,7 @@ void	rotate_a_stack_final(t_list **a, int to_push, t_list **instr)
 	smart_rotate_stack_a(rotations, ft_lstsize(*a), instr);
 }
 
-void	push_cheapest_ab(t_list **a, t_list **b, t_list **instr)
+static void	push_cheapest_ab(t_list **a, t_list **b, t_list **instr)
 {
 	int	cheapest;
 
@@ -77,7 +77,7 @@ void	push_cheapest_ab(t_list **a, t_list **b, t_list **instr)
 	ft_lstadd_back(instr, ft_lstnew(ft_strdup("pb")));
 }
 
-void	push_cheapest_ba(t_list **a, t_list **b, t_list **instr)
+static void	push_cheapest_ba(t_list **a, t_list **b, t_list **instr)
 {
 	int	cheapest;
 

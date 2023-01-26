@@ -6,17 +6,15 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/09 12:13:25 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/01/25 17:38:39 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/01/26 10:38:20 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<fcntl.h>
 #include<unistd.h>
-#include<limits.h>
 #include<stdlib.h>
 #include"push_swap.h"
 
-void	singlecalls(t_list **a, t_list **b, char *instr)
+static void	singlecalls(t_list **a, t_list **b, char *instr)
 {
 	if (ft_strncmp(instr, "sa\n", 3) == 0)
 		*a = swap(*a);
@@ -36,11 +34,11 @@ void	singlecalls(t_list **a, t_list **b, char *instr)
 		*b = rrotate(*b);
 }
 
-void	sortlist(t_list **a, t_list **b, int fd)
+static void	sortlist(t_list **a, t_list **b)
 {
 	char	*instr;
 
-	instr = get_next_line(fd);
+	instr = get_next_line(0);
 	while (instr)
 	{
 		if (ft_strncmp(instr, "ss\n", 3) == 0)
@@ -61,7 +59,7 @@ void	sortlist(t_list **a, t_list **b, int fd)
 		else
 			singlecalls(a, b, instr);
 		free(instr);
-		instr = get_next_line(fd);
+		instr = get_next_line(0);
 	}
 }
 
@@ -69,7 +67,6 @@ int	main(int argc, char **argv)
 {
 	t_list	*a;
 	t_list	*b;
-	int		fd;
 
 	a = NULL;
 	b = NULL;
@@ -80,10 +77,7 @@ int	main(int argc, char **argv)
 			write(2, "error\n", 6);
 			return (1);
 		}
-		fd = open("./check/test.txt", O_RDONLY);
-		sortlist(&a, &b, fd);
-		close(fd);
-		printlist_stack(a);
+		sortlist(&a, &b);
 		if (issorted(a))
 			ft_printf("the list is sorted\n");
 		else
