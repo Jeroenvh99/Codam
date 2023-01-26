@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/12 17:03:47 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/01/26 10:21:15 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/01/26 15:49:53 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ static t_list	*find_instr_pair(t_list *current, char *instr, char *pair,
 		temp = current->next;
 		while (temp && ft_strncmp((char *)temp->content, pair, size) != 0)
 		{
-			if (ft_strncmp((char *)temp->content, instr, size) != 0)
+			if (ft_strncmp((char *)temp->content, instr, size) != 0
+				|| ft_strncmp((char *)temp->content, "pa", 2) != 0
+				|| ft_strncmp((char *)temp->content, "pb", 2) != 0)
 			{
 				temp = NULL;
 				break ;
@@ -34,7 +36,7 @@ static t_list	*find_instr_pair(t_list *current, char *instr, char *pair,
 			((char *)(current->content))[size - 1] = 'r';
 	}
 	return (temp);
-}
+} 
 
 void	optimise_instr(t_list *lst)
 {

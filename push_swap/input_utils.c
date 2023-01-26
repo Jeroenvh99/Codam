@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/09 12:13:34 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/01/26 12:19:06 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/01/26 15:49:09 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	atoi_overflow(char *str, int *num)
 	while (*str && *str >= '0' && *str <= '9')
 	{
 		res = res * 10 + (*str - '0');
-		if (res - 1 > INT_MAX)
+		if ((*num == 1 && res > INT_MAX) || (*num == -1 && res - 1 > INT_MAX))
 			return (0);
 		++str;
 	}
