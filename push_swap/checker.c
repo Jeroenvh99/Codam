@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/09 12:13:25 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/01/26 10:38:20 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/01/26 12:13:35 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,16 @@ int	main(int argc, char **argv)
 
 	a = NULL;
 	b = NULL;
-	if (argc > 2)
+	if (loadlist(argc, argv, &a) == 0)
 	{
-		if (loadlist(argc, argv, &a) == 0)
-		{
-			write(2, "error\n", 6);
-			return (1);
-		}
-		sortlist(&a, &b);
-		if (issorted(a))
-			ft_printf("the list is sorted\n");
-		else
-			ft_printf("the list is not sorted\n");
-		ft_lstclear(&a, del);
+		write(2, "error\n", 6);
+		return (1);
 	}
+	sortlist(&a, &b);
+	if (issorted(a))
+		ft_printf("the list is sorted\n");
+	else
+		ft_printf("the list is not sorted\n");
+	ft_lstclear(&a, del);
 	return (0);
 }

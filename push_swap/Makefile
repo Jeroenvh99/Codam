@@ -1,5 +1,5 @@
 NAME = push_swap
-COMPILEFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
+COMPILEFLAGS = -Wall -Werror -Wextra
 OBJS = ${SRCS:.c=.o}
 BONUS_OBJS = ${BONUS_SRCS:.c=.o}
 OVERLAPPING_OBJS = ${OVERLAPPING_SRCS:.c=.o}
