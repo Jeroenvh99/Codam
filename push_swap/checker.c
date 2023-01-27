@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/09 12:13:25 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/01/26 12:13:35 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/01/27 10:30:45 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ static void	singlecalls(t_list **a, t_list **b, char *instr)
 		*a = rrotate(*a);
 	else if (ft_strncmp(instr, "rrb\n", 4) == 0)
 		*b = rrotate(*b);
+	else
+	{
+		write(2, "wrong instruction, please try again\n", 36);
+		return;
+	}
 }
 
 static void	sortlist(t_list **a, t_list **b)
@@ -70,6 +75,11 @@ int	main(int argc, char **argv)
 
 	a = NULL;
 	b = NULL;
+	if (argc == 1)
+	{
+		write(2, "no list\n", 8);
+		return (1);
+	}
 	if (loadlist(argc, argv, &a) == 0)
 	{
 		write(2, "error\n", 6);
