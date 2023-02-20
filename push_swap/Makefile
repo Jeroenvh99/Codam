@@ -1,5 +1,5 @@
 NAME = push_swap
-COMPILEFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 OBJS = ${SRCS:.c=.o}
 BONUS_OBJS = ${BONUS_SRCS:.c=.o}
 OVERLAPPING_OBJS = ${OVERLAPPING_SRCS:.c=.o}
@@ -17,12 +17,9 @@ OVERLAPPING_SRCS = rules.c\
 
 all: $(NAME)
 
-.c.o:
-	cc $(COMPILEFLAGS) -c $<
-
 $(NAME): $(OBJS) $(OVERLAPPING_OBJS)
 	$(MAKE) -C ./libft bonus_and_printf_and_gnl
-	cc $(OBJS) $(OVERLAPPING_OBJS) $(COMPILEFLAGS) ./libft/libft.a -o push_swap
+	cc $(OBJS) $(OVERLAPPING_OBJS) $(COMPILEFLAGS) ./libft/libft.a -o $(NAME)
 
 checker: $(BONUS_OBJS) $(OVERLAPPING_OBJS)
 	$(MAKE) -C ./libft bonus_and_printf_and_gnl

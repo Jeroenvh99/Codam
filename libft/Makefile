@@ -1,5 +1,5 @@
 NAME = libft.a
-COMPILEFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 OBJS = ${SRCS:.c=.o}
 BONUS_OBJS = ${BONUS_SRCS:.c=.o}
 PRINTF_OBJS = ${PRINTF_SRCS:.c=.o}
@@ -62,9 +62,6 @@ ALL_OBJS = $(OBJS)
 endif
 
 all: $(NAME)
-
-.c.o:
-	cc $(COMPILEFLAGS) -c $<
 
 $(NAME): $(ALL_OBJS)
 	ar -rcs $(NAME) $(ALL_OBJS)
