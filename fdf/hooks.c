@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/27 10:55:36 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/02/20 12:03:03 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/02/23 12:03:51 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,12 @@
 
 static void	update_image_rot(t_fdf *fdf, int x, int y, int z)
 {
-	mlx_delete_image(fdf->mlx, fdf->img);
-	fdf->img = NULL;
-	free(fdf->texture->pixels);
-	free(fdf->texture);
+	delete_prev_img(fdf);
 	fdf->rot_x += x;
 	fdf->rot_y += y;
 	fdf->rot_z += z;
 	rot_map(fdf, fdf->rot_x, fdf->rot_y, fdf->rot_z);
-	fdf->img = generate_image(fdf);
-	if (!fdf->img)
-		return ;
-	mlx_image_to_window(fdf->mlx, fdf->img, min_sx(fdf->coords)
-		+ fdf->trans_x, min_sy(fdf->coords) + fdf->trans_y);
+	create_new_image(fdf);
 }
 
 static void	rotation(mlx_key_data_t keydata, t_fdf *fdf)
@@ -55,11 +48,12 @@ static void	rotation(mlx_key_data_t keydata, t_fdf *fdf)
 		update_image_rot(fdf, x, y, z);
 }
 
-static void	close_fdf(t_fdf *fdf)
+static void	update_translation(t_fdf *fdf, int x, int y)
 {
-	mlx_close_window(fdf->mlx);
-	free_fdf(fdf);
-	exit(EXIT_SUCCESS);
+	fdf->img[0]->instances[0].x += x;
+	fdf->trans_x += x;
+	fdf->img[0]->instances[0].y += y;
+	fdf->trans_y += y;
 }
 
 void	keyhook(mlx_key_data_t keydata, void *param)
@@ -73,6 +67,12 @@ void	keyhook(mlx_key_data_t keydata, void *param)
 	fdf = (t_fdf *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		close_fdf(fdf);
+	if (keydata.key == MLX_KEY_HOME && keydata.action == MLX_PRESS)
+	{
+		delete_prev_img(fdf);
+		set_start_view(fdf);
+		create_new_image(fdf);
+	}
 	if (keydata.key == MLX_KEY_UP && keydata.action == MLX_REPEAT)
 		y -= 5;
 	if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_REPEAT)
@@ -81,10 +81,7 @@ void	keyhook(mlx_key_data_t keydata, void *param)
 		x -= 5;
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_REPEAT)
 		x += 5;
-	fdf->img->instances[0].x += x;
-	fdf->trans_x += x;
-	fdf->img->instances[0].y += y;
-	fdf->trans_y += y;
+	update_translation(fdf, x, y);
 	rotation(keydata, fdf);
 }
 
@@ -103,16 +100,9 @@ void	scrollhook(double xdelta, double ydelta, void *param)
 	if (zoom != 0)
 	{
 		fdf->zoom += zoom;
-		mlx_delete_image(fdf->mlx, fdf->img);
-		fdf->img = NULL;
-		free(fdf->texture->pixels);
-		free(fdf->texture);
+		delete_prev_img(fdf);
 		scale_map(fdf, fdf->zoom);
 		rot_map(fdf, fdf->rot_x, fdf->rot_y, fdf->rot_z);
-		fdf->img = generate_image(fdf);
-		if (!fdf->img)
-			return ;
-		mlx_image_to_window(fdf->mlx, fdf->img, min_sx(fdf->coords)
-			+ fdf->trans_x, min_sy(fdf->coords) + fdf->trans_y);
+		create_new_image(fdf);
 	}
 }

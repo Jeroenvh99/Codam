@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/27 10:55:36 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/02/20 11:59:27 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/02/23 11:13:08 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	draw_line(t_coord *start, t_coord *end, mlx_texture_t *texture)
 	}
 }
 
-static void	draw_x_lines(t_list *coords, mlx_texture_t *texture)
+static void	draw_x_lines(t_list *coords, mlx_texture_t *texture, t_fdf *fdf)
 {
 	t_coord	*start;
 	t_coord	*end;
@@ -44,13 +44,15 @@ static void	draw_x_lines(t_list *coords, mlx_texture_t *texture)
 		start = (t_coord *)(coords->content);
 		coords = coords->next;
 		end = (t_coord *)(coords->content);
-		draw_line(start, end, texture);
+		if (start->sx <= fdf->mlx->width || start->sy <= fdf->mlx->height
+			|| end->sx <= fdf->mlx->width || end->sy <= fdf->mlx->height)
+			draw_line(start, end, texture);
 		if (coords->next && ((t_coord *)(coords->next->content))->y != end->y)
 			coords = coords->next;
 	}
 }
 
-static void	draw_y_lines(t_list *coords, mlx_texture_t *texture)
+static void	draw_y_lines(t_list *coords, mlx_texture_t *texture, t_fdf *fdf)
 {
 	t_list	*temp;
 	t_coord	*start;
@@ -66,7 +68,9 @@ static void	draw_y_lines(t_list *coords, mlx_texture_t *texture)
 		end = (t_coord *)(temp->content);
 		if (start->y == end->y)
 			break ;
-		draw_line(start, end, texture);
+		if (start->sx <= fdf->mlx->width || start->sy <= fdf->mlx->height
+			|| end->sx <= fdf->mlx->width || end->sy <= fdf->mlx->height)
+			draw_line(start, end, texture);
 	}
 }
 
@@ -85,18 +89,18 @@ mlx_image_t	*generate_image(t_fdf *fdf)
 
 	width = (max_sx(fdf->coords) - min_sx(fdf->coords)) + 1;
 	height = (max_sy(fdf->coords) - min_sy(fdf->coords)) + 1;
-	fdf->texture = (mlx_texture_t *)malloc(sizeof(mlx_texture_t));
-	if (!fdf->texture)
+	fdf->texture[0] = (mlx_texture_t *)malloc(sizeof(mlx_texture_t));
+	if (!fdf->texture[0])
 		merror(fdf);
-	fdf->texture->height = height;
-	fdf->texture->width = width;
-	fdf->texture->bytes_per_pixel = 4;
-	fdf->texture->pixels = (uint8_t *)ft_calloc(width * height * 4,
+	fdf->texture[0]->height = height;
+	fdf->texture[0]->width = width;
+	fdf->texture[0]->bytes_per_pixel = 4;
+	fdf->texture[0]->pixels = (uint8_t *)ft_calloc(width * height * 4,
 			sizeof(uint8_t));
-	if (!fdf->texture->pixels)
+	if (!fdf->texture[0]->pixels)
 		merror(fdf);
 	normalize_sc(fdf->coords);
-	draw_x_lines(fdf->coords, fdf->texture);
-	draw_y_lines(fdf->coords, fdf->texture);
-	return (mlx_texture_to_image(fdf->mlx, fdf->texture));
+	draw_x_lines(fdf->coords, fdf->texture[0], fdf);
+	draw_y_lines(fdf->coords, fdf->texture[0], fdf);
+	return (mlx_texture_to_image(fdf->mlx, fdf->texture[0]));
 }

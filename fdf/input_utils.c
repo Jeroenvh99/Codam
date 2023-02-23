@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/30 10:40:20 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/02/17 10:42:27 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/02/22 15:45:08 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static void	rotate_coord(t_coord *coord, double angles[], int zoom)
 void	rot_map(t_fdf *fdf, int x, int y, int z)
 {
 	t_list	*coords;
+	t_coord	*coord;
 	double	angles[3];
 
 	angles[0] = deg_to_rad(x);
@@ -84,7 +85,8 @@ void	rot_map(t_fdf *fdf, int x, int y, int z)
 	coords = fdf->coords;
 	while (coords)
 	{
-		rotate_coord((t_coord *)(coords->content), angles, fdf->zoom);
+		coord = (t_coord *)(coords->content);
+		rotate_coord(coord, angles, fdf->zoom);
 		coords = coords->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/30 10:40:20 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/02/20 10:10:34 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/02/22 13:15:11 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	split_length(char **split)
 	i = 0;
 	while (split[i])
 		++i;
-	return (i - 1);
+	return (i);
 }
 
 static void	free_split(char **split)

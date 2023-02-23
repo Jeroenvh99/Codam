@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 12:56:43 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/02/17 12:01:16 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/02/23 11:51:22 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ static void	plot(unsigned int x, unsigned int y, double z,
 	pixels[i + 3] = 255;
 }
 
-static int	init_difference_low(int d[], t_coord *start, t_coord *end, int *yi)
+static double	init_difference_low(int d[], t_coord *start, t_coord *end,
+	int *yi)
 {
-	int	zdiff;
+	double	zdiff;
 
 	d[0] = end->sx - start->sx;
 	d[1] = end->sy - start->sy;
@@ -81,9 +82,10 @@ void	draw_line_low(t_coord *start, t_coord *end, mlx_texture_t *texture)
 	}
 }
 
-static int	init_difference_high(int d[], t_coord *start, t_coord *end, int *xi)
+static double	init_difference_high(int d[], t_coord *start, t_coord *end,
+	int *xi)
 {
-	int	zdiff;
+	double	zdiff;
 
 	d[0] = end->sx - start->sx;
 	d[1] = end->sy - start->sy;

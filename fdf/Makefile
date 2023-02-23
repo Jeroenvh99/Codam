@@ -9,7 +9,10 @@ SRCS = main.c \
 	image_utils.c \
 	draw_utils.c \
 	map_utils.c \
-	hooks.c
+	hooks.c \
+	hooks_utils.c \
+	legend.c \
+	setup.c
 BONUS_SRCS = 
 
 all: $(NAME)
