@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/27 10:55:36 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/02/23 11:13:08 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/02/28 14:51:42 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,25 @@
 #include<math.h>
 #include"fdf.h"
 
-static void	draw_line(t_coord *start, t_coord *end, mlx_texture_t *texture)
+static void	draw_line(t_coord *start, t_coord *end, t_fdf *fdf)
 {
 	if (abs(end->sy - start->sy) < abs(end->sx - start->sx))
 	{
 		if (start->sx > end->sx)
-			draw_line_low(end, start, texture);
+			draw_line_low(end, start, fdf);
 		else
-			draw_line_low(start, end, texture);
+			draw_line_low(start, end, fdf);
 	}
 	else
 	{
 		if (start->sy > end->sy)
-			draw_line_high(end, start, texture);
+			draw_line_high(end, start, fdf);
 		else
-			draw_line_high(start, end, texture);
+			draw_line_high(start, end, fdf);
 	}
 }
 
-static void	draw_x_lines(t_list *coords, mlx_texture_t *texture, t_fdf *fdf)
+static void	draw_x_lines(t_list *coords, t_fdf *fdf)
 {
 	t_coord	*start;
 	t_coord	*end;
@@ -44,15 +44,13 @@ static void	draw_x_lines(t_list *coords, mlx_texture_t *texture, t_fdf *fdf)
 		start = (t_coord *)(coords->content);
 		coords = coords->next;
 		end = (t_coord *)(coords->content);
-		if (start->sx <= fdf->mlx->width || start->sy <= fdf->mlx->height
-			|| end->sx <= fdf->mlx->width || end->sy <= fdf->mlx->height)
-			draw_line(start, end, texture);
+		draw_line(start, end, fdf);
 		if (coords->next && ((t_coord *)(coords->next->content))->y != end->y)
 			coords = coords->next;
 	}
 }
 
-static void	draw_y_lines(t_list *coords, mlx_texture_t *texture, t_fdf *fdf)
+static void	draw_y_lines(t_list *coords, t_fdf *fdf)
 {
 	t_list	*temp;
 	t_coord	*start;
@@ -68,27 +66,39 @@ static void	draw_y_lines(t_list *coords, mlx_texture_t *texture, t_fdf *fdf)
 		end = (t_coord *)(temp->content);
 		if (start->y == end->y)
 			break ;
-		if (start->sx <= fdf->mlx->width || start->sy <= fdf->mlx->height
-			|| end->sx <= fdf->mlx->width || end->sy <= fdf->mlx->height)
-			draw_line(start, end, texture);
+		draw_line(start, end, fdf);
 	}
 }
 
-static void	merror(t_fdf *fdf)
+void	init_dimensions(t_fdf *fdf, int extremes[], int *width, int *height)
 {
-	free_fdf(fdf);
-	errno = ENOMEM;
-	perror("Error");
-	exit(EXIT_FAILURE);
+	extremes[0] = min_sx(fdf->coords);
+	if (extremes[0] < 0)
+		extremes[0] = 0;
+	extremes[1] = min_sy(fdf->coords);
+	if (extremes[1] < 0)
+		extremes[1] = 0;
+	extremes[2] = max_sx(fdf->coords);
+	if (extremes[2] > fdf->mlx->width)
+		extremes[2] = fdf->mlx->width;
+	extremes[3] = max_sy(fdf->coords);
+	if (extremes[3] > fdf->mlx->height)
+		extremes[3] = fdf->mlx->height;
+	*width = (extremes[2] - extremes[0]) + 1;
+	*height = (extremes[3] - extremes[1]) + 1;
 }
 
 mlx_image_t	*generate_image(t_fdf *fdf)
 {
 	int	width;
 	int	height;
+	int	extremes[4];
 
-	width = (max_sx(fdf->coords) - min_sx(fdf->coords)) + 1;
-	height = (max_sy(fdf->coords) - min_sy(fdf->coords)) + 1;
+	init_dimensions(fdf, extremes, &width, &height);
+	if (width <= 0 || height <= 0)
+		return (NULL);
+	fdf->ox = extremes[0];
+	fdf->oy = extremes[1];
 	fdf->texture[0] = (mlx_texture_t *)malloc(sizeof(mlx_texture_t));
 	if (!fdf->texture[0])
 		merror(fdf);
@@ -99,8 +109,7 @@ mlx_image_t	*generate_image(t_fdf *fdf)
 			sizeof(uint8_t));
 	if (!fdf->texture[0]->pixels)
 		merror(fdf);
-	normalize_sc(fdf->coords);
-	draw_x_lines(fdf->coords, fdf->texture[0], fdf);
-	draw_y_lines(fdf->coords, fdf->texture[0], fdf);
+	draw_x_lines(fdf->coords, fdf);
+	draw_y_lines(fdf->coords, fdf);
 	return (mlx_texture_to_image(fdf->mlx, fdf->texture[0]));
 }

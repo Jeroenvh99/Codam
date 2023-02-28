@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/23 12:01:29 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/02/23 12:02:05 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/02/28 14:47:38 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,14 @@ void	close_fdf(t_fdf *fdf)
 
 void	delete_prev_img(t_fdf *fdf)
 {
+	if (!fdf->img[0])
+		return ;
 	mlx_delete_image(fdf->mlx, fdf->img[0]);
 	fdf->img[0] = NULL;
 	free(fdf->texture[0]->pixels);
+	fdf->texture[0]->pixels = NULL;
 	free(fdf->texture[0]);
+	fdf->texture[0] = NULL;
 }
 
 void	create_new_image(t_fdf *fdf)
@@ -33,6 +37,5 @@ void	create_new_image(t_fdf *fdf)
 	fdf->img[0] = generate_image(fdf);
 	if (!fdf->img[0])
 		return ;
-	mlx_image_to_window(fdf->mlx, fdf->img[0], min_sx(fdf->coords)
-		+ fdf->trans_x, min_sy(fdf->coords) + fdf->trans_y);
+	mlx_image_to_window(fdf->mlx, fdf->img[0], fdf->ox, fdf->oy);
 }

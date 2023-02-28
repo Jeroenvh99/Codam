@@ -3,7 +3,8 @@ CFLAGS = -Wall -Werror -Wextra
 OBJS = ${SRCS:.c=.o}
 BONUS_OBJS = ${BONUS_SRCS:.c=.o}
 SRCS = main.c \
-	ft_atof_hex.c \
+	parse_utils.c \
+	error_utils.c \
 	parse_input.c \
 	input_utils.c \
 	image_utils.c \

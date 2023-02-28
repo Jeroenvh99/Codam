@@ -1,14 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_atof_hex.c                                      :+:    :+:            */
+/*   parse_utils.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/15 13:11:20 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/02/16 16:52:42 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/02/27 10:39:41 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include<limits.h>
 
 static int	getnum_hex(double *temp, char c)
 {
@@ -37,13 +39,11 @@ static void	reduce_significance(int state, double *temp)
 	}
 }
 
-double	ft_atof_hex(const char *str)
+int	ft_atof_hex_overflow(const char *str, double *res)
 {
-	double	res;
 	double	temp;
 	int		state;
 
-	res = 0;
 	temp = 0;
 	state = 0;
 	while (*str)
@@ -51,7 +51,7 @@ double	ft_atof_hex(const char *str)
 		if (*str == ',')
 		{
 			state = 1;
-			res += temp;
+			*res += temp;
 			temp = 0;
 			++str;
 		}
@@ -59,9 +59,42 @@ double	ft_atof_hex(const char *str)
 			str += 2;
 		if (getnum_hex(&temp, *str) == 0)
 			break ;
+		if (temp > INT_MAX)
+			return (0);
 		++str;
 	}
 	reduce_significance(state, &temp);
-	res += temp;
-	return (res);
+	*res += temp;
+	return (1);
+}
+
+static int	ft_isspace(char c)
+{
+	return (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
+		|| c == ' ');
+}
+
+int	atoi_overflow(char *str, double *num)
+{
+	unsigned int	res;
+
+	res = 0;
+	*num = 1;
+	while (ft_isspace(*str))
+		++str;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			*num = -1;
+		++str;
+	}
+	while (*str && *str >= '0' && *str <= '9')
+	{
+		res = res * 10 + (*str - '0');
+		if ((*num == 1 && res > INT_MAX) || (*num == -1 && res < INT_MAX))
+			return (0);
+		++str;
+	}
+	*num *= res;
+	return (1);
 }

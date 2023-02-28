@@ -6,11 +6,13 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/30 10:40:20 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/02/22 13:15:11 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/02/27 10:08:24 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include<stdlib.h>
+#include<stdio.h>
+#include<errno.h>
 #include"fdf.h"
 
 static int	split_length(char **split)
@@ -51,6 +53,7 @@ static int	process_coords(int y, char **coord_info, t_list **coords)
 	t_coord	*coord;
 	int		x;
 	int		linelength;
+	int		overflow;
 
 	x = 0;
 	linelength = split_length(coord_info);
@@ -62,9 +65,11 @@ static int	process_coords(int y, char **coord_info, t_list **coords)
 		coord->x = x;
 		coord->y = y;
 		if (ft_strchr(coord_info[x], 'x'))
-			coord->z = ft_atof_hex(coord_info[x]);
+			overflow = ft_atof_hex_overflow(coord_info[x], &coord->z);
 		else
-			coord->z = ft_atoi(coord_info[x]);
+			overflow = atoi_overflow(coord_info[x], &coord->z);
+		if (!overflow)
+			return (0);
 		ft_lstadd_back(coords, ft_lstnew(coord));
 		++x;
 	}

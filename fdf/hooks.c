@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/27 10:55:36 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/02/23 12:03:51 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/02/28 14:49:43 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 
 static void	update_image_rot(t_fdf *fdf, int x, int y, int z)
 {
-	delete_prev_img(fdf);
 	fdf->rot_x += x;
 	fdf->rot_y += y;
 	fdf->rot_z += z;
 	rot_map(fdf, fdf->rot_x, fdf->rot_y, fdf->rot_z);
+	translate_map(fdf, fdf->trans_x, fdf->trans_y);
+	delete_prev_img(fdf);
 	create_new_image(fdf);
 }
 
-static void	rotation(mlx_key_data_t keydata, t_fdf *fdf)
+static void	rotation(t_fdf *fdf)
 {
 	int	x;
 	int	y;
@@ -32,17 +33,17 @@ static void	rotation(mlx_key_data_t keydata, t_fdf *fdf)
 	x = 0;
 	y = 0;
 	z = 0;
-	if (keydata.key == MLX_KEY_W && keydata.action == MLX_REPEAT)
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_W))
 		y += 2;
-	if (keydata.key == MLX_KEY_S && keydata.action == MLX_REPEAT)
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_S))
 		y -= 2;
-	if (keydata.key == MLX_KEY_A && keydata.action == MLX_REPEAT)
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_A))
 		x += 2;
-	if (keydata.key == MLX_KEY_D && keydata.action == MLX_REPEAT)
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_D))
 		x -= 2;
-	if (keydata.key == MLX_KEY_PAGE_UP && keydata.action == MLX_REPEAT)
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_PAGE_UP))
 		z += 2;
-	if (keydata.key == MLX_KEY_PAGE_DOWN && keydata.action == MLX_REPEAT)
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_PAGE_DOWN))
 		z -= 2;
 	if (x != 0 || y != 0 || z != 0)
 		update_image_rot(fdf, x, y, z);
@@ -50,39 +51,40 @@ static void	rotation(mlx_key_data_t keydata, t_fdf *fdf)
 
 static void	update_translation(t_fdf *fdf, int x, int y)
 {
-	fdf->img[0]->instances[0].x += x;
 	fdf->trans_x += x;
-	fdf->img[0]->instances[0].y += y;
 	fdf->trans_y += y;
+	translate_map(fdf, x, y);
+	delete_prev_img(fdf);
+	create_new_image(fdf);
 }
 
-void	keyhook(mlx_key_data_t keydata, void *param)
+void	keyhook(void *param)
 {
 	t_fdf	*fdf;
-	int		x;
-	int		y;
+	int		trans[2];
 
-	x = 0;
-	y = 0;
+	trans[0] = 0;
+	trans[1] = 0;
 	fdf = (t_fdf *)param;
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_ESCAPE))
 		close_fdf(fdf);
-	if (keydata.key == MLX_KEY_HOME && keydata.action == MLX_PRESS)
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_HOME))
 	{
 		delete_prev_img(fdf);
 		set_start_view(fdf);
 		create_new_image(fdf);
 	}
-	if (keydata.key == MLX_KEY_UP && keydata.action == MLX_REPEAT)
-		y -= 5;
-	if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_REPEAT)
-		y += 5;
-	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_REPEAT)
-		x -= 5;
-	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_REPEAT)
-		x += 5;
-	update_translation(fdf, x, y);
-	rotation(keydata, fdf);
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_UP))
+		trans[1] -= 5;
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_DOWN))
+		trans[1] += 5;
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_LEFT))
+		trans[0] -= 5;
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_RIGHT))
+		trans[0] += 5;
+	if (trans[0] != 0 || trans[1] != 0)
+		update_translation(fdf, trans[0], trans[1]);
+	rotation(fdf);
 }
 
 void	scrollhook(double xdelta, double ydelta, void *param)
@@ -100,9 +102,10 @@ void	scrollhook(double xdelta, double ydelta, void *param)
 	if (zoom != 0)
 	{
 		fdf->zoom += zoom;
-		delete_prev_img(fdf);
 		scale_map(fdf, fdf->zoom);
 		rot_map(fdf, fdf->rot_x, fdf->rot_y, fdf->rot_z);
+		translate_map(fdf, fdf->trans_x, fdf->trans_y);
+		delete_prev_img(fdf);
 		create_new_image(fdf);
 	}
 }

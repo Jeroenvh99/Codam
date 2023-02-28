@@ -6,34 +6,38 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 12:56:43 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/02/23 11:51:22 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/02/28 13:07:50 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include<math.h>
 #include"fdf.h"
 
-static void	plot(unsigned int x, unsigned int y, double z,
-				mlx_texture_t *texture)
+static void	plot(unsigned int x, unsigned int y, double z, t_fdf *fdf)
 {
 	unsigned int	i;
 	uint8_t			*pixels;
 
-	pixels = texture->pixels;
-	if (x >= (texture->height - y) * texture->width)
+	x -= fdf->ox;
+	y -= fdf->oy;
+	if (x < 0 || y < 0)
 		return ;
-	i = (x + (y * texture->width)) * 4;
+	if (x > fdf->texture[0]->width - 1 || y > fdf->texture[0]->height - 1)
+		return ;
+	pixels = fdf->texture[0]->pixels;
+	i = (x + (y * fdf->texture[0]->width)) * 4;
 	if (z > 50)
 		pixels[i] = 255;
-	else if (z > 20 && z < 50)
-		pixels[i] = 160;
 	if (z > 20 && z < 50)
+	{
+		pixels[i] = 160;
 		pixels[i + 1] = 160;
-	else if (z >= 0)
+	}
+	if (z >= 0 && (z <= 20 || z >= 50))
 		pixels[i + 1] = 255;
 	if (z < 0 || z > 50)
 		pixels[i + 2] = 255;
-	else if (z > 20 && z < 50)
+	if (z > 20 && z < 50)
 		pixels[i + 2] = 160;
 	pixels[i + 3] = 255;
 }
@@ -55,7 +59,7 @@ static double	init_difference_low(int d[], t_coord *start, t_coord *end,
 	return (zdiff);
 }
 
-void	draw_line_low(t_coord *start, t_coord *end, mlx_texture_t *texture)
+void	draw_line_low(t_coord *start, t_coord *end, t_fdf *fdf)
 {
 	int		d[2];
 	int		delta;
@@ -70,7 +74,7 @@ void	draw_line_low(t_coord *start, t_coord *end, mlx_texture_t *texture)
 	while (pos[0] != end->sx)
 	{
 		plot(pos[0], pos[1], start->z + (zdiff * sqrt(pow(pos[0] - start->sx,
-						2) + pow(pos[1] - start->sy, 2))), texture);
+						2) + pow(pos[1] - start->sy, 2))), fdf);
 		if (delta > 0)
 		{
 			pos[1] += yi;
@@ -99,7 +103,7 @@ static double	init_difference_high(int d[], t_coord *start, t_coord *end,
 	return (zdiff);
 }
 
-void	draw_line_high(t_coord *start, t_coord *end, mlx_texture_t *texture)
+void	draw_line_high(t_coord *start, t_coord *end, t_fdf *fdf)
 {
 	int		d[2];
 	int		delta;
@@ -114,7 +118,7 @@ void	draw_line_high(t_coord *start, t_coord *end, mlx_texture_t *texture)
 	while (pos[1] != end->sy)
 	{
 		plot(pos[0], pos[1], start->z + (zdiff * sqrt(pow(pos[0] - start->sx,
-						2) + pow(pos[1] - start->sy, 2))), texture);
+						2) + pow(pos[1] - start->sy, 2))), fdf);
 		if (delta > 0)
 		{
 			pos[0] += xi;

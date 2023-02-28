@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/23 11:14:07 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/02/23 11:46:34 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/02/28 13:29:47 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void	set_start_view(t_fdf *fdf)
 	fdf->zoom = 4;
 	fdf->trans_x = 150;
 	fdf->trans_y = 150;
+	scale_map(fdf, fdf->zoom);
 	rot_map(fdf, fdf->rot_x, fdf->rot_y, fdf->rot_z);
+	translate_map(fdf, fdf->trans_x, fdf->trans_y);
 }
 
 int	get_input(char *file, t_fdf *fdf)
@@ -50,7 +52,7 @@ int	get_input(char *file, t_fdf *fdf)
 
 void	hooks(t_fdf *fdf)
 {
-	mlx_key_hook(fdf->mlx, &keyhook, fdf);
+	mlx_loop_hook(fdf->mlx, &keyhook, fdf);
 	mlx_scroll_hook(fdf->mlx, &scrollhook, fdf);
 	mlx_loop(fdf->mlx);
 }

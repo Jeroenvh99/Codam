@@ -6,29 +6,12 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/30 10:40:20 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/02/22 15:45:08 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/02/28 13:25:31 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include<math.h>
 #include"fdf.h"
-
-void	normalize_sc(t_list *coords)
-{
-	t_coord	*coord;
-	int		minx;
-	int		miny;
-
-	minx = min_sx(coords);
-	miny = min_sy(coords);
-	while (coords)
-	{
-		coord = (t_coord *)coords->content;
-		coord->sx -= minx;
-		coord->sy -= miny;
-		coords = coords->next;
-	}
-}
 
 void	scale_map(t_fdf *fdf, int zoom)
 {
@@ -87,6 +70,21 @@ void	rot_map(t_fdf *fdf, int x, int y, int z)
 	{
 		coord = (t_coord *)(coords->content);
 		rotate_coord(coord, angles, fdf->zoom);
+		coords = coords->next;
+	}
+}
+
+void	translate_map(t_fdf *fdf, int trans_x, int trans_y)
+{
+	t_list	*coords;
+	t_coord	*coord;
+
+	coords = fdf->coords;
+	while (coords)
+	{
+		coord = (t_coord *)(coords->content);
+		coord->sx += trans_x;
+		coord->sy += trans_y;
 		coords = coords->next;
 	}
 }
