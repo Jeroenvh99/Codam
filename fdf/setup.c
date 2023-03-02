@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/23 11:14:07 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/02/28 13:29:47 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/03/02 10:40:10 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,19 @@ void	hooks(t_fdf *fdf)
 	mlx_loop_hook(fdf->mlx, &keyhook, fdf);
 	mlx_scroll_hook(fdf->mlx, &scrollhook, fdf);
 	mlx_loop(fdf->mlx);
+}
+
+static void	init_map(t_list *coords)
+{
+	t_coord	*coord;
+
+	while (coords)
+	{
+		coord = (t_coord *)(coords->content);
+		coord->sx = coord->x;
+		coord->sy = coord->y;
+		coords = coords->next;
+	}
 }
 
 void	start_fdf(t_fdf *fdf)

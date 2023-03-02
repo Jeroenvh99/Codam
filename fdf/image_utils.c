@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/27 10:55:36 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/02/28 14:51:42 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/03/02 10:57:53 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,25 @@ static void	draw_y_lines(t_list *coords, t_fdf *fdf)
 	}
 }
 
-void	init_dimensions(t_fdf *fdf, int extremes[], int *width, int *height)
+void	init_dimensions(t_list *coords, int extremes[], int *width, int *height)
 {
-	extremes[0] = min_sx(fdf->coords);
-	if (extremes[0] < 0)
-		extremes[0] = 0;
-	extremes[1] = min_sy(fdf->coords);
-	if (extremes[1] < 0)
-		extremes[1] = 0;
-	extremes[2] = max_sx(fdf->coords);
-	if (extremes[2] > fdf->mlx->width)
-		extremes[2] = fdf->mlx->width;
-	extremes[3] = max_sy(fdf->coords);
-	if (extremes[3] > fdf->mlx->height)
-		extremes[3] = fdf->mlx->height;
+	extremes[0] = ((t_coord *)(coords->content))->sx;
+	extremes[1] = ((t_coord *)(coords->content))->sy;
+	extremes[2] = ((t_coord *)(coords->content))->sx;
+	extremes[3] = ((t_coord *)(coords->content))->sy;
+	coords = coords->next;
+	while (coords)
+	{
+		if (((t_coord *)(coords->content))->sx < extremes[0])
+			extremes[0] = ((t_coord *)(coords->content))->sx;
+		if (((t_coord *)(coords->content))->sx > extremes[2])
+			extremes[2] = ((t_coord *)(coords->content))->sx;
+		if (((t_coord *)(coords->content))->sy < extremes[1])
+			extremes[1] = ((t_coord *)(coords->content))->sy;
+		if (((t_coord *)(coords->content))->sy > extremes[3])
+			extremes[3] = ((t_coord *)(coords->content))->sy;
+		coords = coords->next;
+	}
 	*width = (extremes[2] - extremes[0]) + 1;
 	*height = (extremes[3] - extremes[1]) + 1;
 }
@@ -94,7 +99,7 @@ mlx_image_t	*generate_image(t_fdf *fdf)
 	int	height;
 	int	extremes[4];
 
-	init_dimensions(fdf, extremes, &width, &height);
+	init_dimensions(fdf->coords, extremes, &width, &height);
 	if (width <= 0 || height <= 0)
 		return (NULL);
 	fdf->ox = extremes[0];

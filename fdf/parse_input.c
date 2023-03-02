@@ -6,12 +6,11 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/30 10:40:20 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/02/27 10:08:24 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/03/02 10:49:46 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include<stdlib.h>
-#include<stdio.h>
 #include<errno.h>
 #include"fdf.h"
 
@@ -57,17 +56,14 @@ static int	process_coords(int y, char **coord_info, t_list **coords)
 
 	x = 0;
 	linelength = split_length(coord_info);
-	while (x < linelength)
+	while (coord_info[x] && coord_info[x][0] != '\n')
 	{
 		coord = (t_coord *)malloc(sizeof(t_coord));
 		if (!coord)
 			return (0);
 		coord->x = x;
 		coord->y = y;
-		if (ft_strchr(coord_info[x], 'x'))
-			overflow = ft_atof_hex_overflow(coord_info[x], &coord->z);
-		else
-			overflow = atoi_overflow(coord_info[x], &coord->z);
+		overflow = atoi_overflow(coord_info[x], &coord->z);
 		if (!overflow)
 			return (0);
 		ft_lstadd_back(coords, ft_lstnew(coord));

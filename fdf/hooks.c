@@ -6,11 +6,10 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/27 10:55:36 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/02/28 14:49:43 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/03/02 10:29:47 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdlib.h>
 #include"fdf.h"
 
 static void	update_image_rot(t_fdf *fdf, int x, int y, int z)

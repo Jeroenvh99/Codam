@@ -9,7 +9,6 @@ SRCS = main.c \
 	input_utils.c \
 	image_utils.c \
 	draw_utils.c \
-	map_utils.c \
 	hooks.c \
 	hooks_utils.c \
 	legend.c \
