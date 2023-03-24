@@ -6,14 +6,14 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/07 13:11:32 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/03/17 10:24:03 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/03/23 11:04:57 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include<stdlib.h>
 #include"pipex.h"
 
-void	free_split(char **arr)
+static void	free_split(char **arr)
 {
 	int	i;
 
@@ -28,7 +28,7 @@ void	free_split(char **arr)
 	arr = NULL;
 }
 
-void	free_split_array(char ***split_arr)
+static void	free_split_array(char ***split_arr)
 {
 	int	i;
 

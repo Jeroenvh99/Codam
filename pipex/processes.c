@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/14 13:38:41 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/03/21 17:38:08 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/03/23 11:21:58 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static void	child_process(int *tube, char **envp, int fd, t_info *state)
 	if (dup2(tube[1], STDOUT_FILENO) == -1 || close(tube[1]) == -1
 		|| close(tube[0]) == -1)
 		exit(errno);
+	state->comm_argv[state->index] = split_args(state->argv[state->index
+			+ state->offset], ' ');
 	state->comm_paths[state->index] = get_path(state->paths,
 			state->comm_argv[state->index][0]);
 	execve(state->comm_paths[state->index], state->comm_argv[state->index],
@@ -33,7 +35,7 @@ static void	child_process(int *tube, char **envp, int fd, t_info *state)
 
 static void	child_process_last(char **envp, int fd, int *tube, t_info *state)
 {
-	int		outfd;
+	int	outfd;
 
 	if (close(tube[0]) == -1 || close(tube[1]) == -1)
 		exit(errno);
@@ -42,6 +44,8 @@ static void	child_process_last(char **envp, int fd, int *tube, t_info *state)
 	outfd = open_outfile(state);
 	if (dup2(outfd, STDOUT_FILENO) == -1 || close(outfd) == -1)
 		exit(errno);
+	state->comm_argv[state->index] = split_args(state->argv[state->index
+			+ state->offset], ' ');
 	state->comm_paths[state->index] = get_path(state->paths,
 			state->comm_argv[state->index][0]);
 	execve(state->comm_paths[state->index], state->comm_argv[state->index],
@@ -90,8 +94,6 @@ int	exec_command(char **envp, int fd, t_info *state)
 	int		tube[2];
 	pid_t	pid;
 
-	state->comm_argv[state->index] = split_args(state->argv[state->index
-			+ state->offset], ' ');
 	pid = pipe_and_fork(state, tube);
 	if (pid == 0)
 	{

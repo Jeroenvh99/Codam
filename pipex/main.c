@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/02 16:56:34 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/03/21 15:16:43 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/03/23 11:07:05 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,6 @@
 // {
 // 	system("leaks pipex");
 // }
-
-static int	open_fds(char *filename, t_info *state)
-{
-	int	fd;
-
-	if (ft_strncmp(filename, "here_doc", 9) == 0)
-		fd = read_heredoc(state);
-	else
-		fd = open(filename, O_RDONLY, 0644);
-	return (fd);
-}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -47,9 +36,10 @@ int	main(int argc, char **argv, char **envp)
 	if (ft_strncmp(argv[1], "here_doc", 9) == 0)
 	{
 		state->offset = 3;
-		state->heredoc = 1;
+		fd = read_heredoc(state);
 	}
-	fd = open_fds(argv[1], state);
+	else
+		fd = open(argv[1], O_RDONLY, 0644);
 	if (fd == -1)
 	{
 		error = ft_strjoin("pipex: ", argv[1]);

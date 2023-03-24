@@ -27,4 +27,4 @@ re: fclean all
 .PHONY: clean fclean all bonus re
 
 test:
-	cc libfttester.c libft.a && ./a.out
+	pipex && cd tests && ./test.sh

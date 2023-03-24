@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/20 19:07:33 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/03/21 17:51:20 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/03/23 11:57:22 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,23 @@
 
 static int	getarrlength(char *s, char dlm)
 {
+	int		i;
 	int		count;
 	char	prevc;
 
+	i = 0;
 	count = 0;
 	prevc = dlm;
 	while (*s)
 	{
-		if (*s == 39)
-			s = check_single(s);
-		if (*s == 34)
-			s = check_double(s);
-		prevc = *(s - 1);
-		if (*s == dlm && prevc != dlm)
+		i = skip_quotes_count(s, i);
+		prevc = s[i - 1];
+		if (s[i] == dlm && prevc != dlm)
 			++count;
-		prevc = *s;
-		if (!*s)
+		prevc = s[i];
+		if (!s[i])
 			break ;
-		++s;
+		++i;
 	}
 	if (prevc != dlm)
 		++count;
@@ -89,10 +88,9 @@ char	**split_args(char *s, char c)
 	if (!s)
 		return (NULL);
 	arrsize = getarrlength(s, c) + 1;
-	arr = malloc(sizeof(char *) * arrsize);
+	arr = ft_calloc(arrsize, sizeof(char *));
 	if (!arr)
 		return (NULL);
-	arr[arrsize - 1] = NULL;
 	i = 0;
 	while (i < arrsize - 1)
 	{

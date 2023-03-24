@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/14 14:05:18 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/03/22 11:23:53 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/03/23 11:09:02 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ t_info	*init_state(char **argv, char **envp, int argc)
 	}
 	state->index = 0;
 	state->offset = 2;
-	state->heredoc = 0;
 	state->argv = argv;
 	state->paths = get_paths(envp);
 	init_comm_state(state, argc);
@@ -76,20 +75,20 @@ int	read_heredoc(t_info *state)
 	int		tube[2];
 	char	*delim;
 
-	delim = ft_strjoin(state->argv[2], "\n");
 	if (pipe(tube) == -1)
 	{
 		perror("File descriptor");
 		free_state(state);
 		exit(EXIT_FAILURE);
 	}
+	delim = ft_strjoin(state->argv[2], "\n");
 	write_to_heredoc(delim, tube[1]);
+	free(delim);
 	if (close(tube[1]) == -1)
 	{
 		perror("File descriptor");
 		free_state(state);
 		exit(EXIT_FAILURE);
 	}
-	free(delim);
 	return (tube[0]);
 }

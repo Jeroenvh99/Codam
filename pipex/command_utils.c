@@ -6,7 +6,7 @@
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/07 13:08:00 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/03/21 16:05:19 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/03/24 16:42:06 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,6 @@
 #include<fcntl.h>
 #include"pipex.h"
 
-static char	*get_command_ext(char *command)
-{
-	int		i;
-	int		len;
-	char	*c;
-
-	len = ft_strlen(command);
-	c = malloc(len + 1);
-	if (!c)
-		return (NULL);
-	i = 0;
-	c[i] = '/';
-	++i;
-	while (i <= len + 1)
-	{
-		c[i] = *command;
-		++command;
-		++i;
-	}
-	return (c);
-}
-
 char	*get_path(char **paths, char *command)
 {
 	int		i;
@@ -45,14 +23,14 @@ char	*get_path(char **paths, char *command)
 	char	*path;
 	char	*commandext;
 
-	if (access(command, X_OK) == 0)
+	if (access(command, F_OK) == 0)
 		return (command);
-	commandext = get_command_ext(command);
+	commandext = ft_strjoin("/", command);
 	i = 0;
-	while (paths[i])
+	while (paths && paths[i])
 	{
 		path = ft_strjoin(paths[i], commandext);
-		if (access(path, X_OK) == 0)
+		if (access(path, F_OK) == 0)
 		{
 			free(commandext);
 			return (path);
@@ -72,6 +50,8 @@ char	**ft_env_backup(void)
 	char	**env;
 
 	env = (char **)ft_calloc(8, sizeof(char *));
+	if (!env)
+		return (NULL);
 	env[0] = ft_strdup("/usr/local/bin");
 	env[1] = ft_strdup("/usr/bin");
 	env[2] = ft_strdup("/bin");
@@ -107,7 +87,7 @@ int	open_outfile(t_info *state)
 {
 	int	outfd;
 
-	if (state->heredoc)
+	if (state->offset == 3)
 		outfd = open(state->argv[state->index + state->offset + 1], O_WRONLY
 				| O_CREAT | O_APPEND, 0644);
 	else
