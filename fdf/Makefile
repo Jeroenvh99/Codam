@@ -18,13 +18,13 @@ BONUS_SRCS =
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(MAKE) -C ./libft bonus_and_printf_and_gnl
+	$(MAKE) -j -C ./libft bonus_and_printf_and_gnl
 	cmake -S ./MLX42 -B ./MLX42/build
 	cmake --build ./MLX42/build -j4
 	cc $(OBJS) $(CFLAGS) ./libft/libft.a ./MLX42/build/libmlx42.a -I include -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -lm -o $(NAME)
 
 clean:
-	$(MAKE) -C ./libft fclean
+	$(MAKE) -j -C ./libft fclean
 	cmake --build ./MLX42/build --target clean
 	rm -f $(OBJS)
 

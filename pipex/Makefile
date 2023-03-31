@@ -11,13 +11,13 @@ SRCS = main.c \
 all: $(NAME)
 
 $(NAME): $(SRCS)
-	$(MAKE) -C ./libft bonus_and_printf_and_gnl
+	$(MAKE) -j -C ./libft bonus_and_printf_and_gnl
 	cc $(SRCS) $(CFLAGS) ./libft/libft.a -o $(NAME)
 
 bonus: pipex
 
 clean:
-	$(MAKE) -C ./libft fclean
+	$(MAKE) -j -C ./libft fclean
 
 fclean: clean
 	rm -f $(NAME)

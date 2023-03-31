@@ -18,15 +18,15 @@ OVERLAPPING_SRCS = rules.c\
 all: $(NAME)
 
 $(NAME): $(OBJS) $(OVERLAPPING_OBJS)
-	$(MAKE) -C ./libft bonus_and_printf_and_gnl
+	$(MAKE) -j -C ./libft bonus_and_printf_and_gnl
 	cc $(OBJS) $(OVERLAPPING_OBJS) $(COMPILEFLAGS) ./libft/libft.a -o $(NAME)
 
 checker: $(BONUS_OBJS) $(OVERLAPPING_OBJS)
-	$(MAKE) -C ./libft bonus_and_printf_and_gnl
+	$(MAKE) -j -C ./libft bonus_and_printf_and_gnl
 	cc $(BONUS_OBJS) $(OVERLAPPING_OBJS) $(COMPILEFLAGS) ./libft/libft.a -o checker
 
 clean:
-	$(MAKE) -C ./libft fclean
+	$(MAKE) -j -C ./libft fclean
 	rm -f $(OBJS) $(BONUS_OBJS) $(OVERLAPPING_OBJS)
 
 fclean: clean
