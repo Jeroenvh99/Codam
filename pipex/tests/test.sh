@@ -92,6 +92,19 @@ else
 	echo 'KO'
 fi
 
+echo 'testing with the path set to PATH='
+export PATH=
+echo 'testing here_doc'
+(../pipex here_doc lol "sed 's/i/o/g'" "wc -l" test4_out.txt) < test3.txt
+output=$(/usr/bin/diff test4_out.txt test4_expected.txt)
+
+if [ -n "$output" ]
+then
+	echo 'OK'
+else
+	echo 'KO'
+fi
+
 echo 'testing three commands'
 (../pipex test5.txt "ls -l" "awk '{print \$1}'" "wc -l" test5_out.txt) < test3.txt
 output=$(/usr/bin/diff test5_out.txt test5_expected.txt)

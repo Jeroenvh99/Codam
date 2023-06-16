@@ -5,17 +5,15 @@ SRCS = megaphone.cpp
 all: $(NAME)
 
 $(NAME): $(SRCS)
-	cc $(FLAGS) -std=c++98 $(SRCS)
+	g++ $(FLAGS) $(SRCS) -std=c++98 -o $(NAME)
 
 clean:
-
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: clean fclean all bonus re
+.PHONY: clean fclean all re
 
 test:
-	
