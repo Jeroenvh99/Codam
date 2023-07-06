@@ -1,7 +1,7 @@
-NAME = megaphone
+NAME = Phonebook
 CC = c++
 FLAGS = -Wall -Werror -Wextra
-SRCS = megaphone.cpp
+SRCS = main.cpp Contact.cpp Phonebook.cpp
 OBJS = ${SRCS:.cpp=.o}
 
 all: $(NAME)
