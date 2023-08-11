@@ -6,6 +6,8 @@ Contact::Contact() {
 	this->_index = 0;
 }
 
+Contact::Contact( const Contact &contact ) {}
+
 Contact::Contact(int index) {
 	this->_index = index;
 	std::cout << "Enter your first name:" << std::endl;
@@ -18,6 +20,10 @@ Contact::Contact(int index) {
 	std::cin >> this->_phoneNumber;
 	std::cout << "Enter your darkest secret, if you dare:" << std::endl;
 	std::cin >> this->_darkestSecret;
+}
+
+Contact& Contact::operator=( const Contact &contact ) {
+	return *this;
 }
 
 Contact::~Contact() {}

@@ -13,7 +13,9 @@ class Contact {
 	public:
 		Contact();
 		Contact(int index);
+		Contact(const Contact &contact);
 		~Contact();
+		Contact& operator=(const Contact &contact);
 		std::string Format(std::string in);
 		void Display();
 		void DisplayDetail();

@@ -8,6 +8,8 @@ class Phonebook {
 		int _index;
 	public:
 		Phonebook();
+		Phonebook(const Phonebook &book);
+		Phonebook& operator=(const Phonebook &book);
 		~Phonebook();
 		void Add();
 		void Search();

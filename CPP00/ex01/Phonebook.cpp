@@ -1,13 +1,18 @@
 #include "Phonebook.hpp"
 #include "Contact.hpp"
 #include <iostream>
-#include <string>
 
 Phonebook::Phonebook() {
 	this->_index = 0;
 }
 
+Phonebook::Phonebook( const Phonebook &book ) {}
+
 Phonebook::~Phonebook() {}
+
+Phonebook& Phonebook::operator=( const Phonebook &book ) {
+	return *this;
+}
 
 void Phonebook::Add() {
 	this->_contacts[this->_index] = Contact(this->_index + 1);
