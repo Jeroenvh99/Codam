@@ -7,11 +7,11 @@ class Zombie{
 		std::string _name;
 	public:
 		Zombie();
-		Zombie(std::string name);
 		Zombie(const Zombie &zombie);
+		Zombie(std::string name);
 		Zombie& operator=(const Zombie &zombie);
-		~Zombie();
 		void announce(void);
 		Zombie *zombieHorde(int N, std::string name);
+		~Zombie();
 };
 #endif

@@ -9,11 +9,11 @@ class HumanB{
 		std::string _name;
 	public:
 		HumanB();
-		HumanB(std::string name);
 		HumanB(const HumanA &humanA);
+		HumanB(std::string name);
 		HumanB& operator=(const HumanA &humanA);
-		~HumanB();
 		setWeapon(Weapon weapon);
-		attack();
+		void attack();
+		~HumanB();
 };
 #endif
