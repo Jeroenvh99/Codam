@@ -7,7 +7,7 @@ OBJS = ${SRCS:.cpp=.o}
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) -std=c++98 -o $(NAME)
+	$(CC) $(FLAGS) $(OBJS) -g -std=c++98 -o $(NAME)
 
 clean:
 	rm -f $(OBJS)
