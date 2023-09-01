@@ -8,9 +8,10 @@ class Weapon{
 	public:
 		Weapon();
 		Weapon(const Weapon &weapon);
+		Weapon(std::string type);
 		Weapon& operator=(const Weapon &weapon);
-		~Weapon();
 		const std::string &getType();
 		void setType(std::string type);
+		~Weapon();
 };
 #endif

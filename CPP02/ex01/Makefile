@@ -1,7 +1,7 @@
-NAME = harl
+NAME = usefullfixed
 CC = c++
 FLAGS = -Wall -Werror -Wextra
-SRCS = main.cpp Harl.cpp
+SRCS = main.cpp Fixed.cpp
 OBJS = ${SRCS:.cpp=.o}
 
 all: $(NAME)
