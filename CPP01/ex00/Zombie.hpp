@@ -11,7 +11,6 @@ class Zombie{
 		Zombie& operator=(const Zombie &zombie);
 		Zombie(std::string name);
 		~Zombie();
-		Zombie *newZombie(std::string name);
 		void announce(void);
 		void randomChump(std::string name);
 };

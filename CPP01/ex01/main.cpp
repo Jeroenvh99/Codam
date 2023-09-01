@@ -1,12 +1,15 @@
+#include <string>
 #include "Zombie.hpp"
+
+Zombie *zombieHorde(int N, std::string name);
 
 int main(){
 	Zombie creature = Zombie("mario");
 	creature.announce();
-	Zombie *zombieHorde = creature.zombieHorde(8, "him");
+	Zombie *ZombieHorde = zombieHorde(8, "him");
 	for (int i = 0; i < 8; i++) {
-		zombieHorde[i].announce();
+		ZombieHorde[i].announce();
 	}
-	delete[] zombieHorde;
+	delete[] ZombieHorde;
 	return 0;
 }

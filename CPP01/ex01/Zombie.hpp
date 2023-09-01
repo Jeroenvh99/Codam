@@ -12,6 +12,6 @@ class Zombie{
 		Zombie& operator=(const Zombie &zombie);
 		~Zombie();
 		void announce(void);
-		Zombie *zombieHorde(int N, std::string name);
+		void setName(std::string name);
 };
 #endif
