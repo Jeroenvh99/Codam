@@ -3,7 +3,11 @@
 #include <string>
 
 int main(int argc, char **argv) {
-	if (openfiles(argv[1], argv[2], argv[3]) == 0) {
+    if (argc != 4) {
+        std::cout << "Too little parameters\nUsage ./Losersed filename s1 s2" << std::endl;
+        return 1;
+    }
+    if (openfiles(argv[1], argv[2], argv[3]) == 0) {
 		std::cout << "something went wrong opening the files" << std::endl;
 		return 1;
 	}

@@ -10,7 +10,6 @@ class Zombie{
 		Zombie(const Zombie &zombie);
 		Zombie(std::string name);
 		Zombie& operator=(const Zombie &zombie);
-		Zombie *newZombie(std::string name);
 		void announce(void);
 		void randomChump(std::string name);
 		~Zombie();
