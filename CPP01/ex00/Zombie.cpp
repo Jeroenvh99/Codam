@@ -4,15 +4,8 @@
 
 Zombie::Zombie() {}
 
-Zombie::Zombie(std::string name)
-{
+Zombie::Zombie(std::string name) {
 	this->_name = name;
-}
-
-Zombie::Zombie(const Zombie &zombie) {}
-
-Zombie& Zombie::operator=(const Zombie &zombie) {
-	return *this;
 }
 
 Zombie::~Zombie(){

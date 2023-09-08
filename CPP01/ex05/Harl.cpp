@@ -28,11 +28,9 @@ void Harl::complain(std::string comm) {
 	int i;
 	for (i = 0; i < 4; i++)
 	{
-		if (levels[i].compare(comm) == 0)
-			break;
+		if (levels[i].compare(comm) == 0) {
+			return (this->*modes[i])();
+		}
 	}
-	if (i < 4)
-		(this->*modes[i])();
-	else
-		std::cout << "Harl doesn't know that way of complaining" << std::endl;
+	std::cout << "Harl doesn't know that way of complaining" << std::endl;
 }
