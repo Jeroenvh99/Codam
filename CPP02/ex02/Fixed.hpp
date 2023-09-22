@@ -2,7 +2,7 @@
 # define FIXED_C
 # include <iostream>
 
-class Fixed{
+class Fixed {
 	private:
 		int _value;
 		static const int _fraction_bits = 8;
@@ -28,9 +28,9 @@ class Fixed{
 		Fixed operator++(int);
 		Fixed operator--(int);
 		static Fixed &min(Fixed &p1, Fixed &p2);
-		static Fixed &min(const Fixed &p1, const Fixed &p2);
+		static const Fixed &min(const Fixed &p1, const Fixed &p2);
 		static Fixed &max(Fixed &p1, Fixed &p2);
-		static Fixed &max(const Fixed &p1, const Fixed &p2);
+		static const Fixed &max(const Fixed &p1, const Fixed &p2);
 		int getRawBits() const;
 		void setRawBits(int const raw);
 		float toFloat() const;

@@ -4,8 +4,7 @@
 
 void writeoutput(std::ifstream &infile, std::ofstream &outfile, std::string s1, std::string s2) {
 	std::string str;
-	while (std::getline(infile, str, '\n'))
-	{
+	while (std::getline(infile, str, '\n')) {
 		size_t i = str.find(s1);
 		if (i < str.size()) {
 			str.erase(i, s1.size());

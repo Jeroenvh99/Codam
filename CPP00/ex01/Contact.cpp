@@ -6,8 +6,6 @@ Contact::Contact() {
 	this->_index = 0;
 }
 
-Contact::Contact( const Contact &contact ) {}
-
 Contact::Contact(int index) {
 	this->_index = index;
 	std::cout << "Enter your first name:" << std::endl;
@@ -22,11 +20,11 @@ Contact::Contact(int index) {
 	std::cin >> this->_darkestSecret;
 }
 
+Contact::Contact( const Contact &contact ) {}
+
 Contact& Contact::operator=( const Contact &contact ) {
 	return *this;
 }
-
-Contact::~Contact() {}
 
 std::string Contact::Format(std::string in) {
 	int len;
@@ -34,8 +32,7 @@ std::string Contact::Format(std::string in) {
 	len = in.length();
 	if (len <= 10) {
 		in.insert(0, 10 - len, ' ');
-	}
-	else {
+	} else {
 		in.resize(10);
 		in.at(9) = '.';
 	}
@@ -49,3 +46,5 @@ void Contact::Display() {
 void Contact::DisplayDetail() {
 	std::cout << "Index: " << this->_index << "\nFirst name: " << this->_firstName << "\nLast name: " << this->_lastName << "\nNickname: " << this->_nickname << "\nPhone number: " << this->_phoneNumber << "\nDarkest secret: " << this->_darkestSecret << std::endl;
 }
+
+Contact::~Contact() {}

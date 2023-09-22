@@ -10,8 +10,8 @@ class Phonebook {
 		Phonebook();
 		Phonebook(const Phonebook &book);
 		Phonebook& operator=(const Phonebook &book);
-		~Phonebook();
 		void Add();
 		void Search();
+		~Phonebook();
 };
 #endif

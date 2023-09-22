@@ -2,7 +2,7 @@
 # define WEAPON_C
 # include <string>
 
-class Weapon{
+class Weapon {
 	private:
 		std::string _type;
 	public:

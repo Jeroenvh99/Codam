@@ -8,8 +8,6 @@ Phonebook::Phonebook() {
 
 Phonebook::Phonebook( const Phonebook &book ) {}
 
-Phonebook::~Phonebook() {}
-
 Phonebook& Phonebook::operator=( const Phonebook &book ) {
 	return *this;
 }
@@ -29,7 +27,7 @@ void Phonebook::Search() {
 	}
 	std::cout << "---------------------------------------------" << std::endl;
 	std::cout << "|     Index|First name| Last name|  Nickname|" << std::endl;
-	for (int i = 0;i < this->_index;i++)
+	for (int i = 0; i < this->_index; i++)
 		this->_contacts[i].Display();
 	std::cout << "---------------------------------------------" << std::endl;
 	std::cout << "Please input the index of the contact you would like to view in detail" << std::endl;
@@ -40,3 +38,5 @@ void Phonebook::Search() {
 	}
 	this->_contacts[detailindex - 1].DisplayDetail();
 }
+
+Phonebook::~Phonebook() {}

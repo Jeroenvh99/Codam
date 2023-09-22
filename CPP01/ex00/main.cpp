@@ -3,7 +3,7 @@
 
 Zombie *newZombie(std::string name);
 
-int main(){
+int main() {
 	Zombie creature = Zombie("mario");
 	creature.announce();
 	Zombie *othercreature = newZombie("me");

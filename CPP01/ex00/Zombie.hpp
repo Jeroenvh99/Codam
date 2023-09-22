@@ -2,7 +2,7 @@
 # define ZOMBIE_C
 # include <string>
 
-class Zombie{
+class Zombie {
 	private:
 		std::string _name;
 	public:

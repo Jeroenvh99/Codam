@@ -33,13 +33,11 @@ void    Harl::error( void ) {
 void Harl::complain(std::string comm) {
 	std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 	int i;
-	for (i = 0; i < 4; i++)
-	{
+	for (i = 0; i < 4; i++) {
 		if (levels[i].compare(comm) == 0)
 			break;
 	}
-	switch (i)
-	{
+	switch (i) {
 		case 0: 
 			this->debug();
 		case 1: 

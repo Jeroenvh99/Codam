@@ -3,7 +3,7 @@
 
 Zombie *zombieHorde(int N, std::string name);
 
-int main(){
+int main() {
 	Zombie creature = Zombie("mario");
 	creature.announce();
 	Zombie *ZombieHorde = zombieHorde(8, "him");

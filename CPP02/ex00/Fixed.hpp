@@ -1,7 +1,7 @@
 #ifndef FIXED_C
 # define FIXED_C
 
-class Fixed{
+class Fixed {
 	private:
 		int _value;
 		static const int _fraction_bits = 8;

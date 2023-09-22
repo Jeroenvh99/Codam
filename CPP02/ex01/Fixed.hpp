@@ -2,7 +2,7 @@
 # define FIXED_C
 # include <iostream>
 
-class Fixed{
+class Fixed {
 	private:
 		int _value;
 		static const int _fraction_bits = 8;

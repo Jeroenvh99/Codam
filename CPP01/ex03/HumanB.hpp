@@ -3,7 +3,7 @@
 # include <string>
 # include "Weapon.hpp"
 
-class HumanB{
+class HumanB {
 	private:
 		Weapon *_weapon;
 		std::string _name;
