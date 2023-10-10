@@ -1,5 +1,6 @@
 #ifndef SCAVTRAP_C
 # define SCAVTRAP_C
+# include <string>
 # include "ClapTrap.hpp"
 
 class ScavTrap : ClapTrap {

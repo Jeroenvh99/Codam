@@ -1,5 +1,5 @@
 NAME = open
-CC = c++
+CXX = c++
 FLAGS = -Wall -Werror -Wextra
 SRCS = main.cpp ClapTrap.cpp
 OBJS = ${SRCS:.cpp=.o}
@@ -7,7 +7,7 @@ OBJS = ${SRCS:.cpp=.o}
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) -std=c++98 -o $(NAME)
+	$(CXX) $(FLAGS) $(OBJS) -std=c++98 -o $(NAME)
 
 clean:
 	rm -f $(OBJS)

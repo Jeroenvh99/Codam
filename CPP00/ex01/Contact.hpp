@@ -4,7 +4,6 @@
 
 class Contact {
 	private:
-		int _index;
 		std::string _firstName;
 		std::string _lastName;
 		std::string _nickname;
@@ -12,12 +11,11 @@ class Contact {
 		std::string _darkestSecret;
 	public:
 		Contact();
-		Contact(int index);
 		Contact(const Contact &contact);
 		Contact& operator=(const Contact &contact);
-		std::string Format(std::string in);
-		void Display();
-		void DisplayDetail();
+		void Fill();
+		void Display(int index);
+		void DisplayDetail(int index);
 		~Contact();
 };
 #endif

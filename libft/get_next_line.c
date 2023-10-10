@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_next_line.c                                    :+:    :+:            */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                     +:+                    */
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 09:39:52 by jvan-hal      #+#    #+#                 */
-/*   Updated: 2023/01/09 11:07:31 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/10/10 13:39:05 by jvan-hal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include<unistd.h>
 #include<limits.h>
 #include<stdlib.h>
+#include<stdio.h>
 #include"libft.h"
 
 static int	getstart(char **newline, char **leftstr)
@@ -113,13 +114,13 @@ static int	processbuffer(char **newline, char *buffer, char **leftstr,
 
 char	*get_next_line(int fd)
 {
-	static char	*leftstr[OPEN_MAX];
+	static char	*leftstr[FOPEN_MAX];
 	char		buffer[BUFFER_SIZE + 1];
 	char		*newline;
 	int			bytesread;
 	int			nlindex;
 
-	if (fd < 0 || fd >= OPEN_MAX || BUFFER_SIZE == 0)
+	if (fd < 0 || fd >= FOPEN_MAX || BUFFER_SIZE == 0)
 		return (NULL);
 	newline = NULL;
 	bytesread = 1;

@@ -8,7 +8,9 @@ int main() {
 	std::cout << "Welcome to my awesome phonebook\n" << std::endl;
 	while (option != "EXIT") {
 		std::cout << "Please enter one of the following options\n\tADD\n\tSEARCH\n\tEXIT" << std::endl;
-		std::cin >> option;
+		std::getline(std::cin, option);
+		if (std::cin.eof())
+			break ;
 		if (option == "ADD")
 			book.Add();
 		else if (option == "SEARCH")
@@ -16,4 +18,5 @@ int main() {
 		else if (option == "EXIT")
 			std::cout << "Bye bye" << std::endl;
 	}
+	return 0;
 }

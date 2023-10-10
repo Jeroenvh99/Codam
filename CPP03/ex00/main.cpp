@@ -7,5 +7,8 @@ int main() {
 	bob.beRepaired(5);
 	bob.takeDamage(13); //you died
 	bob.beRepaired(4); //not enough hitpoints
+	ClapTrap henk;
+	henk = bob;
+	henk.attack("willem"); //not enough 
 	return 0;
 }

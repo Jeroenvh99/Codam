@@ -6,6 +6,7 @@ class Phonebook {
 	private:
 		Contact _contacts[8];
 		int _index;
+		int _length;
 	public:
 		Phonebook();
 		Phonebook(const Phonebook &book);

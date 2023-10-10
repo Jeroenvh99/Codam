@@ -13,9 +13,6 @@ int main(int argc, char **argv) {
 			for (size_t j = 0; j < str.size(); j++) {
 				std::cout << static_cast<char>(std::toupper(str[j]));
 			}
-			if (i < argc) {
-				std::cout << ' ';
-			}
 		}
 		std::cout << std::endl;
 	}

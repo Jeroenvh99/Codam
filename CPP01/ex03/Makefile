@@ -1,5 +1,5 @@
 NAME = violence
-CC = c++
+CXX = c++
 FLAGS = -Wall -Werror -Wextra
 SRCS = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 OBJS = ${SRCS:.cpp=.o}
@@ -7,7 +7,7 @@ OBJS = ${SRCS:.cpp=.o}
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) -g -std=c++98 -o $(NAME)
+	$(CXX) $(FLAGS) $(OBJS) -g -std=c++98 -o $(NAME)
 
 clean:
 	rm -f $(OBJS)
