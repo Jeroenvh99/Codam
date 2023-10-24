@@ -4,10 +4,10 @@
 
 int main(int argc, char **argv) {
 	Harl harl;
-	std::string in;
 
+	if (argc == 1)
+		return 1;
 	std::cout << "Hi, this is harl speaking, the complaining person." << std::endl;
-	in = argv[1];
-	harl.complain(in);
+	harl.complain(argv[1]);
 	return 0;
 }

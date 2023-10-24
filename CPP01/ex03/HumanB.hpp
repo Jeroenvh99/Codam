@@ -8,7 +8,7 @@ class HumanB {
 		Weapon *_weapon;
 		std::string _name;
 	public:
-		// HumanB();
+		HumanB();
 		// HumanB(const HumanB &humanB);
 		HumanB(std::string name);
 		HumanB& operator=(const HumanB &humanB);

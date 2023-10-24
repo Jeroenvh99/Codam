@@ -1,13 +1,12 @@
 #include "Zombie.hpp"
 #include <string>
 
-Zombie *newZombie(std::string name);
-
 int main() {
 	Zombie creature = Zombie("mario");
 	creature.announce();
-	Zombie *othercreature = newZombie("me");
+	Zombie *othercreature = Zombie::newZombie("me");
 	othercreature->announce();
+	Zombie::randomChump("Henk");
 	delete othercreature;
 	return 0;
 }

@@ -10,8 +10,9 @@ void writeoutput(std::ifstream &infile, std::ofstream &outfile, std::string s1, 
 			str.erase(i, s1.size());
 			str.insert(i, s2);
 		}
-		outfile << str << std::endl;
+		outfile << str << '\n';
 	}
+	outfile << std::flush;
 }
 
 int openfiles(std::string infile, std::string s1, std::string s2) {

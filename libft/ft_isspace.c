@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_atoi.c                                          :+:    :+:            */
+/*   ft_isspace.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvan-hal <jvan-hal@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -10,26 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
-
-int	ft_atoi(const char *str)
+int	ft_isspace(int c)
 {
-	int	out;
-	int	i;
-
-	while (ft_isspace(*str))
-		++str;
-	if ((*str == '+' || *str == '-') && *(str + 1) >= '0' && *(str + 1) <= '9')
-		++str;
-	out = 0;
-	i = 0;
-	while (str[i] && str[i] >= '0' && str[i] <= '9')
-	{
-		out *= 10;
-		out += str[i] - '0';
-		++i;
-	}
-	if (*(str - 1) == '-')
-		out *= -1;
-	return (out);
+	return (c == '\t' || c == '\n' || c == '\v' || c == '\f'
+		|| c == '\r' || c == ' ');
 }

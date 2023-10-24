@@ -13,6 +13,7 @@ SRCS = ft_strjoin.c\
 	ft_memchr.c\
 	ft_strlen.c\
 	ft_isalnum.c\
+	ft_isspace.c\
 	ft_memcmp.c\
 	ft_strmapi.c\
 	ft_isalpha.c\
@@ -55,7 +56,7 @@ PRINTF_SRCS = ft_printf.c\
 GNL_SRCS = get_next_line.c\
 	get_next_line_utils.c
 
-ifdef ADD_BONUS_PRINTF_GNL
+ifdef ADD_BONUS
 ALL_OBJS = $(OBJS) $(BONUS_OBJS) $(PRINTF_OBJS) $(GNL_OBJS)
 else
 ALL_OBJS = $(OBJS)
@@ -66,8 +67,8 @@ all: $(NAME)
 $(NAME): $(ALL_OBJS)
 	ar -rcs $(NAME) $(ALL_OBJS)
 
-bonus_and_printf_and_gnl:
-	$(MAKE) ADD_BONUS_PRINTF_GNL=1
+bonus:
+	$(MAKE) ADD_BONUS=1
 
 clean:
 	rm -f $(OBJS) $(BONUS_OBJS) $(PRINTF_OBJS) $(GNL_OBJS)
