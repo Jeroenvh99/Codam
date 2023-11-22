@@ -3,13 +3,15 @@
 # include <string>
 # include "ClapTrap.hpp"
 
-class ScavTrap : ClapTrap {
+class ScavTrap : public ClapTrap {
 	public:
 		ScavTrap();
 		ScavTrap(std::string name);
 		ScavTrap(const ScavTrap &scav);
 		ScavTrap& operator=(const ScavTrap &scav);
+		void attack(const std::string &target);
 		void guardGate();
+		void info() const;
 		~ScavTrap();
 };
 #endif

@@ -1,7 +1,7 @@
-NAME = usefullfixed
+NAME = weird
 CXX = c++
-FLAGS = -Wall -Werror -Wextra
-SRCS = main.cpp Fixed.cpp
+FLAGS = -Wall -Werror -Wextra -Wshadow
+SRCS = main.cpp ClapTrap.cpp FragTrap.cpp ScavTrap.cpp DiamondTrap.cpp
 OBJS = ${SRCS:.cpp=.o}
 
 all: $(NAME)

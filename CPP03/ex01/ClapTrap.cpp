@@ -15,7 +15,12 @@ ClapTrap::ClapTrap(const ClapTrap &clap) : _hitPoints(10), _energyPoints(10), _a
 	_name = clap.getName();
 }
 
+ClapTrap::ClapTrap(std::string name, unsigned int hitPoints, unsigned int energyPoints, unsigned int attackDamage) : _name(name), _hitPoints(hitPoints), _energyPoints(energyPoints), _attackDamage(attackDamage) {
+	std::cout << "ClapTrap name constructor called from ScavTrap" << std::endl;
+}
+
 ClapTrap& ClapTrap::operator=(const ClapTrap &clap) {
+	std::cout << "ClapTrap assignment operator called" << std::endl;
 	_name = clap.getName();
 	_energyPoints = clap.getEnergy();
 	_hitPoints = clap.getHit();
@@ -27,12 +32,24 @@ std::string ClapTrap::getName() const {
 	return this->_name;
 }
 
+void ClapTrap::setName(const std::string &name) {
+	this->_name = name;
+}
+
 unsigned int ClapTrap::getEnergy() const {
 	return this->_energyPoints;
 }
 
+void ClapTrap::decreaseEnergy(const int amount) {
+	_energyPoints -= amount;
+}
+
 unsigned int ClapTrap::getHit() const {
 	return this->_hitPoints;
+}
+
+unsigned int ClapTrap::getDamage() const {
+	return this->_attackDamage;
 }
 
 void ClapTrap::attack(const std::string &target) {
@@ -50,8 +67,14 @@ void ClapTrap::attack(const std::string &target) {
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
+	if (amount > _hitPoints)
+	{
+		std::cout << "ClapTrap " << _name << " has taken too much damage, you instantly die." << std::endl;
+		_hitPoints = 0;
+		return;
+	}
 	_hitPoints -= amount;
-	std::cout << "ClapTrap " << _name << " takes " << amount << " damage, it has now " << _hitPoints << " hitpoints" << std::endl;
+	std::cout << "ClapTrap " << _name << " takes " << amount << " damage, it now has " << _hitPoints << " hitpoints" << std::endl;
 	if (_hitPoints == 0)
 		std::cout << "0 hitpoints, you are dead" << std::endl;
 }
@@ -70,6 +93,10 @@ void ClapTrap::beRepaired(unsigned int amount) {
 	std::cout << "ClapTrap " << _name << " repaired itself with " << amount << " points, it now has " << _hitPoints << " hitpoints" << std::endl;
 }
 
+void ClapTrap::info() const {
+	std::cout << "Claptrap " << getName() << " has " << getEnergy() << " energypoints and " << getHit() << " hitpoints and causes " << getDamage() << " points of damage." << std::endl;
+}
+
 ClapTrap::~ClapTrap() {
-	std::cout << "ClapTrap default destructor called" << std::endl;
+	std::cout << "Claptrap " << _name << " is about to be destroyed." << std::endl;
 }

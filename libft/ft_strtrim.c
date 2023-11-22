@@ -64,7 +64,6 @@ static int	getlast(const char *s, const char *set)
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	int		i;
-	int		j;
 	int		end;
 	char	*c;
 
@@ -72,16 +71,5 @@ char	*ft_strtrim(char const *s1, char const *set)
 	end = getlast(s1, set);
 	if (end == -1)
 		i = 0;
-	c = malloc((end - i) + 2);
-	if (!c)
-		return (NULL);
-	j = 0;
-	while (i <= end)
-	{
-		c[j] = s1[i];
-		++j;
-		++i;
-	}
-	c[j] = '\0';
-	return (c);
+	return (ft_substr(s1, i, (end - i) + 1));
 }

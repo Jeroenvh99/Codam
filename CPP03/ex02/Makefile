@@ -1,7 +1,7 @@
-NAME = usefullfixed
+NAME = repetitive
 CXX = c++
 FLAGS = -Wall -Werror -Wextra
-SRCS = main.cpp Fixed.cpp
+SRCS = main.cpp ClapTrap.cpp FragTrap.cpp
 OBJS = ${SRCS:.cpp=.o}
 
 all: $(NAME)
