@@ -6,9 +6,10 @@ void writeoutput(std::ifstream &infile, std::ofstream &outfile, std::string s1, 
 	std::string str;
 	while (std::getline(infile, str, '\n')) {
 		size_t i = str.find(s1);
-		if (i < str.size()) {
-			str.erase(i, s1.size());
+		while (i < str.size()) {
+			str.erase(i, s1.length());
 			str.insert(i, s2);
+			i = str.find(s1, i + s2.length() - 1);
 		}
 		outfile << str << '\n';
 	}

@@ -8,7 +8,7 @@ HEADERS = Base.hpp A.hpp B.hpp C.hpp
 all: $(NAME)
 
 $(NAME): $(OBJS) $(HEADERS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJS) -std=c++98 -o $(NAME)
 
 clean:
 	rm -f $(OBJS)
