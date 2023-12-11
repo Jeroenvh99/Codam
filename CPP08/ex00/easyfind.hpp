@@ -12,10 +12,11 @@ namespace easyfin {
 	};
 }
 
-template<typename T> int &easyfind(T container, int tofind) {
-	T<int>::iterator it = find(container.begin(), container.end(), tofind);
-	if (it == container.end())
+template<typename T, typename V = typename T::value_type>
+int &easyfind(T &container, int tofind) {
+	// T<int>::iterator it = find(container.begin(), container.end(), tofind);
+	if (find(container.begin(), container.end(), tofind) == container.end())
 		throw easyfin::notfoundexception();
-	return *it;
+	return *find(container.begin(), container.end(), tofind);
 }
 #endif

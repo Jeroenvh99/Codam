@@ -25,47 +25,55 @@ fn main() {
 					if x > 0 {
 						if y > 0 {
 							let topleft = schematic[y - 1].chars().nth(x - 1).unwrap();
-							if !topleft.is_numeric() && topleft != '.' {
+							if !topleft.is_numeric() && topleft != '.' && topleft != '\n' {
+								println!("{topleft}");
 								valid = true;
 							}
 						}
 						let middleleft = schematic[y].chars().nth(x - 1).unwrap();
-						if !middleleft.is_numeric() && middleleft != '.' {
+						if !middleleft.is_numeric() && middleleft != '.' && middleleft != '\n' {
+							println!("{middleleft}");
 							valid = true;
 						}
 						if y < 139 {
 							let bottomleft = schematic[y + 1].chars().nth(x - 1).unwrap();
-							if !bottomleft.is_numeric() && bottomleft != '.' {
+							if !bottomleft.is_numeric() && bottomleft != '.' && bottomleft != '\n' {
+								println!("{bottomleft}");
 								valid = true;
 							}
 						}
 					}
 					if y > 0 {
 						let topmiddle = schematic[y - 1].chars().nth(x).unwrap();
-						if !topmiddle.is_numeric() && topmiddle != '.' {
+						if !topmiddle.is_numeric() && topmiddle != '.' && topmiddle != '\n' {
+							println!("{topmiddle}");
 							valid = true;
 						}
 					}
 					if y < 139 {
 						let bottommiddle = schematic[y + 1].chars().nth(x).unwrap();
-						if !bottommiddle.is_numeric() && bottommiddle != '.' {
+						if !bottommiddle.is_numeric() && bottommiddle != '.' && bottommiddle != '\n' {
+							println!("{bottommiddle}");
 							valid = true;
 						}
 					}
 					if x < 139 {
 						if y > 0 {
 							let topright = schematic[y - 1].chars().nth(x + 1).unwrap();
-							if !topright.is_numeric() && topright != '.' {
+							if !topright.is_numeric() && topright != '.' && topright != '\n' {
+								println!("{topright}");
 								valid = true;
 							}
 						}
 						let middleright = schematic[y].chars().nth(x + 1).unwrap();
-						if !middleright.is_numeric() && middleright != '.' {
+						if !middleright.is_numeric() && middleright != '.' && middleright != '\n' {
+							println!("{middleright}");
 							valid = true;
 						}
 						if y < 139 {
 							let bottomright = schematic[y + 1].chars().nth(x + 1).unwrap();
-							if !bottomright.is_numeric() && bottomright != '.' {
+							if !bottomright.is_numeric() && bottomright != '.' && bottomright != '\n' {
+								println!("{bottomright}");
 								valid = true;
 							}
 						}
@@ -73,7 +81,6 @@ fn main() {
 				}
 			} else {
 				if part > 0 && valid {
-					println!("{part}");
 					totalpart += part;
 				}
 				valid = false;

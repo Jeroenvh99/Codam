@@ -7,10 +7,10 @@ int main() {
 	int res;
 	try {
 		res = easyfind(nums, 35);
-	} catch (std::exception &e) {
+	} catch (easyfin::notfoundexception &e) {
 		std::cerr << e.what() << std::endl;
 	}
-	res = easyfind(nums, 8);
-	std::cout << "found the element " << res << " in the container" << std::endl;
+	// res = easyfind(nums, 8);
+	// std::cout << "found the element " << res << " in the container" << std::endl;
 	return 0;
 }
